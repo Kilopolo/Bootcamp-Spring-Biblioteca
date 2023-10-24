@@ -1,6 +1,6 @@
 package com.capgemini.Biblioteca.model;
 
-import com.capgemini.Biblioteca.enumerado.TipoLibro;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,19 +16,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="libros")
-public class Libro {
+@Table(name="multas")
+public class Multa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private Long idlibro;
+	private Long idmulta;
 	@Column
-	private String titulo;
+	private LocalDate fInicio;
 	@Column
-	private String editorial;
-	@Column
-	private TipoLibro tipo;
-	@Column
-	private int anyo;
-	
+	private LocalDate fFin;
 }

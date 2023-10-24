@@ -1,5 +1,6 @@
 package com.capgemini.Biblioteca.model;
 
+import com.capgemini.Biblioteca.enumerado.EstadoCopia;
 import com.capgemini.Biblioteca.enumerado.TipoLibro;
 
 import jakarta.persistence.Column;
@@ -16,19 +17,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="libros")
-public class Libro {
+@Table(name="copias")
+public class Copia {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private Long idlibro;
+	private Long idcopia;
 	@Column
-	private String titulo;
-	@Column
-	private String editorial;
-	@Column
-	private TipoLibro tipo;
-	@Column
-	private int anyo;
-	
+	private EstadoCopia estado;
 }
