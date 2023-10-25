@@ -24,6 +24,8 @@ public class Autor {
 	private Long idautor;
 	@Column
 	private String nombre;
+	@Column
+	private String nacionalidad;
 	@Column(name="fecNac")
 	private LocalDate fechaNacimiento;
 
