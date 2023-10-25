@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
-public interface Service<T> {
+public interface ServiceS<T> {
 	T getById(long id);
 	List<T> getAll();
 	void save(T c);
