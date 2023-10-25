@@ -1,7 +1,11 @@
 package com.capgemini.bibliotecaSpring.model;
 
+import com.capgemini.bibliotecaSpring.enumerados.TipoLibro;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,7 +29,8 @@ public class Libro {
 	@Column
 	private String editorial;
 	@Column
-	private String tipo;
+	@Enumerated(value = EnumType.STRING)
+	private TipoLibro tipo;
 	@Column
 	private int anyo;
 	
