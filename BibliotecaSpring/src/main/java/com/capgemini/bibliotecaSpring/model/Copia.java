@@ -1,5 +1,6 @@
 package com.capgemini.bibliotecaSpring.model;
 
+import enumerado.EstadoCopia;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,5 +22,5 @@ public class Copia {
 	@Column
 	private Long idcopia;
 	@Column
-	private String estado;
+	private EstadoCopia estado;
 }
