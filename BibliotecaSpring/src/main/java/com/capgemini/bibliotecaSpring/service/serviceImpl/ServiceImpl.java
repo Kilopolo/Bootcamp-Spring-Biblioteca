@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.capgemini.bibliotecaSpring.service.ServiceS;
 
-@SuppressWarnings("unchecked")
+
 public abstract class ServiceImpl<S,T> implements ServiceS<T> {
 
 	@Autowired
