@@ -225,6 +225,6 @@ README.html
 .exercism
 *.properties
 *.properties
-*.properties
+BibliotecaSpring/src/main/resources/.properties
 prueba2/pom.xml
 BibliotecaSpring/pom.xml

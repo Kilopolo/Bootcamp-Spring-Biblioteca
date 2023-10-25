@@ -1,0 +1,4 @@
+BibliotecaSpring/src/main/resources/*.properties
+BibliotecaSpring/src/main/resources/application.properties
+BibliotecaSpring/target/classes/application.properties
+BibliotecaSpring/target/classes/META-INF/maven/com.capgemini.BibliotecaSpring/BibliotecaSpring/pom.properties
