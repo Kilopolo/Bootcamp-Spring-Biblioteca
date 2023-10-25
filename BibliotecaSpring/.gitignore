@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+prueba2/pom.xml
+/pom.xml
+**/pom.xml
