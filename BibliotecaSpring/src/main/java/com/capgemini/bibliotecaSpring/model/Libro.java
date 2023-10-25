@@ -1,6 +1,5 @@
 package com.capgemini.bibliotecaSpring.model;
 
-import enumerado.TipoLibro;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +25,7 @@ public class Libro {
 	@Column
 	private String editorial;
 	@Column
-	private TipoLibro tipo;
+	private String tipo;
 	@Column
 	private int anyo;
 	
