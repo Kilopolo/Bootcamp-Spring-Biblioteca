@@ -12,3 +12,8 @@ BibliotecaSpring/target/classes/com/capgemini/bibliotecaSpring/model/BaseEntity.
 BibliotecaSpring/target/classes/com/capgemini/bibliotecaSpring/model/Autor.class
 BibliotecaSpring/target/classes/application.properties
 BibliotecaSpring/src/main/resources/application.properties
+BibliotecaSpring/src/main/resources/application.properties
+BibliotecaSpring/src/main/resources/application.properties
+BibliotecaSpring/target/classes/application.properties
+BibliotecaSpring/target/classes/application.properties
+*.properties
