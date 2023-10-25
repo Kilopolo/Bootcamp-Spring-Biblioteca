@@ -1,4 +1,4 @@
-package com.example.prueba2.model;
+package com.capgemini.bibliotecaSpring.model;
 
 import java.time.LocalDate;
 
@@ -16,15 +16,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="autores")
-public class Autor {
+@Table(name="multas")
+public class Multa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private Long idautor;
+	private Long idmulta;
 	@Column
-	private String nombre;
-	@Column(name="fecNac")
-	private LocalDate fechaNacimiento;
-
+	private LocalDate fInicio;
+	@Column
+	private LocalDate fFin;
 }

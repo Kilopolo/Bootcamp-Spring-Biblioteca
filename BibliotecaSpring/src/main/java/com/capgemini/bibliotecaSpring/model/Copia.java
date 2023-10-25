@@ -1,7 +1,6 @@
-package com.example.prueba2.model;
+package com.capgemini.bibliotecaSpring.model;
 
-import java.time.LocalDate;
-
+import enumerado.EstadoCopia;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,14 +15,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="multas")
-public class Multa {
+@Table(name="copias")
+public class Copia {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private Long idmulta;
+	private Long idcopia;
 	@Column
-	private LocalDate fInicio;
-	@Column
-	private LocalDate fFin;
+	private EstadoCopia estado;
 }

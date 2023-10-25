@@ -1,4 +1,4 @@
-package com.example.prueba2.model;
+package com.capgemini.bibliotecaSpring.model;
 
 import java.util.UUID;
 

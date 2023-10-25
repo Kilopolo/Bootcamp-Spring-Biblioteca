@@ -1,6 +1,6 @@
-package com.example.prueba2.model;
+package com.capgemini.bibliotecaSpring.model;
 
-import enumerado.EstadoCopia;
+import enumerado.TipoLibro;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,12 +15,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="copias")
-public class Copia {
+@Table(name="libros")
+public class Libro {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private Long idcopia;
+	private Long idlibro;
 	@Column
-	private EstadoCopia estado;
+	private String titulo;
+	@Column
+	private String editorial;
+	@Column
+	private TipoLibro tipo;
+	@Column
+	private int anyo;
+	
 }

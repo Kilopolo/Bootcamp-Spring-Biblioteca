@@ -1,4 +1,4 @@
-package com.example.prueba2;
+package com.capgemini.bibliotecaSpring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

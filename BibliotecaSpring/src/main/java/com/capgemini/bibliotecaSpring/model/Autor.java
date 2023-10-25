@@ -1,4 +1,6 @@
-package com.example.prueba2.model;
+package com.capgemini.bibliotecaSpring.model;
+
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,16 +16,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="lectores")
-public class Lector extends BaseEntity {
+@Table(name="autores")
+public class Autor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "nSocio")
-	private Long idlector;
+	@Column
+	private Long idautor;
 	@Column
 	private String nombre;
-	@Column
-	private String telefono;
-	@Column
-	private String direccion;
+	@Column(name="fecNac")
+	private LocalDate fechaNacimiento;
+
 }
