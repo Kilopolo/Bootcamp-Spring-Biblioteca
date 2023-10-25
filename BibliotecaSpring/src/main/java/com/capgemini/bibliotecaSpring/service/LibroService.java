@@ -1,5 +1,6 @@
 package com.capgemini.bibliotecaSpring.service;
 
-public interface LibroService {
+import com.capgemini.bibliotecaSpring.model.Libro;
 
-}
+public interface LibroService extends Service<Libro> {
+	}
