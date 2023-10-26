@@ -7,12 +7,12 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.capgemini.bibliotecaSpring.model.User;
-import com.capgemini.bibliotecaSpring.service.UsersService;
+import com.capgemini.bibliotecaSpring.service.serviceImpl.UsersServiceImpl;
 @Component
 public class LoginFormValidator implements Validator {
 
 	@Autowired
-	private UsersService usersService;
+	private UsersServiceImpl usersServiceImpl;
 
 
 	@Override
@@ -25,8 +25,8 @@ public class LoginFormValidator implements Validator {
 		User user = (User) target;
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "Error.empty");
 
-		if (usersService.getUserByEmail(user.getEmail()) != null) {
-			if (!usersService.getUserByEmail(user.getEmail()).getPassword().equals(user.getPassword())) {
+		if (usersServiceImpl.getUserByEmail(user.getEmail()) != null) {
+			if (!usersServiceImpl.getUserByEmail(user.getEmail()).getPassword().equals(user.getPassword())) {
 				errors.rejectValue("email", "Error.login.email.wrongPassword");
 			}
 		} else {

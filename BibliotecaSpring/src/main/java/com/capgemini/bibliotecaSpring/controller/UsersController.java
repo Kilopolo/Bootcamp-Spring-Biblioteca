@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.capgemini.bibliotecaSpring.model.User;
-import com.capgemini.bibliotecaSpring.service.UsersService;
 import com.capgemini.bibliotecaSpring.service.serviceImpl.RolesService;
 import com.capgemini.bibliotecaSpring.service.serviceImpl.SecurityService;
+import com.capgemini.bibliotecaSpring.service.serviceImpl.UsersServiceImpl;
 import com.capgemini.bibliotecaSpring.validators.SignUpFormValidator;
 
 import jakarta.servlet.http.HttpSession;
@@ -26,7 +26,7 @@ import jakarta.servlet.http.HttpSession;
 public class UsersController {
 	
 	@Autowired
-	private UsersService usersService;
+	private UsersServiceImpl usersServiceImpl;
 
 	@Autowired
 	private SecurityService securityService;
@@ -78,7 +78,7 @@ public class UsersController {
 	public String home(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
-		User activeUser = usersService.getUserByEmail(email);
+		User activeUser = usersServiceImpl.getUserByEmail(email);
 		httpSession.setAttribute("activeUser",activeUser);
 
 		return "home";
@@ -97,7 +97,7 @@ public class UsersController {
 	private User getActiveUser() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
-		User activeUser = usersService.getUserByEmail(email);
+		User activeUser = usersServiceImpl.getUserByEmail(email);
 		return activeUser;
 	}
 

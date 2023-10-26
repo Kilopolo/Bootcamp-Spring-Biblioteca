@@ -1,4 +1,4 @@
-package com.capgemini.bibliotecaSpring.service;
+package com.capgemini.bibliotecaSpring.service.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.bibliotecaSpring.model.User;
 import com.capgemini.bibliotecaSpring.repositorio.UsersRepository;
-import com.capgemini.bibliotecaSpring.service.serviceImpl.ServiceImpl;
+import com.capgemini.bibliotecaSpring.service.UserService;
 
 @Service
-public class UsersService extends ServiceImpl<UsersRepository, User>   implements UserService {
+public class UsersServiceImpl extends ServiceImpl<UsersRepository, User>   implements UserService {
 	@Autowired
 	private UsersRepository usersRepository;
 
