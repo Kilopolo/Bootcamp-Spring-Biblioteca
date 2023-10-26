@@ -1,8 +1,10 @@
 package com.capgemini.bibliotecaSpring;
- 
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -12,21 +14,26 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.capgemini.bibliotecaSpring.service.serviceImpl.UserDetailsServiceImpl;
+
 @SuppressWarnings("deprecation")
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
- 
-    /**
-     * Configura el encriptador de contraseñas a utilizar en la aplicación.
-     * 
-     * @return el encriptador de contraseñas BCryptPasswordEncoder.
-     */
-    @Bean
-    PasswordEncoder encoder() {
+
+	@Autowired
+	UserDetailsServiceImpl userDetailsService;
+
+	/**
+	 * Configura el encriptador de contraseñas a utilizar en la aplicación.
+	 * 
+	 * @return el encriptador de contraseñas BCryptPasswordEncoder.
+	 */
+	@Bean
+	PasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();
 	}
- 
+
 	/**
 	 * Configura el AuthenticationManager a utilizar en la autenticación.
 	 * 
@@ -38,7 +45,7 @@ public class WebSecurityConfig {
 	AuthenticationManager authenticationManager(AuthenticationConfiguration auth) throws Exception {
 		return auth.getAuthenticationManager();
 	}
- 
+
 	/**
 	 * Configura las reglas de autorización para las rutas de la aplicación.
 	 * 
@@ -47,13 +54,12 @@ public class WebSecurityConfig {
 	 * @throws Exception si ocurre algún error al configurar las reglas de
 	 *                   autorización.
 	 */
-	
+
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests(auth -> auth
-                .requestMatchers("/css/**", "/img/**", "/script/**", "/login/**", "/failure-login/**")
-                .permitAll());
- 
+		http.authorizeRequests(auth -> auth
+				.requestMatchers("/css/**", "/img/**", "/script/**", "/login/**", "/failure-login/**").permitAll());
+
 //                .requestMatchers("/user/list").hasAuthority("ADMIN")
 //                .requestMatchers("/autor/**").hasAuthority("ADMIN")
 //                .requestMatchers("/libro/add/*").hasAuthority("ADMIN")
@@ -72,14 +78,14 @@ public class WebSecurityConfig {
 //                .requestMatchers("/report/**").hasAuthority("TUTOR").requestMatchers("/student/**").hasAuthority("ESTUDIANTE")
 //
 //                .requestMatchers("/changePasswordUserInSession").authenticated()
- 
+
 //                .anyRequest().authenticated()).formLogin(login -> login.loginPage("/login").permitAll()
 //                .defaultSuccessUrl("/home").failureUrl("/failure-login")).logout(logout -> logout.logoutSuccessUrl("/login")
 //                .permitAll());
- 
+
 		return http.build();
 	}
- 
+
 	/**
 	 * Configura el objeto WebMvcConfigurer para permitir todas las peticiones CORS.
 	 * 
@@ -94,4 +100,15 @@ public class WebSecurityConfig {
 			}
 		};
 	}
+
+	@Bean
+	public DaoAuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+
+		authProvider.setUserDetailsService(userDetailsService);
+		authProvider.setPasswordEncoder(encoder());
+
+		return authProvider;
+	}
+
 }

@@ -10,7 +10,8 @@ import com.capgemini.bibliotecaSpring.model.Libro;
 
 @Repository
 public interface LibroRepositorio extends JpaRepository<Libro, Long> {
-	@Query("Select o FROM libros o WHERE o.title like ?1")
-	Page<Libro> searchByTitle(Pageable p, String searchText);
+	
+//	@Query("Select o FROM libros o WHERE o.titulo like ?1")
+//	Page<Libro> searchByTitle(Pageable p, String searchText);
 
 }

@@ -13,8 +13,9 @@ public class UsersServiceImpl extends ServiceImpl<UsersRepository, User>   imple
 	@Autowired
 	private UsersRepository usersRepository;
 
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+//	@Autowired
+//	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 //	@PostConstruct
 //	public void init() {
@@ -40,7 +41,10 @@ public class UsersServiceImpl extends ServiceImpl<UsersRepository, User>   imple
 	
 
 	public void addUser(User user) {
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		//TODO arreglar esto
+//		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		user.setPassword((user.getPassword()));
+		
 		usersRepository.save(user);
 	}
 //

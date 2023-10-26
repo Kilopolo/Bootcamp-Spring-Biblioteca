@@ -1,6 +1,5 @@
 package com.capgemini.bibliotecaSpring.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,11 +19,9 @@ import com.capgemini.bibliotecaSpring.validators.SignUpFormValidator;
 
 import jakarta.servlet.http.HttpSession;
 
-
-
 @Controller
 public class UsersController {
-	
+
 	@Autowired
 	private UsersServiceImpl usersServiceImpl;
 
@@ -33,38 +30,36 @@ public class UsersController {
 
 	@Autowired
 	private SignUpFormValidator signUpFormValidator;
-	
 
 	@Autowired
 	private RolesService rolesService;
-	
+
 	@Autowired
 	private HttpSession httpSession;
-	
-	//GESTION DE LOGIN/REGISTRO
 
-//	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-//	public String signup(@ModelAttribute @Validated User user, BindingResult result) {
-//		
-//		
-//		signUpFormValidator.validate(user, result);
-//		if (result.hasErrors()) {
-//			return "signup";
-//		}
-//		user.setRole(rolesService.getRoles()[0]);
-//
-//		usersService.addUser(user);
-//		securityService.autoLogin(user.getEmail(), user.getPasswordConfirm());
-//		return "redirect:user/home";
-//	}
-//	
-//	@RequestMapping(value = "/signup", method = RequestMethod.GET)
-//	public String signup(Model model) {
-//		model.addAttribute("user", new User());
-//		User activeUser = getActiveUser();
-//		httpSession.setAttribute("activeUser",activeUser);
-//		return "signup";
-//	}
+	// GESTION DE LOGIN/REGISTRO
+
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	public String signup(@ModelAttribute @Validated User user, BindingResult result) {
+
+		signUpFormValidator.validate(user, result);
+		if (result.hasErrors()) {
+			return "signup";
+		}
+		user.setRole(rolesService.getRoles()[0]);
+
+		usersServiceImpl.addUser(user);
+		securityService.autoLogin(user.getEmail(), user.getPasswordConfirm());
+		return "redirect:user/home";
+	}
+
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	public String signup(Model model) {
+		model.addAttribute("user", new User());
+		User activeUser = getActiveUser();
+		httpSession.setAttribute("activeUser", activeUser);
+		return "signup";
+	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model) {
@@ -72,20 +67,18 @@ public class UsersController {
 		return "login";
 	}
 
-	
-
 	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
 	public String home(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 		User activeUser = usersServiceImpl.getUserByEmail(email);
-		httpSession.setAttribute("activeUser",activeUser);
+		httpSession.setAttribute("activeUser", activeUser);
 
 		return "home";
 	}
-	
-	//GESTION DE USUARIOS
-	
+
+	// GESTION DE USUARIOS
+
 	@RequestMapping(value = "/user/home")
 	public String getUserHome(Model model) {
 		model.addAttribute("rolesList", rolesService.getRoles());
@@ -101,5 +94,4 @@ public class UsersController {
 		return activeUser;
 	}
 
-	
 }

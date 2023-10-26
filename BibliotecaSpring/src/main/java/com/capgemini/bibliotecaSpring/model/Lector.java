@@ -21,9 +21,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-//@PrimaryKeyJoinColumn(name="id")
+//@PrimaryKeyJoinColumn(name="idLector")
 @Table(name="lectores")
-public class Lector{
+public class Lector  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "nSocio")
@@ -38,4 +38,6 @@ public class Lector{
 	private List<Prestamo> prestamosLector;
 	@OneToOne(mappedBy = "lector", cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
 	private Multa multa;
+	@OneToOne(mappedBy = "lector")
+	private User user;
 }
