@@ -31,6 +31,11 @@ public class Controlador {
 	        modelo.addAttribute("autores", autorservice.getAll());
 	        return "autor/mostrar";
 	    }
+	    @GetMapping("/libros")
+	    public String mostrarLibros(Model modelo) {
+	        modelo.addAttribute("libros", libroservice.getAll());
+	        return "libro/mostrar";
+	    }
 		@GetMapping("/addlector")
 		public String formlector(Model modelo) {
 			Lector lector = new Lector();

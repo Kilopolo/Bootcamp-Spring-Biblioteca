@@ -3,8 +3,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="ISO-8859-1">
-<title>Mostrar autores</title>
+<meta charset="utf-8">
+<title>Mostrar libros</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -12,19 +12,23 @@
 	<table class="table table-striped table-responsive-md">
 		<thead>
 			<tr>
-				<th>Nombre</th>
-				<th>Nacionalidad</th>
-				<th>Fecha</th>
+				<th>Título</th>
+				<th>Editorial</th>
+				<th>Año</th>
+				<th>Género</th>
+				<th>Autores</th>
 				<th>Acciones</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="autor:${autores}">
-				<td th:text="${autor.nombre}" ></td>
-				<td th:text="${autor.nacionalidad}" ></td>
-				<td th:text="${autor.fechaNacimiento}" ></td>
+			<tr th:each="libro:${libros}">
+				<td th:text="${libro.titulo}" ></td>
+				<td th:text="${libro.editorial}" ></td>
+				<td th:text="${libro.anyo}" ></td>
+				<td th:text="${libro.tipo}" ></td>
+				<td th:text="${libro.autor.nombre}" ></td>
 				<td><a class="btn btn-primary">Actualizar</a>
-						<a th:href="@{'/delete/'+${autor.idautor}}" class="btn btn-danger">Eliminar</a></td>
+						<a class="btn btn-danger">Eliminar</a></td>
 			</tr>
 		</tbody>
 	</table>
