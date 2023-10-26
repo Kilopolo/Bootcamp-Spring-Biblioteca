@@ -48,7 +48,7 @@ public class Controlador {
 			model.addAttribute("autores",autorservice.getAll());
 			model.addAttribute("libro", libro);
 			model.addAttribute("autores",autorservice);
-//			System.out.println(autores);
+			System.out.println(autorservice);
 			return "libro/addLibro";
 		}
 	
