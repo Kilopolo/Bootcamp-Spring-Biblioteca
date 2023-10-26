@@ -9,5 +9,10 @@ import com.capgemini.bibliotecaSpring.service.LibroService;
 @Service
 public class LibroServiceImpl extends ServiceImpl<LibroRepositorio, Libro> implements LibroService {
 
-
+	public Page<Offer> searchOffersByTitle(Pageable p, String searchText){
+		searchText = "%"+searchText+"%";
+		Page<Offer> boffers = new PageImpl<Offer>(new LinkedList<Offer>());
+		boffers = offersRepository.searchByTitle(p, searchText);
+		return boffers;
+	}
 }

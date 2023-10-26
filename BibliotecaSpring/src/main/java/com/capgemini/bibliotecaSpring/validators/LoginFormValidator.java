@@ -6,7 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.uniovi.entities.User;
+import com.capgemini.bibliotecaSpring.model.User;
 import com.uniovi.services.UsersService;
 @Component
 public class LoginFormValidator implements Validator {

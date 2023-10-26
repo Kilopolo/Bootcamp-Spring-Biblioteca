@@ -1,4 +1,4 @@
-package com.capgemini.bibliotecaSpring.service;
+package com.capgemini.bibliotecaSpring.service.serviceImpl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
