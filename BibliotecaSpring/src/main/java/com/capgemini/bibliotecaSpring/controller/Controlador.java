@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.capgemini.bibliotecaSpring.model.Autor;
 import com.capgemini.bibliotecaSpring.model.Lector;
-
 import com.capgemini.bibliotecaSpring.model.Libro;
 import com.capgemini.bibliotecaSpring.service.AutorService;
 import com.capgemini.bibliotecaSpring.service.LibroService;
@@ -47,9 +47,17 @@ public class Controlador {
 			Libro libro=new Libro();
 			model.addAttribute("autores",autorservice.getAll());
 			model.addAttribute("libro", libro);
+			model.addAttribute("autores",autores);
+			System.out.println(autores);
 			return "libro/addLibro";
 		}
 	
 	
+//	@RequestMapping(value="/")
+//	public ModelAndView home2() {
+//	    ModelAndView model = new ModelAndView("index");
+//	    return model;
+//	}
+//	
 
 }
