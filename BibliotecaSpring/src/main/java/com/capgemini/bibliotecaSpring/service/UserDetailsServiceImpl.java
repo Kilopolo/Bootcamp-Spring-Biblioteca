@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.bibliotecaSpring.model.User;
+import com.capgemini.bibliotecaSpring.repositorio.UsersRepository;
 
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
