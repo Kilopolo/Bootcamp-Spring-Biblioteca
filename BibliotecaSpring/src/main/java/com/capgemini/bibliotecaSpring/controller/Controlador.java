@@ -5,8 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+
 import com.capgemini.bibliotecaSpring.model.Autor;
 import com.capgemini.bibliotecaSpring.model.Lector;
+
+import com.capgemini.bibliotecaSpring.model.Libro;
+
 import com.capgemini.bibliotecaSpring.service.LibroService;
 
 @Controller
@@ -18,7 +22,7 @@ public class Controlador {
 	    @GetMapping("/")
 	    public String helloWorld() {
 	        System.out.println("Hola, mundo");
-	        return "index.html";
+	        return "index";
 	    }
 		@GetMapping("/addlector")
 		public String showNewLectorForm(Model modelo) {
@@ -32,6 +36,14 @@ public class Controlador {
 			modelo.addAttribute("autor", autor);
 			return "autor/addAutor";
 		}
+	    
+	    @GetMapping("/addlibro")
+		public String addLibro(Model model) {
+			Libro libro=new Libro();
+			model.addAttribute("libro", libro);
+			return "libro/addLibro";
+		}
+	
 	
 
 }
