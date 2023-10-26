@@ -24,12 +24,12 @@
 				<td th:text="${autor.nacionalidad}" ></td>
 				<td th:text="${autor.fechaNacimiento}" ></td>
 				<td><a class="btn btn-primary">Actualizar</a>
-						<a th:href="@{'/delete/'+${autor.idautor}}" class="btn btn-danger">Eliminar</a></td>
+						<a th:href="@{'/deleteautor/'+${autor.idautor}}" class="btn btn-danger">Eliminar</a></td>
 			</tr>
 		</tbody>
 	</table>
 	<div>
-		<a th:href="@{'/addautor}" class="btn btn-primary">Add autor</a>
+		<a th:href="@{'/addautor'}" class="btn btn-primary">Add autor</a>
 	</div>
 	<footer th:replace="~{fragment/fragment :: footer}"></footer>
 </body>

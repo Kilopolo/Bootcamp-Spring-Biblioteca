@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.capgemini.bibliotecaSpring.enumerados.TipoLibro;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -42,7 +43,7 @@ public class Libro {
 	@ManyToOne
 	@JoinColumn(name="idautor")
 	private Autor autor;
-	@OneToMany(mappedBy = "libro", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "libro", fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
 	private List<Copia> copias;
 	
 }

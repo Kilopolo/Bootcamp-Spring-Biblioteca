@@ -28,12 +28,12 @@
 				<td th:text="${libro.tipo}" ></td>
 				<td th:text="${libro.autor.nombre}" ></td>
 				<td><a class="btn btn-primary">Actualizar</a>
-						<a class="btn btn-danger">Eliminar</a></td>
+						<a th:href="@{'/deletelibro/'+${libro.idlibro}}" class="btn btn-danger">Eliminar</a></td>
 			</tr>
 		</tbody>
 	</table>
 	<div>
-		<a th:href="@{'/addautor}" class="btn btn-primary">Add autor</a>
+		<a th:href="@{'/addlibro'}" class="btn btn-primary">Add libro</a>
 	</div>
 	<footer th:replace="~{fragment/fragment :: footer}"></footer>
 </body>
