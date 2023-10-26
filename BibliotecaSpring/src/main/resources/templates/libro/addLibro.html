@@ -11,11 +11,12 @@
 	<header th:replace="~{fragment/fragment :: header}"> </header>
 	<h3>Nuevo libro</h3>
 	<form action="#" th:action="@{/save}" th:object="${libro}" method="post">
-		<input th:field="*{titulo}" type="text" placeholder="inserte el libro" class="form-control mb-4 col-4">
-		<input th:field="*{editorial}" type="text" placeholder="inserte la editorial" class="form-control mb-4 col-4">
-		<input th:field="*{anyo}" type="number" placeholder="inserte el año" class="form-control mb-4 col-4">
-
-		<p> TIPO LIBRO
+		<input th:field="*{titulo}" type="text" placeholder="Título" class="form-control mb-4 col-4">
+		<input th:field="*{editorial}" type="text" placeholder="Editorial" class="form-control mb-4 col-4">
+		<p>Año de publicación
+		<input th:field="*{anyo}" type="number"  class="form-control mb-4 col-4">
+		</p>
+		<p> Género
 			<select name="tipo">
 				<option value="">Selecciona</option>
 				<option th:each="tipo : ${T(com.capgemini.bibliotecaSpring.enumerados.TipoLibro).values()}"
@@ -25,7 +26,7 @@
 		</p>
 
 		<p>
-			autor:
+			Autor:
 			<select name="autores">
 				<option value="">
 					Selecciona
