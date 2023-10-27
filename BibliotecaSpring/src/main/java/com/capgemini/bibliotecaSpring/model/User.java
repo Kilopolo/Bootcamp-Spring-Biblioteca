@@ -37,6 +37,7 @@ public class User {
 	@Transient
 	private String passwordConfirm;
 	
+
 	@Column
 	private String role;
 
