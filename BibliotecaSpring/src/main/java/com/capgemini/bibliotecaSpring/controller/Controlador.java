@@ -61,7 +61,7 @@ public class Controlador {
 		
 	}
 	
-	@GetMapping("/updateAutor/{idautor}")
+	@GetMapping("/updateautor/{idautor}")
 	public String updateAutor(Model modelo, @PathVariable	("idautor") long idautor) {
 		Autor autor = autorservice.getById(idautor);
 		modelo.addAttribute("autor", autor);
