@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="ISO-8859-1">
-	<title>AltaCurso</title>
+	<title>Add libro</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 
@@ -26,7 +26,8 @@
 		</p>
 
 		<p>
-			Autor:
+			<input th:field="*{autor.nombre}" type="text" disabled>
+			<!--Autor:
 			<select name="autores">
 				<option value="">
 					Selecciona
@@ -34,9 +35,9 @@
 				<option th:each="autor : ${autores}" th:value="${autor.idautor}" th:text="${autor.nombre}">
 					Categoría
 				</option>
-			</select>
+			</select>-->
 		</p>
-
+		<input th:field="*{autor.idautor}" type="hidden">
 		<button type="submit" class="btn btn-info col-2">Guardar libro</button>
 	</form>
 	<hr>

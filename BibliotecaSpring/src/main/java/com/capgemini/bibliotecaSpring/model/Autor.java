@@ -31,7 +31,7 @@ public class Autor {
 	private String nacionalidad;
 	@Column(name="fecNac")
 	private LocalDate fechaNacimiento;
-	@OneToMany(mappedBy = "autor", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "autor", fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
 	private List<Libro> Libros;
 
 }
