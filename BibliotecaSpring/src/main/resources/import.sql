@@ -30,6 +30,7 @@ INSERT INTO `projecto_capgemini_biblioteca`.`libros` (`anyo`, `idautor`, `idlibr
 INSERT INTO `projecto_capgemini_biblioteca`.`libros` (`anyo`, `idautor`, `idlibro`, `editorial`, `tipo`, `titulo`) VALUES ('2005', '7', '7', 'Anagrama', 'ENSAYO', 'Historia de la locura en la época clásica');
 INSERT INTO `projecto_capgemini_biblioteca`.`libros` (`anyo`, `idautor`, `idlibro`, `editorial`, `tipo`, `titulo`) VALUES ('1999', '8', '8', 'Galaxia Gutenberg', 'POESIA', 'Las flores del mal');
 INSERT INTO `projecto_capgemini_biblioteca`.`libros` (`anyo`, `idautor`, `idlibro`, `editorial`, `tipo`, `titulo`) VALUES ('2015', '9', '9', 'Debolsillo', 'NOVELA', 'El amor en los tiempos del cólera');
+INSERT INTO `projecto_capgemini_biblioteca`.`libros` (`anyo`, `idautor`, `idlibro`, `editorial`, `tipo`, `titulo`) VALUES ('1989', '1', '10', 'Santillana', 'NOVELA', 'Dracula1');
 
 --Copias
 INSERT INTO `projecto_capgemini_biblioteca`.`copias` (`idlibro`, `estado`) VALUES ('1', 'PRESTADO'); 
