@@ -35,16 +35,42 @@
 					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 				</form>
+				<ul class=" navbar-nav navbar-right">
+					<li class="dropdown"><a id="btnLanguage" href="
+ #" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span
+								th:text="#{language.change}"></span> <span class="caret"></span>
+						</a>
+						<ul id="languageDropdownMenuButton" class="dropdown-menu">
+							<li><a id="btnEnglish" value="EN"> <img th:src="@{/img/if_uk_flag.png}"
+										style="border: 0; float: left; margin-right: 15px" /> <span
+										th:text="#{language.en}"></span>
+								</a></li>
+							<li><a id="btnSpanish" value="ES"> <img th:src="@{/img/if_spain_flag.png}"
+										style="border: 0; float: left; margin-right: 15px" /> <span
+										th:text="#{language.es}"></span>
+								</a></li>
+						</ul>
+					</li>
+
+					<li sec:authorize="!isAuthenticated()"><a href="/signup" th:text="#{signup.message}"> <span
+								class="glyphicon glyphicon-user"></span>
+						</a></li>
+					<li sec:authorize="!isAuthenticated()"><a href="/login" th:text="#{login.message}"> <span
+								class="glyphicon glyphicon-log-in"></span>
+						</a></li>
+					<li sec:authorize="isAuthenticated()"><a href="/logout" th:text="#{logout.message}"> <span
+								class="glyphicon glyphicon-log-out"></span>
+						</a></li>
+				</ul>
 			</div>
 		</nav>
 	</header>
-	<footer th:fragment="footer" class="page-footer font-small bg-dark fixed-bottom"
-		style="color:white">
+	<footer th:fragment="footer" class="page-footer font-small bg-dark fixed-bottom" style="color:white">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 py-3">
 					<div>
-						<div>© 2023 Biblioteca Capgemini SL |    Pablo Díaz    |    Patricia Fdez    |    David Santos</div>
+						<div>© 2023 Biblioteca Capgemini SL | Pablo Díaz | Patricia Fdez | David Santos</div>
 					</div>
 				</div>
 			</div>
