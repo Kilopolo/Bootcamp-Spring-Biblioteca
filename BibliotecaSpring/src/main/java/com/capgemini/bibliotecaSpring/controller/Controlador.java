@@ -22,17 +22,17 @@ import com.capgemini.bibliotecaSpring.service.PrestamoService;
 
 @Controller
 public class Controlador {
+	@Autowired
+	public LibroService libroservice;
+	@Autowired
+	public AutorService autorservice;
+	@Autowired
+	public LectorService lectorservice;
+	@Autowired
+	public CopiaService copiaservice;
+	@Autowired
+	public PrestamoService prestamoservice;
 
-	@Autowired
-	LibroService libroservice;
-	@Autowired
-	AutorService autorservice;
-	@Autowired
-	LectorService lectorservice;
-	@Autowired
-	CopiaService copiaservice;
-	@Autowired
-	PrestamoService prestamoservice;
 
 	@GetMapping("/")
 	public String index() {
@@ -56,11 +56,19 @@ public class Controlador {
 
 	@GetMapping("/deleteautor/{idautor}")
 	public String deleteAutor(@PathVariable("idautor") long idautor, Model modelo) {
-
 		autorservice.deleteById(idautor);
 		return "redirect:/autores";
-
+		
 	}
+	
+	@GetMapping("/updateAutor/{idautor}")
+	public String updateAutor(Model modelo, @PathVariable	("idautor") long idautor) {
+		Autor autor = autorservice.getById(idautor);
+		modelo.addAttribute("autor", autor);
+		return "autor/updateAutor";
+	}
+	
+	
 
 	// LIBROS
 	@GetMapping("/libros/{idautor}")
@@ -82,7 +90,7 @@ public class Controlador {
 
 	@GetMapping("/deletelibro/{idlibro}")
 	public String deleteLibro(@PathVariable("idlibro") long idlibro, Model modelo) {
-		Autor autor = libroservice.getById(idlibro).getAutor();
+		Autor autor =libroservice.getById(idlibro).getAutor();
 		modelo.addAttribute("autor", autor);
 		libroservice.deleteById(idlibro);
 		return "redirect:/libros/"+autor.getIdautor();
@@ -100,6 +108,7 @@ public class Controlador {
 	@GetMapping("/lectores")
 	public String mostrarLectores(Model modelo) {
 		modelo.addAttribute("lectores", lectorservice.getAll());
+		System.out.println("hola lectores");
 		return "lector/mostrar";
 	}
 	
