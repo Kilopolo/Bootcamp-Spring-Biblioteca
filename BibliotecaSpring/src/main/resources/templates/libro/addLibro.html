@@ -9,7 +9,7 @@
 
 <body>
 	<header th:replace="~{fragment/fragment :: header}"> </header>
-	<h3>Nuevo libro</h3>
+	<h3>Nuevo libro de: <span th:text="${autor.nombre}"></span> </h3>
 	<form action="#" th:action="@{/save}" th:object="${libro}" method="post">
 		<input th:field="*{titulo}" type="text" placeholder="Título" class="form-control mb-4 col-4">
 		<input th:field="*{editorial}" type="text" placeholder="Editorial" class="form-control mb-4 col-4">
@@ -24,24 +24,11 @@
 				</option>
 			</select>
 		</p>
-
-		<p>
-			<input th:field="*{autor.nombre}" type="text" disabled>
-			<!--Autor:
-			<select name="autores">
-				<option value="">
-					Selecciona
-				</option>
-				<option th:each="autor : ${autores}" th:value="${autor.idautor}" th:text="${autor.nombre}">
-					Categoría
-				</option>
-			</select>-->
-		</p>
 		<input th:field="*{autor.idautor}" type="hidden">
 		<button type="submit" class="btn btn-info col-2">Guardar libro</button>
 	</form>
 	<hr>
-	<a th:href="@{/}">Volver</a>
+	<a th:href="@{'/libros/'+${autor.idautor}}">Volver</a>
 	<footer th:replace="~{fragment/fragment :: footer}"></footer>
 </body>
 

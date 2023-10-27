@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.capgemini.bibliotecaSpring.model.Autor;
 import com.capgemini.bibliotecaSpring.model.Lector;
@@ -50,16 +49,16 @@ public class Controlador {
 	}
 
 	// LIBROS
-	@GetMapping("/libros")
-	public String mostrarLibros(Model modelo, @RequestParam ("idautor") long idautor) {
+	@GetMapping("/libros/{idautor}")
+	public String mostrarLibros(Model modelo, @PathVariable ("idautor") long idautor) {
 		Autor autor = autorservice.getById(idautor);
 		modelo.addAttribute("autor",autor);
-		modelo.addAttribute("libros", libroservice.getAll());
+		modelo.addAttribute("libros", libroservice.findByAutor(autor));
 		return "libro/mostrar";
 	}
 
-	@GetMapping("/addlibro")
-	public String formLibro(Model modelo,  @RequestParam ("idautor") long idautor) {
+	@GetMapping("/addlibro/{idautor}")
+	public String formLibro(Model modelo, @PathVariable	("idautor") long idautor) {
 		Libro libro = new Libro();
 		Autor autor = autorservice.getById(idautor);
 		modelo.addAttribute("autor",autor);
