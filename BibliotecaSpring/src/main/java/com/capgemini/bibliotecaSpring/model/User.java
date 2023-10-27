@@ -27,6 +27,7 @@ import lombok.NoArgsConstructor;
 public class User {
 	@Id
 	@GeneratedValue
+	@Column
 	private long id;
 	@Column // (unique = true)
 	private String email;
@@ -36,6 +37,7 @@ public class User {
 	@Transient
 	private String passwordConfirm;
 
+	@Column
 	private String role;
 
 	@Transient
