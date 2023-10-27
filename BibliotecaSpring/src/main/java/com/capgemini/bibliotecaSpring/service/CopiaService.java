@@ -6,5 +6,5 @@ import com.capgemini.bibliotecaSpring.model.Copia;
 import com.capgemini.bibliotecaSpring.model.Libro;
 
 public interface CopiaService extends ServiceS<Copia> {
-	List<Libro> findByLibro(Libro libro);
+	List<Copia> findByLibro(Libro libro);
 }

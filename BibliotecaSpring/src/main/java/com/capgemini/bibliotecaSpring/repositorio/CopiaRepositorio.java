@@ -9,5 +9,5 @@ import com.capgemini.bibliotecaSpring.model.Copia;
 import com.capgemini.bibliotecaSpring.model.Libro;
 @Repository
 public interface CopiaRepositorio extends JpaRepository<Copia, Long> {
-	List<Libro> findByLibro(Libro libro);
+	List<Copia> findByLibro(Libro libro);
 }

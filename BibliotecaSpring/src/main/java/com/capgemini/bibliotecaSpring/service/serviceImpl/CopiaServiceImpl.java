@@ -17,7 +17,7 @@ public class CopiaServiceImpl extends ServiceImpl<CopiaRepositorio,Copia> implem
 	CopiaRepositorio cr;
 	
 	@Override
-	public List<Libro> findByLibro(Libro libro) {
+	public List<Copia> findByLibro(Libro libro) {
 		
 		return cr.findByLibro(libro);
 	}

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.capgemini.bibliotecaSpring.model.Autor;
+import com.capgemini.bibliotecaSpring.model.Copia;
 import com.capgemini.bibliotecaSpring.model.Lector;
 import com.capgemini.bibliotecaSpring.model.Libro;
 import com.capgemini.bibliotecaSpring.model.Prestamo;
@@ -108,7 +109,7 @@ public class Controlador {
 	
 	//PRESTAMOS
 	@GetMapping("/prestamos/{idlector}")
-	public String mostrarCopiasLector(Model modelo, @PathVariable ("idlector") long idlector) {
+	public String mostrarPrestamosLector(Model modelo, @PathVariable ("idlector") long idlector) {
 		Lector lector = lectorservice.getById(idlector);
 		modelo.addAttribute("lector",lector);
 		modelo.addAttribute("prestamos", prestamoservice.findByLector(lector));
@@ -125,5 +126,21 @@ public class Controlador {
 		return "prestamo/addPrestamo";
 	}
 	
+	//COPIAS
+	@GetMapping("/copias/{idlibro}")
+	public String mostrarCopiasLibro(Model modelo, @PathVariable ("idlibro") long idlibro) {
+		Libro libro = libroservice.getById(idlibro);
+		modelo.addAttribute("libro",libro);
+		modelo.addAttribute("copias", copiaservice.findByLibro(libro));
+		return "copia/mostrar";
+	}
+	@GetMapping("/addcopia/{idlibro}")
+	public String formCopia(Model modelo, @PathVariable	("idlibro") long idlibro) {
+		Copia copia = new Copia();
+		Libro libro = libroservice.getById(idlibro);
+		modelo.addAttribute("libro",libro);
+		modelo.addAttribute("copia", copia);
+		return "copia/addCopia";
+	}
 
 }

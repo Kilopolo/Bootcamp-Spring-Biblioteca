@@ -18,7 +18,7 @@
 				<th>Editorial</th>
 				<th>Año</th>
 				<th>Género</th>
-				<th>Autores</th>
+				<th>Total copias</th>
 				<th>Acciones</th>
 			</tr>
 		</thead>
@@ -28,7 +28,8 @@
 				<td th:text="${libro.editorial}" ></td>
 				<td th:text="${libro.anyo}" ></td>
 				<td th:text="${libro.tipo}" ></td>
-				<td><a class="btn btn-primary">Copias</a>
+				<td  th:text="${#lists.size(libro.copias)}"></td>
+				<td><a th:href="@{'/copias/'+${libro.idlibro}}"  class="btn btn-primary">Copias</a>
 					<a th:href="@{'/updatelibro/'+${libro.idlibro}}" class="btn btn-primary">Actualizar</a>
 						<a th:onclick="return confirm('¿Estás seguro de que deseas eliminar este libro?')" th:href="@{'/deletelibro/'+${libro.idlibro}}" class="btn btn-danger">Eliminar</a></td>
 			</tr>
