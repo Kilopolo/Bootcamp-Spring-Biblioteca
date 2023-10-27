@@ -53,7 +53,6 @@ public class Controlador {
 
 	@GetMapping("/deleteautor/{idautor}")
 	public String deleteAutor(@PathVariable("idautor") long idautor, Model modelo) {
-
 		autorservice.deleteById(idautor);
 		return "redirect:/autores";
 
@@ -92,6 +91,7 @@ public class Controlador {
 		modelo.addAttribute("libro", libro);
 		return "libro/updateLibro";
 	}
+	
 
 	// LECTORES
 	@GetMapping("/lectores")
@@ -106,6 +106,13 @@ public class Controlador {
 		modelo.addAttribute("lector", lector);
 		return "lector/addLector";
 	}
+	@GetMapping("/deletelector/{idlector}")
+	public String deleteLector(@PathVariable("idlector") long idlector, Model modelo) {
+		lectorservice.deleteById(idlector);
+		return "redirect:/lectores";
+
+	}
+	
 	
 	//PRESTAMOS
 	@GetMapping("/prestamos/{idlector}")
@@ -125,6 +132,14 @@ public class Controlador {
 		modelo.addAttribute("copias", copiaservice.getAll());
 		return "prestamo/addPrestamo";
 	}
+	@GetMapping("/deleteprestamo/{idprestamo}")
+	public String deletePrestamo(@PathVariable("idprestamo") long idprestamo, Model modelo) {
+		Lector lector = prestamoservice.getById(idprestamo).getLector();
+		modelo.addAttribute("lector", lector);
+		prestamoservice.deleteById(idprestamo);
+		return "redirect:/prestamos/"+lector.getIdlector();
+
+	}
 	
 	//COPIAS
 	@GetMapping("/copias/{idlibro}")
@@ -141,6 +156,14 @@ public class Controlador {
 		modelo.addAttribute("libro",libro);
 		modelo.addAttribute("copia", copia);
 		return "copia/addCopia";
+	}
+	@GetMapping("/deletecopia/{idcopia}")
+	public String deleteCopia(@PathVariable("idcopia") long idcopia, Model modelo) {
+		Libro libro = copiaservice.getById(idcopia).getLibro();
+		modelo.addAttribute("libro", libro);
+		copiaservice.deleteById(idcopia);
+		return "redirect:/copias/"+libro.getIdlibro();
+
 	}
 
 }
