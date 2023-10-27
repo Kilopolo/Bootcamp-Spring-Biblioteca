@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.capgemini.bibliotecaSpring.enumerados.EstadoCopia;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -36,7 +37,7 @@ public class Copia {
 	@ManyToOne
 	@JoinColumn(name="idlibro")
 	private Libro libro;
-	@OneToMany(mappedBy = "copia", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "copia", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	private List<Prestamo> prestamosCopia;
 	
 }

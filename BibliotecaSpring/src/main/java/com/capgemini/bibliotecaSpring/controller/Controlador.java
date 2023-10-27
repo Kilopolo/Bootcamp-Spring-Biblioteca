@@ -1,12 +1,11 @@
 package com.capgemini.bibliotecaSpring.controller;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,46 +17,72 @@ import com.capgemini.bibliotecaSpring.service.LibroService;
 
 @Controller
 public class Controlador {
-	
-	@Autowired
-	 LibroService libroservice;
-	@Autowired
-	 AutorService autorservice;
 
-	    @GetMapping("/")
-	    public String index() {
-	        System.out.println("Hola, mundo");
-	        return "index";
-	    }
-		@GetMapping("/addlector")
-		public String showNewLectorForm(Model modelo) {
-			Lector lector = new Lector();
-			modelo.addAttribute("lector", lector);
-			return "lector/addLector";
-		}
-		@GetMapping("/addautor")
-		public String showNewAutorForm(Model modelo) {
-			Autor autor = new Autor();
-			modelo.addAttribute("autor", autor);
-			return "autor/addAutor";
-		}
-	    
-	    @GetMapping("/addlibro")
-		public String addLibro(Model model) {
-			Libro libro=new Libro();
-			model.addAttribute("autores",autorservice.getAll());
-			model.addAttribute("libro", libro);
-			model.addAttribute("autores",autorservice);
-			System.out.println(autorservice);
-			return "libro/addLibro";
-		}
-	
-	
-//	@RequestMapping(value="/")
-//	public ModelAndView home2() {
-//	    ModelAndView model = new ModelAndView("index");
-//	    return model;
-//	}
-//	
+	@Autowired
+	LibroService libroservice;
+	@Autowired
+	AutorService autorservice;
+
+	@GetMapping("/")
+	public String index() {
+		System.out.println("Hola, mundo");
+		return "index";
+	}
+
+	// AUTORES
+	@GetMapping("/autores")
+	public String mostrarAutores(Model modelo) {
+		modelo.addAttribute("autores", autorservice.getAll());
+		return "autor/mostrar";
+	}
+
+	@GetMapping("/addautor")
+	public String formAutor(Model modelo) {
+		Autor autor = new Autor();
+		modelo.addAttribute("autor", autor);
+		return "autor/addAutor";
+	}
+
+	@GetMapping("/deleteautor/{idautor}")
+	public String deleteAutor(@PathVariable("idautor") long idautor, Model modelo) {
+
+		autorservice.deleteById(idautor);
+		return "redirect:/autores";
+
+	}
+
+	// LIBROS
+	@GetMapping("/libros")
+	public String mostrarLibros(Model modelo, @RequestParam ("idautor") long idautor) {
+		Autor autor = autorservice.getById(idautor);
+		modelo.addAttribute("autor",autor);
+		modelo.addAttribute("libros", libroservice.getAll());
+		return "libro/mostrar";
+	}
+
+	@GetMapping("/addlibro")
+	public String formLibro(Model modelo,  @RequestParam ("idautor") long idautor) {
+		Libro libro = new Libro();
+		Autor autor = autorservice.getById(idautor);
+		modelo.addAttribute("autor",autor);
+		modelo.addAttribute("libro", libro);
+		return "libro/addLibro";
+	}
+
+	@GetMapping("/deletelibro/{idlibro}")
+	public String deleteLibro(@PathVariable("idlibro") long idlibro, Model modelo) {
+
+		libroservice.deleteById(idlibro);
+		return "redirect:/libros";
+
+	}
+
+	// LECTORES
+	@GetMapping("/addlector")
+	public String formLector(Model modelo) {
+		Lector lector = new Lector();
+		modelo.addAttribute("lector", lector);
+		return "lector/addLector";
+	}
 
 }
