@@ -78,9 +78,10 @@ public class Controlador {
 
 	@GetMapping("/deletelibro/{idlibro}")
 	public String deleteLibro(@PathVariable("idlibro") long idlibro, Model modelo) {
-		
+		Autor autor = libroservice.getById(idlibro).getAutor();
+		modelo.addAttribute("autor", autor);
 		libroservice.deleteById(idlibro);
-		return "redirect:/libros";
+		return "redirect:/libros/"+autor.getIdautor();
 
 	}
 	@GetMapping("/updatelibro/{idlibro}")
