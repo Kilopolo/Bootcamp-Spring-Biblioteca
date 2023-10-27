@@ -18,3 +18,9 @@ BibliotecaSpring/target/classes/application.properties
 BibliotecaSpring/target/classes/application.properties
 *.properties
 BibliotecaSpring/pom.xml
+*.class
+BibliotecaSpring/.factorypath
+BibliotecaSpring/.classpath
+*.jar
+BibliotecaSpring/.project
+*.prefs

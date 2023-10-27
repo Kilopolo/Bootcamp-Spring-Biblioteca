@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Add Lector</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+
+		<header th:replace="~{fragment/fragment :: header}"> </header>
+		<h3>Nuevo Socio</h3>
+
+		<form action="#" th:action="@{/save}" th:object="${lector}" method="post">
+			<input th:field="*{nombre}" type="text" placeholder="Escriba el nombre" class="form-control mb-4 col.4">
+			<input th:field="*{telefono}" type="text" placeholder="Escriba el telefono" class="form-control mb-4 col.4">
+			<input th:field="*{direccion}" type="text" placeholder="Escriba la dirección "
+				class="form-control mb-4 col.4">
+			<button type="submit" class="btn btn-info col-2">Guardar socio</button>
+		</form>
+		<a th:href="@{/}">Volver</a>
+		<footer th:replace="~{fragment/fragment :: footer}"></footer>
+</body>
+
+</html>
