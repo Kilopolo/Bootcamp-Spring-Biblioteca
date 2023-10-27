@@ -15,6 +15,16 @@ public class LibroServiceImpl extends ServiceImpl<LibroRepositorio, Libro> imple
 	@Autowired
 	LibroRepositorio lr;
 
+//	@Autowired
+//	LibroRepositorio librosRepository;
+//	 
+//	public Page<Libro> searchBookByTitle(Pageable p, String searchText){
+//		searchText = "%"+searchText+"%";
+//		Page<Libro> boffers = new PageImpl<Libro>(new LinkedList<Libro>());
+//		
+//		boffers = librosRepository.searchByTitle(p, searchText);
+//		return boffers;
+//	}
 	@Override
 	public List<Libro> findByAutor(Autor autor) {
 		// TODO Auto-generated method stub

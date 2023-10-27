@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,8 +21,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+//@PrimaryKeyJoinColumn(name="idLector")
 @Table(name="lectores")
-public class Lector{
+public class Lector  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "nSocio")
@@ -36,4 +38,6 @@ public class Lector{
 	private List<Prestamo> prestamosLector;
 	@OneToOne(mappedBy = "lector",fetch = FetchType.LAZY)
 	private Multa multa;
+	@OneToOne(mappedBy = "lector")
+	private User user;
 }
