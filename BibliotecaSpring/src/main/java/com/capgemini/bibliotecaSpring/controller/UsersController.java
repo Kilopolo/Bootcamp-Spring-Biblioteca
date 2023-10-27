@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.capgemini.bibliotecaSpring.model.User;
+import com.capgemini.bibliotecaSpring.service.security.SecurityService;
 import com.capgemini.bibliotecaSpring.service.serviceImpl.RolesService;
-import com.capgemini.bibliotecaSpring.service.serviceImpl.SecurityService;
 import com.capgemini.bibliotecaSpring.service.serviceImpl.UsersServiceImpl;
 import com.capgemini.bibliotecaSpring.validators.SignUpFormValidator;
 
@@ -42,10 +42,11 @@ public class UsersController {
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public String signup(@ModelAttribute @Validated User user, BindingResult result) {
 
-		signUpFormValidator.validate(user, result);
-		if (result.hasErrors()) {
-			return "signup";
-		}
+		//TODO validar datos
+//		signUpFormValidator.validate(user, result);
+//		if (result.hasErrors()) {
+//			return "signup";
+//		}
 		user.setRole(rolesService.getRoles()[0]);
 
 		usersServiceImpl.addUser(user);

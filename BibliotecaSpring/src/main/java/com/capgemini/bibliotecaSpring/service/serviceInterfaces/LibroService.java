@@ -1,9 +1,10 @@
-package com.capgemini.bibliotecaSpring.service;
+package com.capgemini.bibliotecaSpring.service.serviceInterfaces;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.capgemini.bibliotecaSpring.model.Libro;
+import com.capgemini.bibliotecaSpring.service.ServiceS;
 
 import java.util.List;
 

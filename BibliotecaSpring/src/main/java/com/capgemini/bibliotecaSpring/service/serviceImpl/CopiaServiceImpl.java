@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 import com.capgemini.bibliotecaSpring.model.Copia;
 import com.capgemini.bibliotecaSpring.model.Libro;
 import com.capgemini.bibliotecaSpring.repositorio.CopiaRepositorio;
-import com.capgemini.bibliotecaSpring.service.CopiaService;
+import com.capgemini.bibliotecaSpring.service.security.ServiceImpl;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.CopiaService;
 
 
 @Service

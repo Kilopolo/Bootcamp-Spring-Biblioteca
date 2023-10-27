@@ -4,7 +4,8 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.bibliotecaSpring.model.Multa;
 import com.capgemini.bibliotecaSpring.repositorio.MultaRepositorio;
-import com.capgemini.bibliotecaSpring.service.MultaService;
+import com.capgemini.bibliotecaSpring.service.security.ServiceImpl;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.MultaService;
 
 
 @Service

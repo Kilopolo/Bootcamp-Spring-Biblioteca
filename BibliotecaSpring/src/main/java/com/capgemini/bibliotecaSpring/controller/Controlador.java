@@ -14,11 +14,11 @@ import com.capgemini.bibliotecaSpring.model.Copia;
 import com.capgemini.bibliotecaSpring.model.Lector;
 import com.capgemini.bibliotecaSpring.model.Libro;
 import com.capgemini.bibliotecaSpring.model.Prestamo;
-import com.capgemini.bibliotecaSpring.service.AutorService;
-import com.capgemini.bibliotecaSpring.service.CopiaService;
-import com.capgemini.bibliotecaSpring.service.LectorService;
-import com.capgemini.bibliotecaSpring.service.LibroService;
-import com.capgemini.bibliotecaSpring.service.PrestamoService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.AutorService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.CopiaService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LibroService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
 
 @Controller
 public class Controlador {

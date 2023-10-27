@@ -14,7 +14,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.capgemini.bibliotecaSpring.service.serviceImpl.UserDetailsServiceImpl;
+import com.capgemini.bibliotecaSpring.service.security.UserDetailsServiceImpl;
 
 @SuppressWarnings("deprecation")
 @Configuration
@@ -29,8 +29,12 @@ public class WebSecurityConfig {
 	 * 
 	 * @return el encriptador de contraseñas BCryptPasswordEncoder.
 	 */
+//	@Bean
+//	PasswordEncoder encoder() {
+//		return new BCryptPasswordEncoder();
+//	}
 	@Bean
-	PasswordEncoder encoder() {
+	BCryptPasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();
 	}
 
