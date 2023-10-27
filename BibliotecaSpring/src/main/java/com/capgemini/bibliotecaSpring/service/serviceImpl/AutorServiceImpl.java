@@ -20,13 +20,7 @@ public class AutorServiceImpl extends ServiceImpl<AutorRepositorio,Autor> implem
 	public void deleteById(long id) {
 		 ar.deleteById(id);
 	
-}
-	@Override
-	public List<Libro> findByAutor(Autor autor) {
-		
-		return null;
-	}
 
-	
+	}
 
 }
