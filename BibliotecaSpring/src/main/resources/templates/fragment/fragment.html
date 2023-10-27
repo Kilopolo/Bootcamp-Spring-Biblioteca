@@ -35,10 +35,12 @@
 					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 				</form>
-				<ul class=" navbar-nav navbar-right">
-					<li class="dropdown"><a id="btnLanguage" href="
- #" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span
-								th:text="#{language.change}"></span> <span class="caret"></span>
+<!--				<ul class="mr-auto collapse navbar-collapse navbar-right">-->
+					<li class="dropdown nav-item active">
+						<a id="btnLanguage" th:href="@{/#}" class="dropdown-toggle" data-toggle="dropdown" role="button"
+							aria-haspopup="true" aria-expanded="false">
+							<span th:text="#{language.change}"></span>
+							<span class="caret"></span>
 						</a>
 						<ul id="languageDropdownMenuButton" class="dropdown-menu">
 							<li><a id="btnEnglish" value="EN"> <img th:src="@{/img/if_uk_flag.png}"
@@ -52,16 +54,17 @@
 						</ul>
 					</li>
 
-					<li sec:authorize="!isAuthenticated()"><a href="/signup" th:text="#{signup.message}"> <span
-								class="glyphicon glyphicon-user"></span>
+					<li class="nav-link" sec:authorize="!isAuthenticated()"><a th:href="@{/signup}"
+							th:text="#{signup.message}"> <span class="nav-item active glyphicon glyphicon-user"></span>
 						</a></li>
-					<li sec:authorize="!isAuthenticated()"><a href="/login" th:text="#{login.message}"> <span
-								class="glyphicon glyphicon-log-in"></span>
+					<li class="nav-link" sec:authorize="!isAuthenticated()"><a th:href="@{/login}"
+							th:text="#{login.message}"> <span class="glyphicon glyphicon-log-in"></span>
 						</a></li>
-					<li sec:authorize="isAuthenticated()"><a href="/logout" th:text="#{logout.message}"> <span
-								class="glyphicon glyphicon-log-out"></span>
+					<li class="nav-link" sec:authorize="isAuthenticated()"><a th:href="@{/logout}"
+							th:text="#{logout.message}"> <span
+								class=" nav-item active glyphicon glyphicon-log-out"></span>
 						</a></li>
-				</ul>
+<!--				</ul>-->
 			</div>
 		</nav>
 	</header>
