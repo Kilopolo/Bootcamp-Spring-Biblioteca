@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.capgemini.bibliotecaSpring.model.Lector;
 import com.capgemini.bibliotecaSpring.model.Prestamo;
 import com.capgemini.bibliotecaSpring.repositorio.PrestamoRepositorio;
-import com.capgemini.bibliotecaSpring.service.security.ServiceImpl;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
 @Service
 public class PrestamoServiceImpl extends ServiceImpl<PrestamoRepositorio,Prestamo> implements PrestamoService {

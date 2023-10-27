@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.capgemini.bibliotecaSpring.model.User;
+import com.capgemini.bibliotecaSpring.service.security.RolesService;
 import com.capgemini.bibliotecaSpring.service.security.SecurityService;
-import com.capgemini.bibliotecaSpring.service.serviceImpl.RolesService;
 import com.capgemini.bibliotecaSpring.service.serviceImpl.UsersServiceImpl;
 import com.capgemini.bibliotecaSpring.validators.SignUpFormValidator;
 
@@ -51,7 +51,7 @@ public class UsersController {
 
 		usersServiceImpl.addUser(user);
 		securityService.autoLogin(user.getEmail(), user.getPasswordConfirm());
-		return "redirect:user/home";
+		return "redirect:/home";
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)

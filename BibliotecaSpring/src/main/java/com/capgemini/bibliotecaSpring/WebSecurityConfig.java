@@ -8,13 +8,18 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.capgemini.bibliotecaSpring.service.security.UserDetailsServiceImpl;
+
+//import com.capgemini.bibliotecaSpring.service.security.UserDetailsServiceImpl;
 
 @SuppressWarnings("deprecation")
 @Configuration
@@ -29,14 +34,11 @@ public class WebSecurityConfig {
 	 * 
 	 * @return el encriptador de contraseñas BCryptPasswordEncoder.
 	 */
-//	@Bean
-//	PasswordEncoder encoder() {
-//		return new BCryptPasswordEncoder();
-//	}
-	@Bean
-	BCryptPasswordEncoder encoder() {
-		return new BCryptPasswordEncoder();
-	}
+    @Bean
+    public PasswordEncoder encoder() {
+        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        return encoder;
+    }
 
 	/**
 	 * Configura el AuthenticationManager a utilizar en la autenticación.
@@ -61,6 +63,15 @@ public class WebSecurityConfig {
 
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//	       http.csrf()
+//           .disable()
+//           .authorizeRequests()
+//           .antMatchers("/admin/**")
+//           .hasRole("ROLE_ADMIN")
+//           .antMatchers("/anonymous*")
+//           .anonymous()
+//           .antMatchers("/login*")
+//           .permitAll();
 		http.authorizeRequests(auth -> auth
 				.requestMatchers("/css/**", "/img/**", "/script/**", "/login/**", "/failure-login/**").permitAll());
 
@@ -105,6 +116,25 @@ public class WebSecurityConfig {
 		};
 	}
 
+	
+    @Bean
+    public InMemoryUserDetailsManager userDetailsService() {
+        UserDetails user1 = User.withUsername("user@gmail.com")
+            .password(encoder().encode("1234"))
+            .roles("ROLE_USER")
+            .build();
+        UserDetails user2 = User.withUsername("user2@gmail.com")
+            .password(encoder().encode("user2Pass"))
+            .roles("ROLE_USER")
+            .build();
+        UserDetails admin = User.withUsername("admin@gmail.com")
+            .password(encoder().encode("1234"))
+            .roles("ROLE_ADMIN")
+            .build();
+        return new InMemoryUserDetailsManager(user1, user2, admin);
+    }
+    
+	
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();

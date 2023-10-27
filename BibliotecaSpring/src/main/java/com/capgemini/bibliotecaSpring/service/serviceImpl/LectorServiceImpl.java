@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.bibliotecaSpring.model.Lector;
 import com.capgemini.bibliotecaSpring.repositorio.LectorRepositorio;
-import com.capgemini.bibliotecaSpring.service.security.ServiceImpl;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
 
 @Service

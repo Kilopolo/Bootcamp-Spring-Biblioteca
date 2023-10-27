@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.bibliotecaSpring.model.User;
+import com.capgemini.bibliotecaSpring.service.security.RolesService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.UserService;
 
 import jakarta.annotation.PostConstruct;

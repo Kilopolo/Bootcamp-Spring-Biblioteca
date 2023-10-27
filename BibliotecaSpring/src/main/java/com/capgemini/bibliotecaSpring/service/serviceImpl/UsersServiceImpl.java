@@ -11,17 +11,15 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.bibliotecaSpring.model.User;
 import com.capgemini.bibliotecaSpring.repositorio.UsersRepository;
-import com.capgemini.bibliotecaSpring.service.security.ServiceImpl;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.UserService;
 
 import jakarta.annotation.PostConstruct;
 
 @Service
 public class UsersServiceImpl extends ServiceImpl<UsersRepository, User>   implements UserService {
+	
 	@Autowired
 	private UsersRepository usersRepository;
-
-
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
