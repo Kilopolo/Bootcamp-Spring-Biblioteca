@@ -10,6 +10,7 @@ import com.capgemini.bibliotecaSpring.model.Autor;
 import com.capgemini.bibliotecaSpring.model.Lector;
 import com.capgemini.bibliotecaSpring.model.Libro;
 import com.capgemini.bibliotecaSpring.service.AutorService;
+import com.capgemini.bibliotecaSpring.service.LectorService;
 import com.capgemini.bibliotecaSpring.service.LibroService;
 
 @Controller
@@ -19,6 +20,8 @@ public class Controlador {
 	LibroService libroservice;
 	@Autowired
 	AutorService autorservice;
+	@Autowired
+	LectorService lectorservice;
 
 	@GetMapping("/")
 	public String index() {
@@ -73,8 +76,21 @@ public class Controlador {
 		return "redirect:/libros";
 
 	}
+	@GetMapping("/updatelibro/{idlibro}")
+	public String updateLibro(Model modelo, @PathVariable	("idlibro") long idlibro) {
+		Libro libro = libroservice.getById(idlibro);
+		modelo.addAttribute("autor",libro.getAutor());
+		modelo.addAttribute("libro", libro);
+		return "libro/updateLibro";
+	}
 
 	// LECTORES
+	@GetMapping("/lectores")
+	public String mostrarLectores(Model modelo) {
+		modelo.addAttribute("lectores", lectorservice.getAll());
+		return "lector/mostrar";
+	}
+	
 	@GetMapping("/addlector")
 	public String formLector(Model modelo) {
 		Lector lector = new Lector();

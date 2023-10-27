@@ -27,7 +27,7 @@
 				<td th:text="${libro.editorial}" ></td>
 				<td th:text="${libro.anyo}" ></td>
 				<td th:text="${libro.tipo}" ></td>
-				<td><a class="btn btn-primary">Actualizar</a>
+				<td><a th:href="@{'/updatelibro/'+${libro.idlibro}}" class="btn btn-primary">Actualizar</a>
 						<a th:href="@{'/deletelibro/'+${libro.idlibro}}" class="btn btn-danger">Eliminar</a></td>
 			</tr>
 		</tbody>
