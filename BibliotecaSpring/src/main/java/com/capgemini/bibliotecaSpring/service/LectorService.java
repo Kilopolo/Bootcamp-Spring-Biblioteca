@@ -19,6 +19,6 @@ public interface LectorService extends ServiceS<Lector> {
 	 */
 	public void prestar(long id, LocalDate fechaAct);
 	
-	void multar(int dias);
+	void multar(long idLector, int diasRetraso);
 	
 }

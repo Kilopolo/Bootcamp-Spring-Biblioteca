@@ -1,5 +1,7 @@
 package com.capgemini.bibliotecaSpring.model;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -40,4 +42,8 @@ public class Lector  {
 	private Multa multa;
 	@OneToOne(mappedBy = "lector")
 	private User user;
+
+
+
+
 }

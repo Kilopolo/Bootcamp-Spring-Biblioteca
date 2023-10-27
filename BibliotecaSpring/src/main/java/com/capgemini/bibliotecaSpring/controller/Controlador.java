@@ -1,5 +1,10 @@
 package com.capgemini.bibliotecaSpring.controller;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,11 +18,13 @@ import com.capgemini.bibliotecaSpring.model.Autor;
 import com.capgemini.bibliotecaSpring.model.Copia;
 import com.capgemini.bibliotecaSpring.model.Lector;
 import com.capgemini.bibliotecaSpring.model.Libro;
+import com.capgemini.bibliotecaSpring.model.Multa;
 import com.capgemini.bibliotecaSpring.model.Prestamo;
 import com.capgemini.bibliotecaSpring.service.AutorService;
 import com.capgemini.bibliotecaSpring.service.CopiaService;
 import com.capgemini.bibliotecaSpring.service.LectorService;
 import com.capgemini.bibliotecaSpring.service.LibroService;
+import com.capgemini.bibliotecaSpring.service.MultaService;
 import com.capgemini.bibliotecaSpring.service.PrestamoService;
 
 @Controller
@@ -154,5 +161,53 @@ public class Controlador {
 		modelo.addAttribute("copia", copia);
 		return "copia/addCopia";
 	}
-
+	
+	
+	
+	//LOGICA DEL PROGRAMA 
+//	@GetMapping("/devolverlibro/{idprestamo}")
+//	public String devolverLibro(@PathVariable("idprestamo") long idprestamo, @RequestParam("fechaDevolucion") LocalDate fechaDevolucion) {
+//	    Prestamo prestamo = prestamoservice.getById(idprestamo);
+//	    Lector lector = prestamo.getLector();
+//	    
+//	    LocalDate fechaDevolucionEsperada = prestamo.getFechaDevolucionEsperada();
+//	    int diasDeRetraso = calcularDiasDeRetraso(fechaDevolucionEsperada, fechaDevolucion);
+//	    int tasaSancionDiaria = 2; 
+//	    int sancion = diasDeRetraso * tasaSancionDiaria;
+//
+//	    // Verificar si el lector tiene una multa
+//	    List<Multa> multas = MultaService.obtenerMultasPorLector(lector);
+//	    if (!multas.isEmpty()) {
+//	        // Actualizar la multa existente
+//	        Multa multa = multas.get(0);
+//	        multa.setFFin(multa.getFFin().plusDays(sancion)); // Extender la fecha de finalización de la multa
+//	        multa.setTiempoMultado(multa.getTiempoMultado() + sancion);
+//	        multaService.actualizarMulta(multa);
+//	    } else {
+//	        // Crear una nueva multa
+//	        Multa multa = new Multa();
+//	        multa.setFInicio(LocalDate.now());
+//	        multa.setFFin(LocalDate.now().plusDays(sancion));
+//	        multa.setTiempoMultado(sancion);
+//	        multa.setLector(lector);
+//	        multaService.crearMulta(multa);
+//	    }
+//	    
+//	    // Restringir el alquiler de nuevos libros si hay una sanción pendiente
+//	    if (!multas.isEmpty() && multas.get(0).getFFin().isAfter(LocalDate.now())) {
+//	        return "redirect:/mensajeSancion"; // Mostrar un mensaje de sanción
+//	    }
+//	    
+//	    // Lógica para la devolución del libro y actualización de la base de datos
+//
+//	    return "redirect:/prestamos/" + lector.getIdlector();
+//	}
+//
+//	private int calcularDiasDeRetraso(LocalDate fechaDevolucionEsperada, LocalDate fechaDevolucion) {
+//	    if (fechaDevolucionEsperada != null && fechaDevolucion != null) {
+//	        return (int) ChronoUnit.DAYS.between(fechaDevolucionEsperada, fechaDevolucion);
+//	    } else {
+//	        return 0;
+//	    }
+//	}
 }
