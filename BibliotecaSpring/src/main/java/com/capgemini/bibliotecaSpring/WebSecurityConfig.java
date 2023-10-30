@@ -63,8 +63,15 @@ public class WebSecurityConfig {
 	@SuppressWarnings("removal")
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().requestMatchers("/admin/**").hasRole("ADMIN")
-				.requestMatchers("/anonymous*").anonymous().requestMatchers("/login*").permitAll();
+		http.csrf()
+				.disable()
+				.authorizeRequests()
+				.requestMatchers("/admin/**")
+				.hasRole("ADMIN")
+				.requestMatchers("/anonymous*")
+				.anonymous()
+				.requestMatchers("/login*")
+				.permitAll();
 		http.authorizeRequests(auth -> auth
 				.requestMatchers("/css/**", "/img/**", "/script/**", "/login/**", "/failure-login/**").permitAll())
 				.formLogin((form) -> form.loginPage("/login").permitAll());
