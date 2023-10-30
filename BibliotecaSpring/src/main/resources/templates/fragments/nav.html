@@ -9,7 +9,7 @@
 		</button>
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
+			<ul class="nav navbar-nav mr-auto">
 				<li class="nav-item active">
 					<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/home}">Home<span class="sr-only">(current)</span></a>
 				</li>
@@ -20,8 +20,53 @@
 						<a class="nav-link" th:href="@{/libros}">Libros</a>
 					</li>
 				<li class="nav-item">
+				<!--				<li class="nav-item">-->
+				<!--					<a class="nav-link" th:href="@{/lectores}">Socios</a>-->
+				<!--				</li>-->
+				<li sec:authorize="isAuthenticated() && hasRole('USER')" class="nav-item">
+					<a class="nav-link" th:href="@{/libros}">Libros</a>
+				</li>
+				<li sec:authorize="hasRole('USER')" class="nav-item">
+					<a class="nav-link" th:href="@{/libros}">sin autenticates</a>
+				</li>
+				<li sec:authorize="hasRole('USER')" class="nav-item">
+					<a class="nav-link" th:href="@{/libros}">sin autenticates</a>
+				</li>
+				<li sec:authorize="isAuthenticated() " class="nav-item">
+					<a class="nav-link" th:href="@{/autores}">sin rol</a>
+				</li>
+								<li sec:authorize="isAuthenticated() && hasRole('ADMIN')" class="nav-item">
 					<a class="nav-link" th:href="@{/autores}">Autor</a>
 				</li>
+				<li sec:authorize="isAuthenticated() && hasRole('ADMIN')" id="users-menu" class="dropdown"><a
+						class="dropdown-toggle" data-toggle="dropdown" href="#">
+						. <span class="caret">Socios</span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a th:href="@{/lectores}">Ver listado</a></li>
+						<!--						<li><a href="#" >texto</a></li>-->
+					</ul>
+				</li>
+
+				<!--				<li sec:authorize="isAuthenticated() && hasRole('ROLE_USER')" id="offers-menu" class="dropdown"><a-->
+				<!--					class="dropdown-toggle" data-toggle="dropdown" href="#"-->
+				<!--					th:text=#{manageOffers.message}> . <span class="caret"></span>-->
+				<!--				</a>-->
+				<!--					<ul class="dropdown-menu">-->
+				<!--						<li><a href="/offer/add" th:text=#{addOffers.message}></a></li>-->
+				<!--						<li><a href="/offer/ownList" th:text=#{ownOffers.message}></a></li>-->
+				<!--						<li><a href="/offer/list" th:text=#{showOffers.message}></a></li>-->
+				<!--					</ul></li>-->
+
+				<!--				<li id="buyButton" sec:authorize="isAuthenticated() && hasRole('ROLE_USER')"><a href="/offer/buyView" th:text="#{buyView.message}">-->
+				<!--				</a></li>-->
+
+
+				<li sec:authorize="isAuthenticated()"><a sec:authorize="hasRole('USER')"
+						style="margin-right: 15px; color: #FFFFFF" th:text="${#session.getAttribute('activeUser')}">
+					</a></li>
+
+
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
 				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -29,8 +74,8 @@
 			</form>
 			<!--				<ul class="mr-auto collapse navbar-collapse navbar-right">-->
 			<li class="dropdown nav-item active">
-				<a id="btnLanguage" th:href="@{/#}" class="dropdown-toggle" data-toggle="dropdown" role="button"
-					aria-haspopup="true" aria-expanded="false">
+				<a id="btnLanguage" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+					aria-expanded="false">
 					<span th:text="#{language.change}"></span>
 					<span class="caret"></span>
 				</a>

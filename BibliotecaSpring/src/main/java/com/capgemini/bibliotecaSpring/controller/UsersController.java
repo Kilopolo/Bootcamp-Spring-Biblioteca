@@ -63,6 +63,7 @@ public class UsersController {
 		
 		System.out.println(""+l.toString());
 		securityService.autoLogin(user.getEmail(), user.getPasswordConfirm());
+//		securityService.autoLogin(user.getEmail(), user.getPasswordConfirm());
 		return "redirect:/login";
 	}
 
