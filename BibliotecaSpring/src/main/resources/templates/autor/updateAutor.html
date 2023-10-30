@@ -14,6 +14,16 @@
 	<h3>Nacionalidad: <span th:text="${autor.nacionalidad}"></span> </h3>
 	<h3>fecha nacimiento: <span th:text="${autor.fechaNacimiento}"></span> </h3>
 	<form action="#" th:action="@{/save}" th:object="${autor}" method="post">
+	<head th:replace="fragments/head" />
+	<title>Update autor</title>
+</head>
+
+<body>
+	<nav th:replace="fragments/nav" />
+	<h3>Autor: <span th:text="${autor.nombre}"> </span></h3>
+	<h3>Nacionalidad: <span th:text="${autor.nacionalidad}"></span> </h3>
+	<h3>fecha nacimiento: <span th:text="${autor.fechaNacimiento}"></span> </h3>
+	<form action="#" th:action="@{/saveautor}" th:object="${autor}" method="post">
 		<input th:field="*{nombre}" type="text" placeholder="Nombre" class="form-control mb-4 col-4">
 		<input th:field="*{Nacionalidad}" type="text" placeholder="Nacionalidad" class="form-control mb-4 col-4">
 		<p>Fecha de nacimiento
@@ -28,6 +38,8 @@
 	<hr>
 	<a th:href="@{/}">Volver</a>
 	<footer th:replace="~{fragment/fragment :: footer}"></footer>
+	<a th:href="@{/autores}">Volver</a>
+	<footer th:replace="fragments/footer" />
 </body>
 
 </html>

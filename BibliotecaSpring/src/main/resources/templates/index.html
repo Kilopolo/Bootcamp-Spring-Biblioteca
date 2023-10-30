@@ -1,18 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<header>
 
-<head>
-<meta charset="ISO-8859-1">
-<title>Biblioteca</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-</head>
+	<head th:replace="fragments/head" />
+	<title>BibliotecA</title>
+</header>
+
 
 <body>
-	<header th:replace="~{fragment/fragment :: header}"> </header>
+	<nav th:replace="fragments/nav" />
 	<h3>Bienvenido a la Biblioteca de Capgemini</h3>
-	<!--<img th:src="@{../static/img/Capgemini_201x_logo.svg.png}" th:title="Logo">-->
-	<footer th:replace="~{fragment/fragment :: footer}"></footer>
+	<img class="img-fluid" th:src="@{/img/Capgemini_201x_logo.svg.png}" th:title="Logo">
+	<footer th:replace="fragments/footer" />
 </body>
 
 </html>

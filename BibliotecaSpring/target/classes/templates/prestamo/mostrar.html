@@ -1,15 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">>
-<title>Mostrar prestamos</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+	<head th:replace="fragments/head" />
+	<title>Mostrar prestamos</title>
 </head>
+
 <body>
-<header th:replace="~{fragment/fragment :: header}"> </header>
+	<nav th:replace="fragments/nav" />
 	<table class="table table-striped table-responsive-md">
 		<h3>Prestamos Socio <span th:text="${lector.nombre}"></span> </h3>
 		<thead>
@@ -23,12 +22,22 @@
 		</thead>
 		<tbody>
 			<tr th:each="prestamo:${prestamos}">
-				<td th:text="${prestamo.fechaInicio}" ></td>
-				<td th:text="${prestamo.fechaFin}" ></td>
+				<td th:text="${prestamo.fechaInicio}"></td>
+				<td th:text="${prestamo.fechaFin}"></td>
 				<td th:text="${prestamo.copia.libro.titulo}"></td>
 				<td th:text="${prestamo.copia.estado}"></td>
-				<td><a  class="btn btn-primary">Actualizar</a>
-						<a th:onclick="return confirm('¿Estás seguro de que deseas eliminar este prestamo?')" class="btn btn-danger">Eliminar</a></td>
+				<td><a th:href="@{'/updateprestamo/'+${prestamo.idprestamo}}" class="btn btn-primary">Actualizar</a>
+					<a th:onclick="return confirm('¿Estás seguro de que deseas eliminar este prestamo?')"
+						th:href="@{'/deleteprestamo/'+${prestamo.idprestamo}}" class="btn btn-danger">Eliminar</a>
+				</td>
+			</tr>
+			<tr th:if="${#lists.isEmpty(prestamos)}">
+				<td colspan="5" style="color: red;">No hay prestamos</td>
+			</tr>
+			<tr th:if="${!#lists.isEmpty(prestamos)}">
+				<th colspan="3">Total:
+				</th>
+				<td colspan="2" th:text="${prestamos.size()}" style="color: green;"></td>
 			</tr>
 		</tbody>
 	</table>
@@ -36,6 +45,7 @@
 		<a th:href="@{'/addprestamo/'+${lector.idlector}}" class="btn btn-primary">Add prestamo</a>
 	</div>
 	<div> <a th:href="@{/lectores}">Volver</a> </div>
-	<footer th:replace="~{fragment/fragment :: footer}"></footer>
+	<footer th:replace="fragments/footer" />
 </body>
+
 </html>

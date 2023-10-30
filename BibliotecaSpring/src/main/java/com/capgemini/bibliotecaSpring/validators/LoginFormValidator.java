@@ -19,14 +19,21 @@ public class LoginFormValidator implements Validator {
 	public boolean supports(Class<?> aClass) {
 		return User.class.equals(aClass);
 	}
+
+
+
 	
+	@SuppressWarnings("unused")
 	@Override
 	public void validate(Object target, Errors errors) {
 		User user = (User) target;
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "Error.empty");
 
-		if (usersServiceImpl.getUserByEmail(user.getEmail()) != null) {
-			if (!usersServiceImpl.getUserByEmail(user.getEmail()).getPassword().equals(user.getPassword())) {
+		User jpaUser = usersServiceImpl.getUserByEmail(user.getEmail());
+		System.out.println(jpaUser.getPassword());
+		if (jpaUser != null) {
+			if (!jpaUser.getPassword().equals(user.getPassword())) {
+				
 				errors.rejectValue("email", "Error.login.email.wrongPassword");
 			}
 		} else {

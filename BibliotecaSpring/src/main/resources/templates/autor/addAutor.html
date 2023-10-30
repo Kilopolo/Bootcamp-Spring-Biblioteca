@@ -2,10 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	<title>Add Autor</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<head th:replace="fragments/head" />
 </head>
 
 <body>
@@ -14,6 +13,7 @@
 		<h3>Nuevo Autor</h3>
 
 		<form action="#" th:action="@{/saveAutor}" th:object="${autor}" method="post">
+		<form action="#" th:action="@{/saveautor}" th:object="${autor}" method="post">
 			<input th:field="*{nombre}" type="text" placeholder="Escriba el nombre" class="form-control mb-4 col.4">
 			<input th:field="*{nacionalidad}" type="text" placeholder="Escriba la nacionalidad" class="form-control mb-4 col.4">
 			<p> Fecha de nacimiento
@@ -21,7 +21,7 @@
 			<button type="submit" class="btn btn-info col-2">Guardar autor</button>
 		</form>
 		<a th:href="@{/}">Volver</a>
-		<footer th:replace="~{fragment/fragment :: footer}"></footer>
+		<footer th:replace="fragments/footer" />
 </body>
 
 </html>

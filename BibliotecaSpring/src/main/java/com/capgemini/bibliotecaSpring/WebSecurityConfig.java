@@ -60,6 +60,7 @@ public class WebSecurityConfig {
 	 *                   autorización.
 	 */
 
+	@SuppressWarnings("removal")
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().requestMatchers("/admin/**").hasRole("ADMIN")
@@ -111,13 +112,12 @@ public class WebSecurityConfig {
 
 	@Bean
 	public InMemoryUserDetailsManager userDetailsService() {
-		UserDetails user1 = User.withUsername("user@gmail.com").password(encoder().encode("1234")).roles("USER")
+		UserDetails user1 = User.withUsername("david").password(encoder().encode("1234")).roles("USER")
 				.build();
-		UserDetails user2 = User.withUsername("user2@gmail.com").password(encoder().encode("user2Pass")).roles("USER")
+
+		UserDetails admin = User.withUsername("admindavid").password(encoder().encode("1234")).roles("ADMIN")
 				.build();
-		UserDetails admin = User.withUsername("admin@gmail.com").password(encoder().encode("1234")).roles("ADMIN")
-				.build();
-		return new InMemoryUserDetailsManager(user1, user2, admin);
+		return new InMemoryUserDetailsManager(user1, admin);
 	}
 
 	@Bean

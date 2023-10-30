@@ -46,11 +46,24 @@ public class Controlador {
 		return "autor/mostrar";
 	}
 
+	@PostMapping("/saveautor")
+	public String saveAutor(@ModelAttribute("autor") Autor autor) {
+		autorservice.save(autor);
+		return "redirect:/autores";
+	}
+
 	@GetMapping("/addautor")
 	public String formAutor(Model modelo) {
 		Autor autor = new Autor();
 		modelo.addAttribute("autor", autor);
 		return "autor/addAutor";
+	}
+	
+	@GetMapping("/updateautor/{idautor}")
+	public String updateAutor(Model modelo, @PathVariable("idautor") long idautor) {
+		Autor autor = autorservice.getById(idautor);
+		modelo.addAttribute("autor", autor);
+		return "autor/updateAutor";
 	}
 
 	@GetMapping("/deleteautor/{idautor}")
@@ -77,18 +90,27 @@ public class Controlador {
 
 	// LIBROS
 	@GetMapping("/libros/{idautor}")
-	public String mostrarLibros(Model modelo, @PathVariable ("idautor") long idautor) {
+	public String mostrarLibros(Model modelo, @PathVariable("idautor") long idautor) {
 		Autor autor = autorservice.getById(idautor);
-		modelo.addAttribute("autor",autor);
+		modelo.addAttribute("autor", autor);
 		modelo.addAttribute("libros", libroservice.findByAutor(autor));
 		return "libro/mostrar";
 	}
+	
+	@PostMapping("/savelibro/{idautor}")
+	public String saveLibro(@ModelAttribute("libro") Libro libro, @PathVariable ("idautor") long idautor, Model modelo) {
+		Autor autor = autorservice.getById(idautor);
+		libro.setAutor(autor);
+		libroservice.save(libro);
+		modelo.addAttribute("autor", autor);
+		return "redirect:/libros/" + autor.getIdautor();
+	}
 
 	@GetMapping("/addlibro/{idautor}")
-	public String formLibro(Model modelo, @PathVariable	("idautor") long idautor) {
+	public String formLibro(Model modelo, @PathVariable("idautor") long idautor) {
 		Libro libro = new Libro();
 		Autor autor = autorservice.getById(idautor);
-		modelo.addAttribute("autor",autor);
+		modelo.addAttribute("autor", autor);
 		modelo.addAttribute("libro", libro);
 		return "libro/addLibro";
 	}
@@ -98,13 +120,14 @@ public class Controlador {
 		Autor autor =libroservice.getById(idlibro).getAutor();
 		modelo.addAttribute("autor", autor);
 		libroservice.deleteById(idlibro);
-		return "redirect:/libros/"+autor.getIdautor();
+		return "redirect:/libros/" + autor.getIdautor();
 
 	}
+
 	@GetMapping("/updatelibro/{idlibro}")
-	public String updateLibro(Model modelo, @PathVariable	("idlibro") long idlibro) {
+	public String updateLibro(Model modelo, @PathVariable("idlibro") long idlibro) {
 		Libro libro = libroservice.getById(idlibro);
-		modelo.addAttribute("autor",libro.getAutor());
+		modelo.addAttribute("autor", libro.getAutor());
 		modelo.addAttribute("libro", libro);
 		return "libro/updateLibro";
 	}
@@ -123,6 +146,12 @@ public class Controlador {
 		return "lector/mostrar";
 	}
 	
+	@PostMapping("/savelector")
+	public String saveLector(@ModelAttribute("lector") Lector lector ) {
+		lectorservice.save(lector);
+		return "redirect:/lectores";
+	}
+
 	@GetMapping("/addlector")
 	public String formLector(Model modelo) {
 		Lector lector = new Lector();
@@ -140,17 +169,43 @@ public class Controlador {
 	//PRESTAMOS
 	@GetMapping("/prestamos/{idlector}")
 	public String mostrarPrestamosLector(Model modelo, @PathVariable ("idlector") long idlector) {
+	@GetMapping("/updatelector/{idlector}")
+	public String updateLector(Model modelo, @PathVariable("idlector") long idlector) {
 		Lector lector = lectorservice.getById(idlector);
-		modelo.addAttribute("lector",lector);
+		modelo.addAttribute("lector", lector);
+		return "lector/updateLector";
+	}
+
+	@GetMapping("/deletelector/{idlector}")
+	public String deleteLector(@PathVariable("idlector") long idlector, Model modelo) {
+		lectorservice.deleteById(idlector);
+		return "redirect:/lectores";
+
+	}
+
+	// PRESTAMOS
+	@GetMapping("/prestamos/{idlector}")
+	public String mostrarPrestamosLector(Model modelo, @PathVariable("idlector") long idlector) {
+		Lector lector = lectorservice.getById(idlector);
+		modelo.addAttribute("lector", lector);
 		modelo.addAttribute("prestamos", prestamoservice.findByLector(lector));
 		return "prestamo/mostrar";
 	}
 	
+	@PostMapping("/saveprestamo/{idlector}")
+	public String savePrestamo(@ModelAttribute("prestamo") Prestamo prestamo, @PathVariable ("idlector") long idlector, Model modelo) {
+		Lector lector = lectorservice.getById(idlector);
+		prestamo.setLector(lector);
+		prestamoservice.save(prestamo);
+		modelo.addAttribute("lector", lector);
+		return "redirect:/prestamos/" + idlector;
+	}
+
 	@GetMapping("/addprestamo/{idlector}")
-	public String formPrestamo(Model modelo, @PathVariable	("idlector") long idlector) {
+	public String formPrestamo(Model modelo, @PathVariable("idlector") long idlector) {
 		Prestamo prestamo = new Prestamo();
 		Lector lector = lectorservice.getById(idlector);
-		modelo.addAttribute("lector",lector);
+		modelo.addAttribute("lector", lector);
 		modelo.addAttribute("prestamo", prestamo);
 		modelo.addAttribute("copias", copiaservice.getAll());
 		return "prestamo/addPrestamo";
@@ -164,18 +219,46 @@ public class Controlador {
 	
 	
 	//COPIAS
+	@GetMapping("/updateprestamo/{idprestamo}")
+	public String updatePrestamo(Model modelo, @PathVariable("idprestamo") long idprestamo) {
+		Prestamo prestamo = prestamoservice.getById(idprestamo);
+		modelo.addAttribute("lector", prestamo.getLector());
+		modelo.addAttribute("prestamo", prestamo);
+		return "prestamo/updatePrestamo";
+	}
+
+	@GetMapping("/deleteprestamo/{idprestamo}")
+	public String deletePrestamo(@PathVariable("idprestamo") long idprestamo, Model modelo) {
+		Lector lector = prestamoservice.getById(idprestamo).getLector();
+		modelo.addAttribute("lector", lector);
+		prestamoservice.deleteById(idprestamo);
+		return "redirect:/prestamos/" + lector.getIdlector();
+
+	}
+
+	// COPIAS
 	@GetMapping("/copias/{idlibro}")
-	public String mostrarCopiasLibro(Model modelo, @PathVariable ("idlibro") long idlibro) {
+	public String mostrarCopiasLibro(Model modelo, @PathVariable("idlibro") long idlibro) {
 		Libro libro = libroservice.getById(idlibro);
-		modelo.addAttribute("libro",libro);
+		modelo.addAttribute("libro", libro);
 		modelo.addAttribute("copias", copiaservice.findByLibro(libro));
 		return "copia/mostrar";
 	}
+	
+	@PostMapping("/savecopia/{idlibro}")
+	public String saveCopia(@ModelAttribute("copia") Copia copia, @PathVariable ("idlibro") long idlibro, Model modelo) {
+		Libro libro= libroservice.getById(idlibro);
+		copia.setLibro(libro);
+		copiaservice.save(copia);
+		modelo.addAttribute("libro", libro);
+		return "redirect:/copias/" + idlibro;
+	}
+
 	@GetMapping("/addcopia/{idlibro}")
-	public String formCopia(Model modelo, @PathVariable	("idlibro") long idlibro) {
+	public String formCopia(Model modelo, @PathVariable("idlibro") long idlibro) {
 		Copia copia = new Copia();
 		Libro libro = libroservice.getById(idlibro);
-		modelo.addAttribute("libro",libro);
+		modelo.addAttribute("libro", libro);
 		modelo.addAttribute("copia", copia);
 		return "copia/addCopia";
 	}
@@ -234,4 +317,21 @@ public class Controlador {
 //	        return 0;
 //	    }
 //	}
+	@GetMapping("/updatecopia/{idcopia}")
+	public String updatecopia(Model modelo, @PathVariable("idcopia") long idcopia) {
+		Copia copia = copiaservice.getById(idcopia);
+		modelo.addAttribute("libro", copia.getLibro());
+		modelo.addAttribute("copia", copia);
+		return "copia/updateCopia";
+	}
+	
+	@GetMapping("/deletecopia/{idcopia}")
+	public String deleteCopia(@PathVariable("idcopia") long idcopia, Model modelo) {
+		Libro libro = copiaservice.getById(idcopia).getLibro();
+		modelo.addAttribute("libro", libro);
+		copiaservice.deleteById(idcopia);
+		return "redirect:/copias/" + libro.getIdlibro();
+
+	}
+
 }
