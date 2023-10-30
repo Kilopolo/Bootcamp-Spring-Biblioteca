@@ -10,14 +10,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import com.capgemini.bibliotecaSpring.service.security.UserDetailsServiceImpl;
 
 //import com.capgemini.bibliotecaSpring.service.security.UserDetailsServiceImpl;
 
@@ -27,18 +26,18 @@ import com.capgemini.bibliotecaSpring.service.security.UserDetailsServiceImpl;
 public class WebSecurityConfig {
 
 	@Autowired
-	UserDetailsServiceImpl userDetailsService;
+	UserDetailsService userDetailsServiceImpl;
 
 	/**
 	 * Configura el encriptador de contraseñas a utilizar en la aplicación.
 	 * 
 	 * @return el encriptador de contraseñas BCryptPasswordEncoder.
 	 */
-    @Bean
-    public PasswordEncoder encoder() {
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        return encoder;
-    }
+	@Bean
+	public PasswordEncoder encoder() {
+		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		return encoder;
+	}
 
 	/**
 	 * Configura el AuthenticationManager a utilizar en la autenticación.
@@ -63,17 +62,11 @@ public class WebSecurityConfig {
 
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//	       http.csrf()
-//           .disable()
-//           .authorizeRequests()
-//           .antMatchers("/admin/**")
-//           .hasRole("ROLE_ADMIN")
-//           .antMatchers("/anonymous*")
-//           .anonymous()
-//           .antMatchers("/login*")
-//           .permitAll();
+		http.csrf().disable().authorizeRequests().requestMatchers("/admin/**").hasRole("ADMIN")
+				.requestMatchers("/anonymous*").anonymous().requestMatchers("/login*").permitAll();
 		http.authorizeRequests(auth -> auth
-				.requestMatchers("/css/**", "/img/**", "/script/**", "/login/**", "/failure-login/**").permitAll());
+				.requestMatchers("/css/**", "/img/**", "/script/**", "/login/**", "/failure-login/**").permitAll())
+				.formLogin((form) -> form.loginPage("/login").permitAll());
 
 //                .requestMatchers("/user/list").hasAuthority("ADMIN")
 //                .requestMatchers("/autor/**").hasAuthority("ADMIN")
@@ -116,30 +109,22 @@ public class WebSecurityConfig {
 		};
 	}
 
-	
-    @Bean
-    public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails user1 = User.withUsername("user@gmail.com")
-            .password(encoder().encode("1234"))
-            .roles("ROLE_USER")
-            .build();
-        UserDetails user2 = User.withUsername("user2@gmail.com")
-            .password(encoder().encode("user2Pass"))
-            .roles("ROLE_USER")
-            .build();
-        UserDetails admin = User.withUsername("admin@gmail.com")
-            .password(encoder().encode("1234"))
-            .roles("ROLE_ADMIN")
-            .build();
-        return new InMemoryUserDetailsManager(user1, user2, admin);
-    }
-    
-	
+	@Bean
+	public InMemoryUserDetailsManager userDetailsService() {
+		UserDetails user1 = User.withUsername("user@gmail.com").password(encoder().encode("1234")).roles("USER")
+				.build();
+		UserDetails user2 = User.withUsername("user2@gmail.com").password(encoder().encode("user2Pass")).roles("USER")
+				.build();
+		UserDetails admin = User.withUsername("admin@gmail.com").password(encoder().encode("1234")).roles("ADMIN")
+				.build();
+		return new InMemoryUserDetailsManager(user1, user2, admin);
+	}
+
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
-		authProvider.setUserDetailsService(userDetailsService);
+		authProvider.setUserDetailsService(userDetailsServiceImpl);
 		authProvider.setPasswordEncoder(encoder());
 
 		return authProvider;

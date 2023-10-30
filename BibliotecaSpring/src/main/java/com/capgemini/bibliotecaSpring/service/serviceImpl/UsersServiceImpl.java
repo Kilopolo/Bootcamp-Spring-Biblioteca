@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.bibliotecaSpring.model.User;
@@ -21,7 +21,7 @@ public class UsersServiceImpl extends ServiceImpl<UsersRepository, User>   imple
 	@Autowired
 	private UsersRepository usersRepository;
 	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	private PasswordEncoder bCryptPasswordEncoder;
 	
 	@PostConstruct
 	public void init() {
