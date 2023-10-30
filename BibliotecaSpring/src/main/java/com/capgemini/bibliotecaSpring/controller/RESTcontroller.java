@@ -42,7 +42,6 @@ public class RESTcontroller {
 	@GetMapping("/listado")
 	public List<Lector> index() {
 //		System.out.println("Hola, mundo");
-		
 		return lectorservice.getAll();
 	}
 	@GetMapping("/listadoautor")
@@ -57,6 +56,11 @@ public class RESTcontroller {
 //		System.out.println("Hola, mundo");
 		lectorservice.prestar(1, LocalDate.of(2000, 05, 05), copia);
 		return prestamoservice.getAll();
+	}
+	@GetMapping("/autores")
+	public String mostrarAutores(Model modelo) {
+		modelo.addAttribute("autores", autorservice.getAll());
+		return "autor/mostrar";
 	}
 /**
 	// AUTORES
