@@ -58,6 +58,13 @@ public class Controlador {
 		modelo.addAttribute("autor", autor);
 		return "autor/addAutor";
 	}
+	
+	@GetMapping("/updateautor/{idautor}")
+	public String updateAutor(Model modelo, @PathVariable("idautor") long idautor) {
+		Autor autor = autorservice.getById(idautor);
+		modelo.addAttribute("autor", autor);
+		return "autor/updateAutor";
+	}
 
 	@GetMapping("/deleteautor/{idautor}")
 	public String deleteAutor(@PathVariable("idautor") long idautor, Model modelo) {
@@ -129,6 +136,12 @@ public class Controlador {
 		modelo.addAttribute("lector", lector);
 		return "lector/addLector";
 	}
+	@GetMapping("/updatelector/{idlector}")
+	public String updateLector(Model modelo, @PathVariable("idlector") long idlector) {
+		Lector lector = lectorservice.getById(idlector);
+		modelo.addAttribute("lector", lector);
+		return "lector/updateLector";
+	}
 
 	@GetMapping("/deletelector/{idlector}")
 	public String deleteLector(@PathVariable("idlector") long idlector, Model modelo) {
@@ -163,6 +176,14 @@ public class Controlador {
 		modelo.addAttribute("prestamo", prestamo);
 		modelo.addAttribute("copias", copiaservice.getAll());
 		return "prestamo/addPrestamo";
+	}
+	
+	@GetMapping("/updateprestamo/{idprestamo}")
+	public String updatePrestamo(Model modelo, @PathVariable("idprestamo") long idprestamo) {
+		Prestamo prestamo = prestamoservice.getById(idprestamo);
+		modelo.addAttribute("lector", prestamo.getLector());
+		modelo.addAttribute("prestamo", prestamo);
+		return "prestamo/updatePrestamo";
 	}
 
 	@GetMapping("/deleteprestamo/{idprestamo}")
@@ -200,7 +221,15 @@ public class Controlador {
 		modelo.addAttribute("copia", copia);
 		return "copia/addCopia";
 	}
-
+	
+	@GetMapping("/updatecopia/{idcopia}")
+	public String updatecopia(Model modelo, @PathVariable("idcopia") long idcopia) {
+		Copia copia = copiaservice.getById(idcopia);
+		modelo.addAttribute("libro", copia.getLibro());
+		modelo.addAttribute("copia", copia);
+		return "copia/updateCopia";
+	}
+	
 	@GetMapping("/deletecopia/{idcopia}")
 	public String deleteCopia(@PathVariable("idcopia") long idcopia, Model modelo) {
 		Libro libro = copiaservice.getById(idcopia).getLibro();

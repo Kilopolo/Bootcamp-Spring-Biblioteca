@@ -23,7 +23,7 @@
 			<tr th:each="copia: ${copias}">
 				<td th:text="${copia.idcopia}"></td>
 				<td th:text="${copia.estado}"></td>
-				<td><a  class="btn btn-primary">Actualizar</a>
+				<td><a  th:href="@{'/updatecopia/'+${copia.idcopia}}"  class="btn btn-primary">Actualizar</a>
 						<a th:onclick="return confirm('¿Estás seguro de que deseas eliminar esta copia?')" th:href="@{'/deletecopia/'+${copia.idcopia}}" class="btn btn-danger">Eliminar</a></td>
 			</tr>
 			<tr th:if="${#lists.isEmpty(copias)}">

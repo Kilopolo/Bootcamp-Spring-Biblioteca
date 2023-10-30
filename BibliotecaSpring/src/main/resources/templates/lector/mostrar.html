@@ -27,7 +27,7 @@
 				<td th:text="${lector.direccion}"></td>
 				<td><a th:href="@{'/prestamos/' +${lector.idlector}}" class="btn btn-primary">Ver prestamos</a>
 					<a class="btn btn-primary">Ver multas</a>
-					<a class="btn btn-primary">Actualizar</a>
+					<a  th:href="@{'/updatelector/'+${lector.idlector}}" class="btn btn-primary">Actualizar</a>
 					<a th:onclick="return confirm('¿Estás seguro de que deseas eliminar este socio?')" th:href="@{'/deletelector/'+${lector.idlector}}" class="btn btn-danger">Eliminar</a>
 				</td>
 			</tr>
