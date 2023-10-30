@@ -15,12 +15,11 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "autores")
+@Table(name="autores")
 public class Autor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,9 +29,9 @@ public class Autor {
 	private String nombre;
 	@Column
 	private String nacionalidad;
-	@Column(name = "fecNac")
+	@Column(name="fecNac")
 	private LocalDate fechaNacimiento;
-	@OneToMany(mappedBy = "autor", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "autor", fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
 	private List<Libro> Libros;
 
 }

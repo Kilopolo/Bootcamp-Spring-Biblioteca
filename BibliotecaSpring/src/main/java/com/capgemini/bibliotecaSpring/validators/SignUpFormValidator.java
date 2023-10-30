@@ -9,16 +9,20 @@ import org.springframework.validation.Validator;
 import com.capgemini.bibliotecaSpring.model.User;
 import com.capgemini.bibliotecaSpring.service.serviceImpl.UsersServiceImpl;
 
+
+
 @Component
 public class SignUpFormValidator implements Validator {
 	@Autowired
 	private UsersServiceImpl usersServiceImpl;
+
 
 	@Override
 	public boolean supports(Class<?> aClass) {
 		return User.class.equals(aClass);
 	}
 
+	 
 	@Override
 	public void validate(Object target, Errors errors) {
 		User user = (User) target;
@@ -30,10 +34,11 @@ public class SignUpFormValidator implements Validator {
 		if (user.getPassword().length() < 5 || user.getPassword().length() > 24) {
 			errors.rejectValue("password", "Error.signup.password.length");
 		}
-		if (user.getPasswordConfirm() != null)
+		if (user.getPasswordConfirm()!=null) 
 			if (!user.getPasswordConfirm().equals(user.getPassword())) {
 				errors.rejectValue("passwordConfirm", "Error.signup.passwordConfirm.coincidence");
 			}
-
+		
+		
 	}
 }

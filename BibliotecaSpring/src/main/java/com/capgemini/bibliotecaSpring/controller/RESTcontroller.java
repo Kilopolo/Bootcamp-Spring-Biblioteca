@@ -1,12 +1,15 @@
 package com.capgemini.bibliotecaSpring.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.bibliotecaSpring.model.Autor;
 import com.capgemini.bibliotecaSpring.model.Copia;
@@ -19,8 +22,9 @@ import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LibroService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
 
-@Controller
-public class Controlador {
+@RestController
+@RequestMapping("/biblio")
+public class RESTcontroller {
 	@Autowired
 	public LibroService libroservice;
 	@Autowired
@@ -33,12 +37,19 @@ public class Controlador {
 	public PrestamoService prestamoservice;
 
 
-	@GetMapping("/")
-	public String index() {
-		System.out.println("Hola, mundo");
-		return "index";
+	@GetMapping("/listado")
+	public List<Lector> index() {
+//		System.out.println("Hola, mundo");
+		
+		return lectorservice.getAll();
 	}
-
+	@GetMapping("/listadoautor")
+	public List<Autor> indexautor() {
+//		System.out.println("Hola, mundo");
+		
+		return autorservice.getAll();
+	}
+/**
 	// AUTORES
 	@GetMapping("/autores")
 	public String mostrarAutores(Model modelo) {
@@ -185,53 +196,7 @@ public class Controlador {
 		copiaservice.save(copia);
 		return "redirect:/copias";
 	}
-	
-	
-	
-	//LOGICA DEL PROGRAMA 
-//	@GetMapping("/devolverlibro/{idprestamo}")
-//	public String devolverLibro(@PathVariable("idprestamo") long idprestamo, @RequestParam("fechaDevolucion") LocalDate fechaDevolucion) {
-//	    Prestamo prestamo = prestamoservice.getById(idprestamo);
-//	    Lector lector = prestamo.getLector();
-//	    
-//	    LocalDate fechaDevolucionEsperada = prestamo.getFechaDevolucionEsperada();
-//	    int diasDeRetraso = calcularDiasDeRetraso(fechaDevolucionEsperada, fechaDevolucion);
-//	    int tasaSancionDiaria = 2; 
-//	    int sancion = diasDeRetraso * tasaSancionDiaria;
-//
-//	    // Verificar si el lector tiene una multa
-//	    List<Multa> multas = MultaService.obtenerMultasPorLector(lector);
-//	    if (!multas.isEmpty()) {
-//	        // Actualizar la multa existente
-//	        Multa multa = multas.get(0);
-//	        multa.setFFin(multa.getFFin().plusDays(sancion)); // Extender la fecha de finalización de la multa
-//	        multa.setTiempoMultado(multa.getTiempoMultado() + sancion);
-//	        multaService.actualizarMulta(multa);
-//	    } else {
-//	        // Crear una nueva multa
-//	        Multa multa = new Multa();
-//	        multa.setFInicio(LocalDate.now());
-//	        multa.setFFin(LocalDate.now().plusDays(sancion));
-//	        multa.setTiempoMultado(sancion);
-//	        multa.setLector(lector);
-//	        multaService.crearMulta(multa);
-//	    }
-//	    
-//	    // Restringir el alquiler de nuevos libros si hay una sanción pendiente
-//	    if (!multas.isEmpty() && multas.get(0).getFFin().isAfter(LocalDate.now())) {
-//	        return "redirect:/mensajeSancion"; // Mostrar un mensaje de sanción
-//	    }
-//	    
-//	    // Lógica para la devolución del libro y actualización de la base de datos
-//
-//	    return "redirect:/prestamos/" + lector.getIdlector();
-//	}
-//
-//	private int calcularDiasDeRetraso(LocalDate fechaDevolucionEsperada, LocalDate fechaDevolucion) {
-//	    if (fechaDevolucionEsperada != null && fechaDevolucion != null) {
-//	        return (int) ChronoUnit.DAYS.between(fechaDevolucionEsperada, fechaDevolucion);
-//	    } else {
-//	        return 0;
-//	    }
-//	}
+	*/
+
 }
+

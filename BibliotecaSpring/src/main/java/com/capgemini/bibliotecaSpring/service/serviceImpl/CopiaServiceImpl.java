@@ -10,15 +10,17 @@ import com.capgemini.bibliotecaSpring.model.Libro;
 import com.capgemini.bibliotecaSpring.repositorio.CopiaRepositorio;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.CopiaService;
 
+
 @Service
-public class CopiaServiceImpl extends ServiceImpl<CopiaRepositorio, Copia> implements CopiaService {
+public class CopiaServiceImpl extends ServiceImpl<CopiaRepositorio,Copia> implements CopiaService {
 	@Autowired
 	CopiaRepositorio cr;
-
+	
 	@Override
 	public List<Copia> findByLibro(Libro libro) {
-
+		
 		return cr.findByLibro(libro);
 	}
+
 
 }

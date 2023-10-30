@@ -10,7 +10,6 @@ import jakarta.persistence.Version;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,8 +17,8 @@ import lombok.NoArgsConstructor;
 public abstract class BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID) // Valor unico que no se puede repetir
-	private String id = UUID.randomUUID().toString();
+	private String id=UUID.randomUUID().toString();
 	@Version
 	private Long version;
-
+	
 }

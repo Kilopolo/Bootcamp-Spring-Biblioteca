@@ -60,7 +60,6 @@ public class WebSecurityConfig {
 	 *                   autorización.
 	 */
 
-	@SuppressWarnings("removal")
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().requestMatchers("/admin/**").hasRole("ADMIN")

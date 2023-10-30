@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "multas")
+@Table(name="multas")
 public class Multa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +29,7 @@ public class Multa {
 	private LocalDate fInicio;
 	@Column
 	private LocalDate fFin;
-	@JoinColumn(name = "nSocio")
-	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="nSocio")
+	@OneToOne(fetch =FetchType.LAZY)
 	private Lector lector;
 }
