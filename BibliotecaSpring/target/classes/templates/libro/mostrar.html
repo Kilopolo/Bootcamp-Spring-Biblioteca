@@ -30,15 +30,15 @@
 				<td th:text="${libro.tipo}"></td>
 				<td th:text="${#lists.size(libro.copias)}"></td>
 				<td><a th:href="@{'/copias/'+${libro.idlibro}}" class="btn btn-primary">Copias</a>
-					<a th:href="@{'/updatelibro/'+${libro.idlibro}}" class="btn btn-primary">Actualizar</a>
+					<a  sec:authorize="hasRole('ADMIN')" th:href="@{'/admin/updatelibro/'+${libro.idlibro}}" class="btn btn-primary">Actualizar</a>
 					<a th:onclick="return confirm('¿Estás seguro de que deseas eliminar este libro?')"
-						th:href="@{'/deletelibro/'+${libro.idlibro}}" class="btn btn-danger">Eliminar</a>
+						 sec:authorize="hasRole('ADMIN')" th:href="@{'/admin/deletelibro/'+${libro.idlibro}}" class="btn btn-danger">Eliminar</a>
 				</td>
 			</tr>
 		</tbody>
 	</table>
 	<div>
-		<a th:href="@{'/addlibro/'+${autor.idautor}}" class="btn btn-primary">Add libro</a>
+		<a  sec:authorize="hasRole('ADMIN')" th:href="@{'/admin/addlibro/'+${autor.idautor}}" class="btn btn-primary">Add libro</a>
 	</div>
 	<div> <a th:href="@{/autores}">Volver </a></div>
 	<footer th:replace="fragments/footer" />

@@ -38,12 +38,12 @@ public class Lector {
 	private Multa multa;
 	@OneToOne(mappedBy = "lector")
 	private User user;
+
 	public Lector(String nombre, String telefono, String direccion) {
 		super();
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.direccion = direccion;
 	}
-	
-	
+
 }

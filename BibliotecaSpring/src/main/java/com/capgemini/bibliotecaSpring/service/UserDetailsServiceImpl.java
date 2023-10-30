@@ -1,6 +1,5 @@
 package com.capgemini.bibliotecaSpring.service;
 
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,9 +24,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		User user = usersRepository.findByEmail(email);
 		System.out.println("loadUserByUsername email: " + user.getEmail());
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-		
+
 		grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole()));
-		
+
 		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
 				grantedAuthorities);
 	}

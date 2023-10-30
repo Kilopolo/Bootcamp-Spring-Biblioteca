@@ -52,21 +52,21 @@ public class Controlador {
 		return "redirect:/autores";
 	}
 
-	@GetMapping("/addautor")
+	@GetMapping("/admin/addautor")
 	public String formAutor(Model modelo) {
 		Autor autor = new Autor();
 		modelo.addAttribute("autor", autor);
 		return "autor/addAutor";
 	}
 
-	@GetMapping("/updateautor/{idautor}")
+	@GetMapping("/admin/updateautor/{idautor}")
 	public String updateAutor(Model modelo, @PathVariable("idautor") long idautor) {
 		Autor autor = autorservice.getById(idautor);
 		modelo.addAttribute("autor", autor);
 		return "autor/updateAutor";
 	}
 
-	@GetMapping("/deleteautor/{idautor}")
+	@GetMapping("/admin/deleteautor/{idautor}")
 	public String deleteAutor(@PathVariable("idautor") long idautor, Model modelo) {
 		autorservice.deleteById(idautor);
 		return "redirect:/autores";
@@ -97,7 +97,7 @@ public class Controlador {
 		return "redirect:/libros/" + autor.getIdautor();
 	}
 
-	@GetMapping("/addlibro/{idautor}")
+	@GetMapping("/admin/addlibro/{idautor}")
 	public String formLibro(Model modelo, @PathVariable("idautor") long idautor) {
 		Libro libro = new Libro();
 		Autor autor = autorservice.getById(idautor);
@@ -106,7 +106,7 @@ public class Controlador {
 		return "libro/addLibro";
 	}
 
-	@GetMapping("/deletelibro/{idlibro}")
+	@GetMapping("/admin/deletelibro/{idlibro}")
 	public String deleteLibro(@PathVariable("idlibro") long idlibro, Model modelo) {
 		Autor autor = libroservice.getById(idlibro).getAutor();
 		modelo.addAttribute("autor", autor);
@@ -115,7 +115,7 @@ public class Controlador {
 
 	}
 
-	@GetMapping("/updatelibro/{idlibro}")
+	@GetMapping("/admin/updatelibro/{idlibro}")
 	public String updateLibro(Model modelo, @PathVariable("idlibro") long idlibro) {
 		Libro libro = libroservice.getById(idlibro);
 		modelo.addAttribute("autor", libro.getAutor());
@@ -124,7 +124,7 @@ public class Controlador {
 	}
 
 	// LECTORES
-	@GetMapping("/lectores")
+	@GetMapping("/admin/lectores")
 	public String mostrarLectores(Model modelo) {
 		modelo.addAttribute("lectores", lectorservice.getAll());
 		return "lector/mostrar";
@@ -136,7 +136,7 @@ public class Controlador {
 		return "redirect:/lectores";
 	}
 
-	@GetMapping("/addlector")
+	@GetMapping("/admin/addlector")
 	public String formLector(Model modelo) {
 		Lector lector = new Lector();
 		modelo.addAttribute("lector", lector);
@@ -150,7 +150,7 @@ public class Controlador {
 		return "lector/updateLector";
 	}
 
-	@GetMapping("/deletelector/{idlector}")
+	@GetMapping("/admin/deletelector/{idlector}")
 	public String deleteLector(@PathVariable("idlector") long idlector, Model modelo) {
 		lectorservice.deleteById(idlector);
 		return "redirect:/lectores";
@@ -221,7 +221,7 @@ public class Controlador {
 		return "redirect:/copias/" + idlibro;
 	}
 
-	@GetMapping("/addcopia/{idlibro}")
+	@GetMapping("/admin/addcopia/{idlibro}")
 	public String formCopia(Model modelo, @PathVariable("idlibro") long idlibro) {
 		Copia copia = new Copia();
 		Libro libro = libroservice.getById(idlibro);
@@ -230,7 +230,7 @@ public class Controlador {
 		return "copia/addCopia";
 	}
 
-	@GetMapping("/updatecopia/{idcopia}")
+	@GetMapping("/admin/updatecopia/{idcopia}")
 	public String updatecopia(Model modelo, @PathVariable("idcopia") long idcopia) {
 		Copia copia = copiaservice.getById(idcopia);
 		modelo.addAttribute("libro", copia.getLibro());
@@ -238,7 +238,7 @@ public class Controlador {
 		return "copia/updateCopia";
 	}
 
-	@GetMapping("/deletecopia/{idcopia}")
+	@GetMapping("/admin/deletecopia/{idcopia}")
 	public String deleteCopia(@PathVariable("idcopia") long idcopia, Model modelo) {
 		Libro libro = copiaservice.getById(idcopia).getLibro();
 		modelo.addAttribute("libro", libro);

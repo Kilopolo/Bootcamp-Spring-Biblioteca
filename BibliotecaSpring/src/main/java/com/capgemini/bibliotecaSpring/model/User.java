@@ -32,18 +32,16 @@ public class User {
 
 	@Transient
 	private String passwordConfirm;
-	
 
 	@Column
 	private String role;
 
 	@Transient
 	private boolean selected = false;
-	
-	@OneToOne(fetch =FetchType.LAZY)
-	@JoinColumn(name="nSocio")
-	private Lector lector;
 
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "nSocio")
+	private Lector lector;
 
 	public long getId() {
 		return id;
