@@ -1,5 +1,7 @@
 package com.capgemini.bibliotecaSpring.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,10 +13,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.capgemini.bibliotecaSpring.model.Lector;
+import com.capgemini.bibliotecaSpring.model.Multa;
+import com.capgemini.bibliotecaSpring.model.Prestamo;
 import com.capgemini.bibliotecaSpring.model.User;
 import com.capgemini.bibliotecaSpring.service.security.RolesService;
 import com.capgemini.bibliotecaSpring.service.security.SecurityService;
 import com.capgemini.bibliotecaSpring.service.serviceImpl.UsersServiceImpl;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
 import com.capgemini.bibliotecaSpring.validators.SignUpFormValidator;
 
 import jakarta.servlet.http.HttpSession;
@@ -37,19 +43,29 @@ public class UsersController {
 	@Autowired
 	private HttpSession httpSession;
 
+	@Autowired
+	private LectorService lectorService;
+	
 	// GESTION DE LOGIN/REGISTRO
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public String signup(@ModelAttribute @Validated User user, BindingResult result) {
 
-		//TODO validar datos
+		// TODO validar datos
 //		signUpFormValidator.validate(user, result);
 //		if (result.hasErrors()) {
 //			return "signup";
 //		}
+		Lector l = new Lector("no-name", "no-phone", "no-direction");
+		lectorService.save(l);
+		Lector last = lectorService.getAll().getLast();
+		//Asigno rol usuario
 		user.setRole(rolesService.getRoles()[0]);
-
+		user.setLector(last);
+		
 		usersServiceImpl.addUser(user);
+		
+		System.out.println(""+l.toString());
 		securityService.autoLogin(user.getEmail(), user.getPasswordConfirm());
 		return "redirect:/home";
 	}

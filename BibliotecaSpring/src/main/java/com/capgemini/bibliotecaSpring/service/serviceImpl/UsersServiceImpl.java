@@ -22,7 +22,7 @@ public class UsersServiceImpl extends ServiceImpl<UsersRepository, User>   imple
 	private UsersRepository usersRepository;
 	@Autowired
 	private PasswordEncoder bCryptPasswordEncoder;
-	
+
 	@PostConstruct
 	public void init() {
 	}
