@@ -1,5 +1,6 @@
 package com.capgemini.bibliotecaSpring.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,8 @@ public class RESTcontroller {
 	@Autowired
 	public PrestamoService prestamoservice;
 
-
+	Copia copia=null;
+	
 	@GetMapping("/listado")
 	public List<Lector> index() {
 //		System.out.println("Hola, mundo");
@@ -48,6 +50,13 @@ public class RESTcontroller {
 //		System.out.println("Hola, mundo");
 		
 		return autorservice.getAll();
+	}
+	
+	@GetMapping("/prestar")
+	public List<Prestamo> prestar() {
+//		System.out.println("Hola, mundo");
+		lectorservice.prestar(1, LocalDate.of(2000, 05, 05), copia);
+		return prestamoservice.getAll();
 	}
 /**
 	// AUTORES
