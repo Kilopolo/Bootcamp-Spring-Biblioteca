@@ -2,28 +2,26 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<head th:replace="fragments/head" />
 	<title>Add Prestamo</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 
 <body>
-	<header th:replace="~{fragment/fragment :: header}"> </header>
+	<nav th:replace="fragments/nav" />
 	<h3>Nuevo Prestamo de: <span th:text="${lector.nombre}"></span> </h3>
-	<form action="#" th:action="@{/save}" th:object="${prestamo}" method="post">
-		
+	<form action="#" th:action="@{'/saveprestamo/'+${lector.idlector}}" th:object="${prestamo}" method="post">
+
 		<p>Fecha inicio
-		<input th:field="*{fechaInicio}" type="date"  class="form-control mb-4 col-4">
+			<input th:field="*{fechaInicio}" type="date" class="form-control mb-4 col-4">
 		</p>
 		<p>Fecha fin
-		<input th:field="*{fechaFin}" type="date"  class="form-control mb-4 col-4">
+			<input th:field="*{fechaFin}" type="date" class="form-control mb-4 col-4">
 		</p>
 		<p> Copia
 			<select name="copia">
 				<option value="">Selecciona</option>
-				<option th:each="copia : ${copias}"
-					th:value="${copia.idcopia}" th:text="${copia.libro.titulo}">
+				<option th:each="copia : ${copias}" th:value="${copia.idcopia}" th:text="${copia.libro.titulo}">
 				</option>
 			</select>
 		</p>
@@ -32,7 +30,7 @@
 	</form>
 	<hr>
 	<a th:href="@{'/prestamos/'+${lector.idlector}}">Volver</a>
-	<footer th:replace="~{fragment/fragment :: footer}"></footer>
+	<footer th:replace="fragments/footer" />
 </body>
 
 </html>

@@ -2,15 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<head th:replace="fragments/head" />
 	<title>Add Lector</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	
 </head>
 
 <body>
 
-		<header th:replace="~{fragment/fragment :: header}"> </header>
+	<nav th:replace="fragments/nav" />
 		<h3>Nuevo Socio</h3>
 
 		<form action="#" th:action="@{/savelector}" th:object="${lector}" method="post">
@@ -21,7 +20,7 @@
 			<button type="submit" class="btn btn-info col-2">Guardar socio</button>
 		</form>
 		<a th:href="@{/}">Volver</a>
-		<footer th:replace="~{fragment/fragment :: footer}"></footer>
+	<footer th:replace="fragments/footer" />
 </body>
 
 </html>

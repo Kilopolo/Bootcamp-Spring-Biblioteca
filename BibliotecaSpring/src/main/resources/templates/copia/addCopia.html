@@ -2,20 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<head th:replace="fragments/head" />
 	<title>Add Copia</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 
 <body>
 
-		<header th:replace="~{fragment/fragment :: header}"> </header>
-		<h3>Nueva Copia libro <span th:text="${libro.titulo}"></span> </h3>
+	<nav th:replace="fragments/nav" />
+	<h3>Nueva Copia libro <span th:text="${libro.titulo}"></span> </h3>
 
-		<form action="#" th:action="@{'/savecopia/'+${libro.idlibro}}" th:object="${copia}" method="post">
-			<input th:field="*{libro.idlibro}" type="hidden">
-				<p> Estado
+	<form action="#" th:action="@{'/savecopia/'+${libro.idlibro}}" th:object="${copia}" method="post">
+		<input th:field="*{libro.idlibro}" type="hidden">
+		<p> Estado
 			<select name="estado">
 				<option value="">Selecciona</option>
 				<option th:each="estado : ${T(com.capgemini.bibliotecaSpring.enumerados.EstadoCopia).values()}"
@@ -23,10 +22,10 @@
 				</option>
 			</select>
 		</p>
-			<button type="submit" class="btn btn-info col-2">Guardar autor</button>
-		</form>
-		<a th:href="@{'/copias/'+ ${libro.idlibro}}">Volver</a>
-		<footer th:replace="~{fragment/fragment :: footer}"></footer>
+		<button type="submit" class="btn btn-info col-2">Guardar autor</button>
+	</form>
+	<a th:href="@{'/copias/'+ ${libro.idlibro}}">Volver</a>
+	<footer th:replace="fragments/footer" />
 </body>
 
 </html>
