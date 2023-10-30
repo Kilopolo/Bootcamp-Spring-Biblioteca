@@ -26,7 +26,7 @@
 				<td th:text="${autor.nacionalidad}" ></td>
 				<td th:text="${autor.fechaNacimiento}" ></td>
 				<td><a th:href="@{'/libros/'+${autor.idautor}}" class="btn btn-primary">Ver libros</a>
-				<a class="btn btn-primary">Actualizar</a>
+				<a  th:href="@{'/updateautor/'+${autor.idautor}}" class="btn btn-primary">Actualizar</a>
 						<a th:onclick="return confirm('¿Estás seguro de que deseas eliminar este autor?')" th:href="@{'/deleteautor/'+${autor.idautor}}" class="btn btn-danger">Eliminar</a></td>
 			</tr>
 		</tbody>

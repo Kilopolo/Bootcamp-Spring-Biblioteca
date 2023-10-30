@@ -27,8 +27,16 @@
 				<td th:text="${prestamo.fechaFin}" ></td>
 				<td th:text="${prestamo.copia.libro.titulo}"></td>
 				<td th:text="${prestamo.copia.estado}"></td>
-				<td><a  class="btn btn-primary">Actualizar</a>
-						<a th:onclick="return confirm('¿Estás seguro de que deseas eliminar este prestamo?')" class="btn btn-danger">Eliminar</a></td>
+				<td><a th:href="@{'/updateprestamo/'+${prestamo.idprestamo}}"  class="btn btn-primary">Actualizar</a>
+						<a th:onclick="return confirm('¿Estás seguro de que deseas eliminar este prestamo?')" th:href="@{'/deleteprestamo/'+${prestamo.idprestamo}}" class="btn btn-danger">Eliminar</a></td>
+			</tr>
+			<tr th:if="${#lists.isEmpty(prestamos)}">
+			<td colspan="5"  style="color: red;">No hay prestamos</td>
+			</tr>
+			<tr th:if="${!#lists.isEmpty(prestamos)}">
+				<th colspan="3">Total:
+			</th>
+			<td  colspan="2" th:text="${prestamos.size()}" style="color: green;"></td>
 			</tr>
 		</tbody>
 	</table>

@@ -4,17 +4,18 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Add Copia</title>
+	<title>Update Copia</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 
 <body>
 
 		<header th:replace="~{fragment/fragment :: header}"> </header>
-		<h3>Nueva Copia libro <span th:text="${libro.titulo}"></span> </h3>
+		<h3>Actualizar Copia libro <span th:text="${libro.titulo}"></span> </h3>
 
 		<form action="#" th:action="@{'/savecopia/'+${libro.idlibro}}" th:object="${copia}" method="post">
 			<input th:field="*{libro.idlibro}" type="hidden">
+			<input th:field="*{idcopia}" type="hidden">
 				<p> Estado
 			<select name="estado">
 				<option value="">Selecciona</option>
