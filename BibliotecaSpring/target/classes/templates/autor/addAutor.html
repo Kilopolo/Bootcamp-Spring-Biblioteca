@@ -9,7 +9,7 @@
 
 <body>
 
-		<header th:replace="~{fragment/fragment :: header}"> </header>
+	<nav th:replace="fragments/nav" />
 		<h3>Nuevo Autor</h3>
 
 		<form action="#" th:action="@{/saveautor}" th:object="${autor}" method="post">
