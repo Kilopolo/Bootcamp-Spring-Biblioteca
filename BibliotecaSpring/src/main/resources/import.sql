@@ -59,3 +59,8 @@ INSERT INTO `projecto_capgemini_biblioteca`.`prestamos` (`fecha_fin`, `fecha_ini
 INSERT INTO `projecto_capgemini_biblioteca`.`prestamos` ( `fecha_inicio`, `idcopia`, `n_socio`) VALUES ( '2023-06-03', '8', '8');
 INSERT INTO `projecto_capgemini_biblioteca`.`prestamos` (`fecha_fin`, `fecha_inicio`, `idcopia`, `n_socio`) VALUES ('2023-09-22', '2023-09-12', '9', '9');
 
+-- Users
+
+-- INSERT INTO `projecto_capgemini_biblioteca`.`users` (`id`, `n_socio`, `email`, `password`,`role`) VALUES ('1','1', 'admin@gmail.com', '1234', 'ROLE_ADMIN');
+-- INSERT INTO `projecto_capgemini_biblioteca`.`users` (`id`, `n_socio`, `email`, `password`,`role`) VALUES ('2','2', 'user@gmail.com', '1234', 'ROLE_USER');
+

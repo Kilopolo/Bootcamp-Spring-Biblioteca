@@ -1,5 +1,6 @@
 package com.capgemini.bibliotecaSpring.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -11,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +22,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "lectores")
+public class Lector {
+//@PrimaryKeyJoinColumn(name="idLector")
 @Table(name = "lectores")
 public class Lector {
 	@Id
@@ -36,4 +41,6 @@ public class Lector {
 	private List<Prestamo> prestamosLector;
 	@OneToOne(mappedBy = "lector", fetch = FetchType.LAZY)
 	private Multa multa;
+	@OneToOne(mappedBy = "lector")
+	private User user;
 }

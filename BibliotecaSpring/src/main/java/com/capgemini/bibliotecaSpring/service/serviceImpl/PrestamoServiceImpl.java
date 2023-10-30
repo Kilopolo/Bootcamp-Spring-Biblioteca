@@ -10,6 +10,7 @@ import com.capgemini.bibliotecaSpring.model.Prestamo;
 import com.capgemini.bibliotecaSpring.repositorio.PrestamoRepositorio;
 import com.capgemini.bibliotecaSpring.service.PrestamoService;
 
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
 @Service
 public class PrestamoServiceImpl extends ServiceImpl<PrestamoRepositorio, Prestamo> implements PrestamoService {
 
