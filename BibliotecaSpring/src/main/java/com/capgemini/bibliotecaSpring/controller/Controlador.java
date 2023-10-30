@@ -28,6 +28,11 @@ import com.capgemini.bibliotecaSpring.service.LectorService;
 import com.capgemini.bibliotecaSpring.service.LibroService;
 import com.capgemini.bibliotecaSpring.service.MultaService;
 import com.capgemini.bibliotecaSpring.service.PrestamoService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.AutorService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.CopiaService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LibroService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
 
 @Controller
 public class Controlador {

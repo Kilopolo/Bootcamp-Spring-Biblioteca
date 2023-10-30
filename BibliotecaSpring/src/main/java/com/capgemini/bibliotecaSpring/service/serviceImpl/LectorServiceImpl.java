@@ -17,6 +17,7 @@ import com.capgemini.bibliotecaSpring.repositorio.MultaRepositorio;
 import com.capgemini.bibliotecaSpring.repositorio.PrestamoRepositorio;
 import com.capgemini.bibliotecaSpring.service.LectorService;
 import com.capgemini.bibliotecaSpring.service.PrestamoService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
 
 @Service
 public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> implements LectorService {

@@ -1,10 +1,10 @@
-package com.capgemini.bibliotecaSpring.service.serviceImpl;
+package com.capgemini.bibliotecaSpring.service.security;
 
 import org.springframework.stereotype.Service;
 
 @Service
 public class RolesService {
-	String[] roles = { "ROLE_USER", "ROLE_ADMIN" };
+	String[] roles = { "USER", "ADMIN" };
 
 	public String[] getRoles() {
 		return roles;

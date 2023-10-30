@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.capgemini.bibliotecaSpring.model.Autor;
 import com.capgemini.bibliotecaSpring.model.Libro;
 import com.capgemini.bibliotecaSpring.repositorio.AutorRepositorio;
-import com.capgemini.bibliotecaSpring.service.AutorService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.AutorService;
 
 
 @Service
