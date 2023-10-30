@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="copias")
+@Table(name = "copias")
 public class Copia {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,9 +35,9 @@ public class Copia {
 	@Enumerated(value = EnumType.STRING)
 	private EstadoCopia estado;
 	@ManyToOne
-	@JoinColumn(name="idlibro")
+	@JoinColumn(name = "idlibro")
 	private Libro libro;
 	@OneToMany(mappedBy = "copia", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	private List<Prestamo> prestamosCopia;
-	
+
 }

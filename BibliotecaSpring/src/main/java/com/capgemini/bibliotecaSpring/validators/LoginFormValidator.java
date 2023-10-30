@@ -8,18 +8,18 @@ import org.springframework.validation.Validator;
 
 import com.capgemini.bibliotecaSpring.model.User;
 import com.capgemini.bibliotecaSpring.service.serviceImpl.UsersServiceImpl;
+
 @Component
 public class LoginFormValidator implements Validator {
 
 	@Autowired
 	private UsersServiceImpl usersServiceImpl;
 
-
 	@Override
 	public boolean supports(Class<?> aClass) {
 		return User.class.equals(aClass);
 	}
-	
+
 	@Override
 	public void validate(Object target, Errors errors) {
 		User user = (User) target;
@@ -27,12 +27,12 @@ public class LoginFormValidator implements Validator {
 
 		if (usersServiceImpl.getUserByEmail(user.getEmail()) != null) {
 			if (!usersServiceImpl.getUserByEmail(user.getEmail()).getPassword().equals(user.getPassword())) {
+				System.out.println();
 				errors.rejectValue("email", "Error.login.email.wrongPassword");
 			}
 		} else {
 			errors.rejectValue("email", "Error.login.email.notRegistered");
 		}
 
-		
 	}
 }

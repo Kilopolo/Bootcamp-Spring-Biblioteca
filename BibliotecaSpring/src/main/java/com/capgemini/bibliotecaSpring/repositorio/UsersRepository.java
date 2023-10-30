@@ -8,5 +8,6 @@ import com.capgemini.bibliotecaSpring.model.User;
 
 public interface UsersRepository extends JpaRepository<User, Long> {
 	Page<User> findAll(Pageable pageable);
+
 	User findByEmail(String email);
-	}
+}

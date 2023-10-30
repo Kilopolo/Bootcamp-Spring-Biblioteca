@@ -13,7 +13,7 @@
 		<header th:replace="~{fragment/fragment :: header}"> </header>
 		<h3>Nuevo Autor</h3>
 
-		<form action="#" th:action="@{/saveAutor}" th:object="${autor}" method="post">
+		<form action="#" th:action="@{/save}" th:object="${autor}" method="post">
 			<input th:field="*{nombre}" type="text" placeholder="Escriba el nombre" class="form-control mb-4 col.4">
 			<input th:field="*{nacionalidad}" type="text" placeholder="Escriba la nacionalidad" class="form-control mb-4 col.4">
 			<p> Fecha de nacimiento
