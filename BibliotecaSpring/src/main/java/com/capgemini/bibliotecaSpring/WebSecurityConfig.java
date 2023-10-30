@@ -110,16 +110,15 @@ public class WebSecurityConfig {
 		};
 	}
 
-//	@Bean
-//	public InMemoryUserDetailsManager userDetailsService() {
-//		UserDetails user1 = User.withUsername("user@gmail.com").password(encoder().encode("1234")).roles("USER")
-//				.build();
-//		UserDetails user2 = User.withUsername("user2@gmail.com").password(encoder().encode("user2Pass")).roles("USER")
-//				.build();
-//		UserDetails admin = User.withUsername("admin@gmail.com").password(encoder().encode("1234")).roles("ADMIN")
-//				.build();
-//		return new InMemoryUserDetailsManager(user1, user2, admin);
-//	}
+	@Bean
+	public InMemoryUserDetailsManager userDetailsService() {
+		UserDetails user1 = User.withUsername("david@gmail.com").password(encoder().encode("1234")).roles("USER")
+				.build();
+
+		UserDetails admin = User.withUsername("admindavid@gmail.com").password(encoder().encode("1234")).roles("ADMIN")
+				.build();
+		return new InMemoryUserDetailsManager(user1, admin);
+	}
 
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
