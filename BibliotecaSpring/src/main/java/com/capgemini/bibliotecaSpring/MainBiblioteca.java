@@ -12,5 +12,7 @@ public class MainBiblioteca {
 		ApplicationContext ac = SpringApplication.run(MainBiblioteca.class, args);
 //		System.out.println(ac.getDisplayName().toString());
 		System.out.println("http://localhost:8080/");
+		System.out.println("INSERTANDO USUARIOS");
+		
 	}
 }
