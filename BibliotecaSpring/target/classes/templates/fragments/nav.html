@@ -16,9 +16,11 @@
 				<!--				<li class="nav-item">-->
 				<!--					<a class="nav-link" th:href="@{/lectores}">Socios</a>-->
 				<!--				</li>-->
-				<li sec:authorize="isAuthenticated() && hasRole('USER')" class="nav-item">
+				<li role="USER" 
+				sec:authorize="isAuthenticated() && hasRole('USER')" class="nav-item">
 					<a class="nav-link" th:href="@{/libros}">Libros</a>
 				</li>
+				
 				<li sec:authorize="hasRole('USER')" class="nav-item">
 					<a class="nav-link" th:href="@{/libros}">sin autenticates</a>
 				</li>
