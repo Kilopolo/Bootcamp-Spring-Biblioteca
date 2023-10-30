@@ -27,8 +27,6 @@ public class InsertSampleDataService {
 	@PostConstruct
 	public void init() {
 
-		
-
 	
 		User admin = new User();
 		admin.setEmail("admin@gmail.com");

@@ -1,7 +1,5 @@
 package com.capgemini.bibliotecaSpring.controller;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.capgemini.bibliotecaSpring.model.Lector;
-import com.capgemini.bibliotecaSpring.model.Multa;
-import com.capgemini.bibliotecaSpring.model.Prestamo;
 import com.capgemini.bibliotecaSpring.model.User;
 import com.capgemini.bibliotecaSpring.service.security.RolesService;
 import com.capgemini.bibliotecaSpring.service.security.SecurityService;
@@ -96,13 +92,13 @@ public class UsersController {
 
 	// GESTION DE USUARIOS
 
-	@RequestMapping(value = "/user/home")
-	public String getUserHome(Model model) {
-		model.addAttribute("rolesList", rolesService.getRoles());
-		User activeUser = getActiveUser();
-		model.addAttribute("user", activeUser);
-		return "user/home";
-	}
+//	@RequestMapping(value = "/user/home")
+//	public String getUserHome(Model model) {
+//		model.addAttribute("rolesList", rolesService.getRoles());
+//		User activeUser = getActiveUser();
+//		model.addAttribute("user", activeUser);
+//		return "user/home";
+//	}
 
 	private User getActiveUser() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
