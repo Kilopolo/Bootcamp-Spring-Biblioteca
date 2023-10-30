@@ -9,15 +9,18 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.bibliotecaSpring.Exceptions.LectorNotFoundException;
 import com.capgemini.bibliotecaSpring.Exceptions.MaximoLibrosPrestadosException;
+import com.capgemini.bibliotecaSpring.enumerados.EstadoCopia;
+import com.capgemini.bibliotecaSpring.model.Copia;
 import com.capgemini.bibliotecaSpring.model.Lector;
+import com.capgemini.bibliotecaSpring.model.Libro;
 import com.capgemini.bibliotecaSpring.model.Multa;
 import com.capgemini.bibliotecaSpring.model.Prestamo;
+import com.capgemini.bibliotecaSpring.repositorio.CopiaRepositorio;
 import com.capgemini.bibliotecaSpring.repositorio.LectorRepositorio;
 import com.capgemini.bibliotecaSpring.repositorio.MultaRepositorio;
 import com.capgemini.bibliotecaSpring.repositorio.PrestamoRepositorio;
-import com.capgemini.bibliotecaSpring.service.LectorService;
-import com.capgemini.bibliotecaSpring.service.PrestamoService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
 
 @Service
 public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> implements LectorService {
@@ -32,6 +35,8 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 	public PrestamoRepositorio prestamorepo;
 	@Autowired
 	public PrestamoService prestamoservice;
+	@Autowired
+	public CopiaRepositorio copiarepo;
 
 	@Override
 	public void devolver(long id, LocalDate fechaDevuelto) {
@@ -53,7 +58,6 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 	    }
 	}
 
-	// Método de ejemplo para encontrar un préstamo basado en algún criterio, ajusta esto según tus necesidades.
 	private Prestamo encontrarPrestamoPorNSocio(List<Prestamo> prestamos, Long nSocio) {
 	    for (Prestamo prestamo : prestamos) {
 	        Lector lector = prestamo.getLector();
@@ -65,22 +69,38 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 	}
 
 	
-	
 	@Override
-	public void prestar(long id, LocalDate fechaAct) {
-	    Optional<Lector> lector = lectorrepo.findById(id);
-	    if (lector.isPresent()) {
-	        Lector l = lector.get();
-	        int numLibrosPrestados = l.getPrestamosLector().size();
-	        if (numLibrosPrestados < MAX_COPIAS) {
-	            Prestamo nuevoPrestamo = new Prestamo();
-	            nuevoPrestamo.setFechaInicio(fechaAct);
-	            nuevoPrestamo.setLector(l);
-	            prestamorepo.save(nuevoPrestamo);
-	        } else {
-	        	throw new MaximoLibrosPrestadosException();
-	        }
-	    }
+	public void prestar(long id, LocalDate fechaAct,Copia copia) {
+		 Optional<Lector> lectorOptional = lectorrepo.findById(id);
+		    
+		    if (lectorOptional.isPresent()) {
+		        Lector lector = lectorOptional.get();
+		        Libro libro = copia.getLibro();
+
+		        if (isAvailableCopia(copia, lector) && isNotMoroso(lector)) {
+		            copia.setEstado(EstadoCopia.PRESTADO);
+		            Prestamo nuevoPrestamo = new Prestamo();
+		            nuevoPrestamo.setFechaInicio(fechaAct);
+		            nuevoPrestamo.setLector(lector);
+		            nuevoPrestamo.setCopia(copia);
+		            
+		            prestamorepo.save(nuevoPrestamo);
+		            copiarepo.save(copia);
+		        } else {
+		            throw new MaximoLibrosPrestadosException();
+		        }
+		    } else {
+		        throw new LectorNotFoundException(id);
+		    }
+		}
+
+	private boolean isAvailableCopia(Copia copia, Lector lector) {
+	    return copia.getEstado() == EstadoCopia.BIBLIOTECA;
+	}
+
+	private boolean isNotMoroso(Lector lector) {
+	    Multa multa = lector.getMulta();
+	    return multa == null || multa.getFFin() == null || multa.getFFin().isBefore(LocalDate.now());
 	}
 
 	@Override

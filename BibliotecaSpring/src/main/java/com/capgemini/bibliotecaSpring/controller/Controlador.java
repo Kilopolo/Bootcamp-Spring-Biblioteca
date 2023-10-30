@@ -1,10 +1,5 @@
 package com.capgemini.bibliotecaSpring.controller;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,22 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.capgemini.bibliotecaSpring.model.Autor;
 import com.capgemini.bibliotecaSpring.model.Copia;
 import com.capgemini.bibliotecaSpring.model.Lector;
 import com.capgemini.bibliotecaSpring.model.Libro;
-import com.capgemini.bibliotecaSpring.model.Multa;
 import com.capgemini.bibliotecaSpring.model.Prestamo;
-import com.capgemini.bibliotecaSpring.service.AutorService;
-import com.capgemini.bibliotecaSpring.service.CopiaService;
-import com.capgemini.bibliotecaSpring.service.LectorService;
-import com.capgemini.bibliotecaSpring.service.LibroService;
-import com.capgemini.bibliotecaSpring.service.MultaService;
-import com.capgemini.bibliotecaSpring.service.PrestamoService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.AutorService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.CopiaService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
