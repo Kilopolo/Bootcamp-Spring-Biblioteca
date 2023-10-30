@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="prestamos")
+@Table(name = "prestamos")
 public class Prestamo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,10 +31,10 @@ public class Prestamo {
 	@Column
 	private LocalDate fechaFin;
 	@ManyToOne
-	@JoinColumn(name="idcopia")
+	@JoinColumn(name = "idcopia")
 	private Copia copia;
 	@ManyToOne
-	@JoinColumn(name="nSocio")
+	@JoinColumn(name = "nSocio")
 	private Lector lector;
 	
 	public LocalDate getFechaDevolucionEsperada() {
