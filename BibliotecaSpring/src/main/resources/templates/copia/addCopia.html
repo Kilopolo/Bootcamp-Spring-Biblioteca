@@ -13,7 +13,7 @@
 		<header th:replace="~{fragment/fragment :: header}"> </header>
 		<h3>Nueva Copia libro <span th:text="${libro.titulo}"></span> </h3>
 
-		<form action="#" th:action="@{/save}" th:object="${copia}" method="post">
+		<form action="#" th:action="@{'/savecopia/'+${libro.idlibro}}" th:object="${copia}" method="post">
 			<input th:field="*{libro.idlibro}" type="hidden">
 				<p> Estado
 			<select name="estado">
