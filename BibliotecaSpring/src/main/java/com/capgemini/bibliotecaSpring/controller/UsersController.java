@@ -62,8 +62,8 @@ public class UsersController {
 		usersServiceImpl.addUser(user);
 		
 		System.out.println(""+l.toString());
-		securityService.autoLogin(user.getEmail(), user.getPasswordConfirm());
-		return "redirect:/home";
+//		securityService.autoLogin(user.getEmail(), user.getPasswordConfirm());
+		return "redirect:/login";
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
