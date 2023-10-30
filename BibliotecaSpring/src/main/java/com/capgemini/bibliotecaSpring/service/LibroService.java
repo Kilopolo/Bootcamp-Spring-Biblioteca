@@ -7,4 +7,4 @@ import com.capgemini.bibliotecaSpring.model.Libro;
 
 public interface LibroService extends ServiceS<Libro> {
 	List<Libro> findByAutor(Autor autor);
-	}
+}

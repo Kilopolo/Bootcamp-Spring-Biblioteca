@@ -20,6 +20,5 @@ public class LibroServiceImpl extends ServiceImpl<LibroRepositorio, Libro> imple
 		// TODO Auto-generated method stub
 		return lr.findByAutor(autor);
 	}
-	
 
 }

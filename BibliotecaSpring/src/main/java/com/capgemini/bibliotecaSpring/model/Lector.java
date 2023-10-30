@@ -20,8 +20,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="lectores")
-public class Lector{
+@Table(name = "lectores")
+public class Lector {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "nSocio")
@@ -32,8 +32,8 @@ public class Lector{
 	private String telefono;
 	@Column
 	private String direccion;
-	@OneToMany(mappedBy = "lector", fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "lector", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	private List<Prestamo> prestamosLector;
-	@OneToOne(mappedBy = "lector",fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "lector", fetch = FetchType.LAZY)
 	private Multa multa;
 }
