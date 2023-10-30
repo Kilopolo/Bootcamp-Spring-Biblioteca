@@ -63,7 +63,7 @@ public class UsersController {
 		
 		System.out.println(""+l.toString());
 		securityService.autoLogin(user.getEmail(), user.getPasswordConfirm());
-		return "redirect:/home";
+		return "redirect:/login";
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)

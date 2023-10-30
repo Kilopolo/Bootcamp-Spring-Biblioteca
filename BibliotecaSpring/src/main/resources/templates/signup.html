@@ -2,7 +2,7 @@
 <html lang="en">
 <head th:replace="fragments/head" />
 <body>
-	<header th:replace="~{fragment/fragment :: header}"> </header>
+	<nav th:replace="fragments/nav" />
 	<div class="container">
 		<h2 th:text="#{signup.message}"></h2>
 		<form class="form-horizontal" method="post" action="/signup"
@@ -46,6 +46,6 @@
 			</div>
 		</form>
 	</div>
-	<footer th:replace="~{fragment/fragment :: footer}"></footer>
+		<footer th:replace="fragments/footer" />
 </body>
 </html>

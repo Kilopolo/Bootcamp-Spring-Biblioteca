@@ -43,7 +43,7 @@ public class Libro {
 	@ManyToOne
 	@JoinColumn(name = "idautor")
 	private Autor autor;
-	@OneToMany(mappedBy = "libro", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "libro", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<Copia> copias;
 
 }

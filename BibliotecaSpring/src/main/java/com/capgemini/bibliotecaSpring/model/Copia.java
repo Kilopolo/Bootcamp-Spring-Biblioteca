@@ -37,7 +37,7 @@ public class Copia {
 	@ManyToOne
 	@JoinColumn(name = "idlibro")
 	private Libro libro;
-	@OneToMany(mappedBy = "copia", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "copia", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<Prestamo> prestamosCopia;
 
 }

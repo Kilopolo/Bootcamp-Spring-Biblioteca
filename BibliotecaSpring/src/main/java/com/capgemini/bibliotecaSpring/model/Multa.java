@@ -30,6 +30,6 @@ public class Multa {
 	@Column
 	private LocalDate fFin;
 	@JoinColumn(name = "nSocio")
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	private Lector lector;
 }
