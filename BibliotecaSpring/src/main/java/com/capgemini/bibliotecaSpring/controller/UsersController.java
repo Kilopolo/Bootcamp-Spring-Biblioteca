@@ -41,7 +41,7 @@ public class UsersController {
 
 	@Autowired
 	private LectorService lectorService;
-	
+
 	// GESTION DE LOGIN/REGISTRO
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
@@ -55,13 +55,14 @@ public class UsersController {
 		Lector l = new Lector("no-name", "no-phone", "no-direction");
 		lectorService.save(l);
 		Lector last = lectorService.getAll().getLast();
-		//Asigno rol usuario
+		// Asigno rol usuario
 		user.setRole(rolesService.getRoles()[0]);
 		user.setLector(last);
-		
+
 		usersServiceImpl.addUser(user);
-		
-		System.out.println(""+l.toString());
+
+		System.out.println("" + l.toString());
+		securityService.autoLogin(user.getEmail(), user.getPasswordConfirm());
 //		securityService.autoLogin(user.getEmail(), user.getPasswordConfirm());
 		return "redirect:/login";
 	}

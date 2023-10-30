@@ -16,8 +16,8 @@ import com.capgemini.bibliotecaSpring.service.serviceInterfaces.UserService;
 import jakarta.annotation.PostConstruct;
 
 @Service
-public class UsersServiceImpl extends ServiceImpl<UsersRepository, User>   implements UserService {
-	
+public class UsersServiceImpl extends ServiceImpl<UsersRepository, User> implements UserService {
+
 	@Autowired
 	private UsersRepository usersRepository;
 	@Autowired
@@ -44,15 +44,15 @@ public class UsersServiceImpl extends ServiceImpl<UsersRepository, User>   imple
 	public User getUser(Long id) {
 		return usersRepository.findById(id).get();
 	}
-	
 
 	public void addUser(User user) {
-		//TODO arreglar esto
+		// TODO arreglar esto
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 //		user.setPassword((user.getPassword()));
-		
+
 		usersRepository.save(user);
 	}
+
 //
 //	public void editUser(User user) {
 //		usersRepository.save(user);
@@ -65,9 +65,5 @@ public class UsersServiceImpl extends ServiceImpl<UsersRepository, User>   imple
 //	public void deleteUser(Long id) {
 //		usersRepository.deleteById(id);
 //	}
-
-
-
-
 
 }

@@ -1,13 +1,13 @@
 -- Autores
-INSERT INTO `projecto_capgemini_biblioteca`.`autores` (`fec_nac`, `nacionalidad`, `nombre`) VALUES ('1881-10-25', 'Asturias', 'Andres');
-INSERT INTO `projecto_capgemini_biblioteca`.`autores` (`fec_nac`, `nacionalidad`, `nombre`) VALUES ('1880-09-30', 'Andalucía', 'Maria');
-INSERT INTO `projecto_capgemini_biblioteca`.`autores` (`fec_nac`, `nacionalidad`, `nombre`) VALUES ('1875-07-02', 'Madrid', 'Pedro');
-INSERT INTO `projecto_capgemini_biblioteca`.`autores` (`fec_nac`, `nacionalidad`, `nombre`) VALUES ('1899-12-11', 'Valencia', 'Luisa');
-INSERT INTO `projecto_capgemini_biblioteca`.`autores` (`fec_nac`, `nacionalidad`, `nombre`) VALUES ('1905-03-17', 'Cataluña', 'Javier');
-INSERT INTO `projecto_capgemini_biblioteca`.`autores` (`fec_nac`, `nacionalidad`, `nombre`) VALUES ('1860-05-08', 'Aragón', 'Elena');
-INSERT INTO `projecto_capgemini_biblioteca`.`autores` (`fec_nac`, `nacionalidad`, `nombre`) VALUES ('1898-08-22', 'Galicia', 'Manuel');
-INSERT INTO `projecto_capgemini_biblioteca`.`autores` (`fec_nac`, `nacionalidad`, `nombre`) VALUES ('1872-04-14', 'Castilla y León', 'Ana');
-INSERT INTO `projecto_capgemini_biblioteca`.`autores` (`fec_nac`, `nacionalidad`, `nombre`) VALUES ('1910-01-27', 'Extremadura', 'Carlos');
+INSERT INTO `projecto_capgemini_biblioteca`.`autores` (`fec_nac`, `nacionalidad`, `nombre`) VALUES ('1847-11-08', 'Irlanda', 'Bram Stoker');
+INSERT INTO `projecto_capgemini_biblioteca`.`autores` (`fec_nac`, `nacionalidad`, `nombre`) VALUES ('1564-04-26', 'Inglaterra', 'William Shakespeare');
+INSERT INTO `projecto_capgemini_biblioteca`.`autores` (`fec_nac`, `nacionalidad`, `nombre`) VALUES ('1922-11-16', 'Portugal', 'José Saramago');
+INSERT INTO `projecto_capgemini_biblioteca`.`autores` (`fec_nac`, `nacionalidad`, `nombre`) VALUES ('1904-07-12', 'Chile', 'Pablo Neruda');
+INSERT INTO `projecto_capgemini_biblioteca`.`autores` (`fec_nac`, `nacionalidad`, `nombre`) VALUES ('1927-03-06', 'Colombia', 'Gabriel García Márquez');
+INSERT INTO `projecto_capgemini_biblioteca`.`autores` (`fec_nac`, `nacionalidad`, `nombre`) VALUES ('1898-06-5', 'España', 'Federico García Lorca');
+INSERT INTO `projecto_capgemini_biblioteca`.`autores` (`fec_nac`, `nacionalidad`, `nombre`) VALUES ('1821-12-12', 'Francia', 'Gustave Flaubert');
+INSERT INTO `projecto_capgemini_biblioteca`.`autores` (`fec_nac`, `nacionalidad`, `nombre`) VALUES ('1821-11-11', 'Rusia', 'Fiodor Dostoievski');
+INSERT INTO `projecto_capgemini_biblioteca`.`autores` (`fec_nac`, `nacionalidad`, `nombre`) VALUES ('1927-03-06', 'Colombia', 'Gabriel García Márquez');
 
 -- Lectores
 INSERT INTO `projecto_capgemini_biblioteca`.`lectores` (`n_socio`, `direccion`, `nombre`, `telefono`) VALUES ('1', 'Asturias', 'David', '666666666');
@@ -34,7 +34,7 @@ INSERT INTO `projecto_capgemini_biblioteca`.`libros` (`anyo`, `idautor`, `idlibr
 
 --Copias
 INSERT INTO `projecto_capgemini_biblioteca`.`copias` (`idlibro`, `estado`) VALUES ('1', 'PRESTADO'); 
-INSERT INTO `projecto_capgemini_biblioteca`.`copias` (`idlibro`, `estado`) VALUES ('2', 'RETRASO');
+INSERT INTO `projecto_capgemini_biblioteca`.`copias` (`idlibro`, `estado`) VALUES ('2', 'BIBLIOTECA');
 INSERT INTO `projecto_capgemini_biblioteca`.`copias` (`idlibro`, `estado`) VALUES ('3', 'BIBLIOTECA');
 INSERT INTO `projecto_capgemini_biblioteca`.`copias` (`idlibro`, `estado`) VALUES ('4', 'REPARACION');
 INSERT INTO `projecto_capgemini_biblioteca`.`copias` (`idlibro`, `estado`) VALUES ('5', 'PRESTADO');
@@ -49,18 +49,18 @@ INSERT INTO `projecto_capgemini_biblioteca`.`copias` (`idlibro`, `estado`) VALUE
 
 
 -- Prestamos
-INSERT INTO `projecto_capgemini_biblioteca`.`prestamos` (`fecha_fin`, `fecha_inicio`, `idcopia`, `n_socio`) VALUES ('2023-09-30', '2023-09-10', '1', '1');
+INSERT INTO `projecto_capgemini_biblioteca`.`prestamos` ( `fecha_inicio`, `idcopia`, `n_socio`) VALUES ( '2023-09-10', '1', '1');
 INSERT INTO `projecto_capgemini_biblioteca`.`prestamos` (`fecha_fin`, `fecha_inicio`, `idcopia`, `n_socio`) VALUES ('2023-10-15', '2023-09-05', '2', '2');
 INSERT INTO `projecto_capgemini_biblioteca`.`prestamos` (`fecha_fin`, `fecha_inicio`, `idcopia`, `n_socio`) VALUES ('2023-12-28', '2023-12-18', '3', '3');
 INSERT INTO `projecto_capgemini_biblioteca`.`prestamos` (`fecha_fin`, `fecha_inicio`, `idcopia`, `n_socio`) VALUES ('2023-11-29', '2023-11-19', '4', '4');
-INSERT INTO `projecto_capgemini_biblioteca`.`prestamos` (`fecha_fin`, `fecha_inicio`, `idcopia`, `n_socio`) VALUES ('2023-02-26', '2023-02-16', '5', '5');
-INSERT INTO `projecto_capgemini_biblioteca`.`prestamos` (`fecha_fin`, `fecha_inicio`, `idcopia`, `n_socio`) VALUES ('2023-05-27', '2023-05-17', '6', '6');
+INSERT INTO `projecto_capgemini_biblioteca`.`prestamos` ( `fecha_inicio`, `idcopia`, `n_socio`) VALUES ( '2023-02-16', '5', '5');
+INSERT INTO `projecto_capgemini_biblioteca`.`prestamos` ( `fecha_inicio`, `idcopia`, `n_socio`) VALUES ( '2023-05-17', '6', '6');
 INSERT INTO `projecto_capgemini_biblioteca`.`prestamos` (`fecha_fin`, `fecha_inicio`, `idcopia`, `n_socio`) VALUES ('2023-03-24', '2023-03-14', '7', '7');
-INSERT INTO `projecto_capgemini_biblioteca`.`prestamos` (`fecha_fin`, `fecha_inicio`, `idcopia`, `n_socio`) VALUES ('2023-07-13', '2023-06-03', '8', '8');
+INSERT INTO `projecto_capgemini_biblioteca`.`prestamos` ( `fecha_inicio`, `idcopia`, `n_socio`) VALUES ( '2023-06-03', '8', '8');
 INSERT INTO `projecto_capgemini_biblioteca`.`prestamos` (`fecha_fin`, `fecha_inicio`, `idcopia`, `n_socio`) VALUES ('2023-09-22', '2023-09-12', '9', '9');
 
 -- Users
 
--- INSERT INTO `projecto_capgemini_biblioteca`.`users` (`id`, `n_socio`, `email`, `password`,`role`) VALUES ('1','1', 'admin@gmail.com', '1234', 'ROLE_ADMIN');
--- INSERT INTO `projecto_capgemini_biblioteca`.`users` (`id`, `n_socio`, `email`, `password`,`role`) VALUES ('2','2', 'user@gmail.com', '1234', 'ROLE_USER');
+--INSERT INTO `projecto_capgemini_biblioteca`.`users` (`id`, `n_socio`, `email`, `password`,`role`) VALUES ('1','1', 'admin@gmail.com', '1234', 'ROLE_ADMIN');
+--INSERT INTO `projecto_capgemini_biblioteca`.`users` (`id`, `n_socio`, `email`, `password`,`role`) VALUES ('2','2', 'user@gmail.com', '1234', 'ROLE_USER');
 
