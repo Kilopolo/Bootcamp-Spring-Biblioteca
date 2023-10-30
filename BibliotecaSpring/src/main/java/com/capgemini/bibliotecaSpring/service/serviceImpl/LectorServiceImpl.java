@@ -22,7 +22,7 @@ import com.capgemini.bibliotecaSpring.service.PrestamoService;
 public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> implements LectorService {
 
 	private static final int DIAS_MULTA = 0;
-	private static final int MAX_LIBROS = 3;
+	private static final int MAX_COPIAS = 3;
 	@Autowired
 	public LectorRepositorio lectorrepo;
 	@Autowired
@@ -71,7 +71,7 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 	    if (lector.isPresent()) {
 	        Lector l = lector.get();
 	        int numLibrosPrestados = l.getPrestamosLector().size();
-	        if (numLibrosPrestados < MAX_LIBROS) {
+	        if (numLibrosPrestados < MAX_COPIAS) {
 	            Prestamo nuevoPrestamo = new Prestamo();
 	            nuevoPrestamo.setFechaInicio(fechaAct);
 	            nuevoPrestamo.setLector(l);

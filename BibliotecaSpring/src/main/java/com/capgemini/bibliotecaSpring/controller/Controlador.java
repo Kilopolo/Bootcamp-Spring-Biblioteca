@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -75,6 +77,12 @@ public class Controlador {
 		return "autor/updateAutor";
 	}
 	
+	@PostMapping("/saveAutor")
+	public String saveAutor(@ModelAttribute("autor") Autor autor) {
+		autorservice.save(autor);
+		return "redirect:/autores";
+	}
+	
 	
 
 	// LIBROS
@@ -110,6 +118,12 @@ public class Controlador {
 		modelo.addAttribute("libro", libro);
 		return "libro/updateLibro";
 	}
+	
+	@PostMapping("/saveLibro")
+	public String saveLibro(@ModelAttribute("libro") Libro libro) {
+		libroservice.save(libro);
+		return "redirect:/libros";
+	}
 
 	// LECTORES
 	@GetMapping("/lectores")
@@ -125,6 +139,13 @@ public class Controlador {
 		modelo.addAttribute("lector", lector);
 		return "lector/addLector";
 	}
+	
+	@PostMapping("/saveLector")
+	public String saveLector(@ModelAttribute("lector") Lector lector) {
+		lectorservice.save(lector);
+		return "redirect:/lectores";
+	}
+	
 	
 	//PRESTAMOS
 	@GetMapping("/prestamos/{idlector}")
@@ -145,6 +166,13 @@ public class Controlador {
 		return "prestamo/addPrestamo";
 	}
 	
+	@PostMapping("/savePrestamo")
+	public String savePrestamo(@ModelAttribute("prestamo") Prestamo prestamo) {
+		prestamoservice.save(prestamo);
+		return "redirect:/prestamos";
+	}
+	
+	
 	//COPIAS
 	@GetMapping("/copias/{idlibro}")
 	public String mostrarCopiasLibro(Model modelo, @PathVariable ("idlibro") long idlibro) {
@@ -160,6 +188,12 @@ public class Controlador {
 		modelo.addAttribute("libro",libro);
 		modelo.addAttribute("copia", copia);
 		return "copia/addCopia";
+	}
+	
+	@PostMapping("/saveCopias")
+	public String saveCopia(@ModelAttribute("copia") Copia copia) {
+		copiaservice.save(copia);
+		return "redirect:/copias";
 	}
 	
 	
