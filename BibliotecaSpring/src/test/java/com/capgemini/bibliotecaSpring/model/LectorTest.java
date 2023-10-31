@@ -1,22 +1,16 @@
 package com.capgemini.bibliotecaSpring.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.time.Duration;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.WebDriver;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 class LectorTest {
+	static WebDriver driver = SeleniumTesting.getDriver();
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -40,10 +34,16 @@ class LectorTest {
 
 	@Test
 	void test() {
-		assertEquals(0, 0);
-//		fail("Not yet implemented"); // TODO
+		SeleniumTesting.logInAsUser();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
-	
+
 //	@Test
 //	public void register() throws InterruptedException {
 //		driver.findElement(By.linkText("REGISTER")).click();

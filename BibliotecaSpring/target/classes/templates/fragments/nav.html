@@ -86,13 +86,13 @@
 				</ul>
 			</li>
 
-			<li class="nav-link" sec:authorize="!isAuthenticated()"><a th:href="@{/signup}" th:text="#{signup.message}">
+			<li class="nav-link" sec:authorize="!isAuthenticated()"><a id="signup" th:href="@{/signup}" th:text="#{signup.message}">
 					<span class="nav-item active glyphicon glyphicon-user"></span>
 				</a></li>
-			<li class="nav-link" sec:authorize="!isAuthenticated()"><a th:href="@{/login}" th:text="#{login.message}">
+			<li class="nav-link" sec:authorize="!isAuthenticated()"><a id="login" th:href="@{/login}" th:text="#{login.message}">
 					<span class="glyphicon glyphicon-log-in"></span>
-				</a></li>
-			<li class="nav-link" sec:authorize="isAuthenticated()"><a th:href="@{/logout}" th:text="#{logout.message}">
+				</a id="signup"></li>
+			<li class="nav-link" sec:authorize="isAuthenticated()"><a id="logout" th:href="@{/logout}" th:text="#{logout.message}">
 					<span class=" nav-item active glyphicon glyphicon-log-out"></span>
 				</a></li>
 			<!--				</ul>-->
