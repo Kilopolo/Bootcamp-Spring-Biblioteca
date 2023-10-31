@@ -12,10 +12,10 @@ import com.capgemini.bibliotecaSpring.Exceptions.MaximoLibrosPrestadosException;
 import com.capgemini.bibliotecaSpring.enumerados.EstadoCopia;
 import com.capgemini.bibliotecaSpring.model.Copia;
 import com.capgemini.bibliotecaSpring.model.Lector;
-import com.capgemini.bibliotecaSpring.model.User;
 import com.capgemini.bibliotecaSpring.model.Libro;
 import com.capgemini.bibliotecaSpring.model.Multa;
 import com.capgemini.bibliotecaSpring.model.Prestamo;
+import com.capgemini.bibliotecaSpring.model.User;
 import com.capgemini.bibliotecaSpring.repositorio.CopiaRepositorio;
 import com.capgemini.bibliotecaSpring.repositorio.LectorRepositorio;
 import com.capgemini.bibliotecaSpring.repositorio.MultaRepositorio;
@@ -81,11 +81,14 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 		        if (isAvailableCopia(copia, lector) && isNotMoroso(lector)) {
 		            copia.setEstado(EstadoCopia.PRESTADO);
 		            Prestamo nuevoPrestamo = new Prestamo();
+		            nuevoPrestamo.setIdprestamo(50l);
 		            nuevoPrestamo.setFechaInicio(fechaAct);
+		            nuevoPrestamo.setFechaFin(fechaAct.plusDays(30));
 		            nuevoPrestamo.setLector(lector);
 		            nuevoPrestamo.setCopia(copia);
-		            
-		            prestamorepo.save(nuevoPrestamo);
+		            System.out.println(nuevoPrestamo);
+		            prestamoservice.save(nuevoPrestamo);
+		            System.out.println(prestamoservice.getAll());
 		            copiarepo.save(copia);
 		            //return nuevoPrestamo;
 		        } else {
@@ -124,12 +127,6 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 	            }
 	        }
 	    }
-	}
-
-	@Override
-	public Lector findByUser(User user) {
-	
-		return lr.findByUser(user);
 	}
 
 }

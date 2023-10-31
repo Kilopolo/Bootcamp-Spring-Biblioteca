@@ -1,5 +1,5 @@
 package com.capgemini.bibliotecaSpring.controller;
- 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,12 +19,11 @@ import com.capgemini.bibliotecaSpring.service.serviceInterfaces.CopiaService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LibroService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
-import com.capgemini.bibliotecaSpring.service.serviceInterfaces.UserService;
 
 @Controller
 @RequestMapping({ "/admin", "/" })
 public class Controlador {
- 
+
 	@Autowired
 	LibroService libroservice;
 	@Autowired
@@ -35,22 +34,20 @@ public class Controlador {
 	CopiaService copiaservice;
 	@Autowired
 	PrestamoService prestamoservice;
-	@Autowired
-	UserService userservice;
 
 	@GetMapping("/")
 	public String index() {
 		System.out.println("Hola, mundo");
 		return "index";
 	}
- 
+
 	// AUTORES
 	@GetMapping("/autores")
 	public String mostrarAutores(Model modelo) {
 		modelo.addAttribute("autores", autorservice.getAll());
 		return "autor/mostrar";
 	}
- 
+
 	@PostMapping("/saveautor")
 	public String saveAutor(@ModelAttribute("autor") Autor autor) {
 		autorservice.save(autor);
@@ -75,9 +72,9 @@ public class Controlador {
 	public String deleteAutor(@PathVariable("idautor") long idautor, Model modelo) {
 		autorservice.deleteById(idautor);
 		return "redirect:/autores";
- 
+
 	}
- 
+
 	// LIBROS
 	@GetMapping("/libros/{idautor}")
 	public String mostrarLibros(Model modelo, @PathVariable("idautor") long idautor) {
@@ -86,11 +83,13 @@ public class Controlador {
 		modelo.addAttribute("libros", libroservice.findByAutor(autor));
 		return "libro/mostrar";
 	}
+
 	@GetMapping("/libros")
 	public String mostrarTodoLibros(Model modelo) {
 		modelo.addAttribute("libros", libroservice.getAll());
 		return "libro/mostrarTodos";
 	}
+
 	@PostMapping("/savelibro/{idautor}")
 	public String saveLibro(@ModelAttribute("libro") Libro libro, @PathVariable("idautor") long idautor, Model modelo) {
 		Autor autor = autorservice.getById(idautor);
@@ -115,7 +114,7 @@ public class Controlador {
 		modelo.addAttribute("autor", autor);
 		libroservice.deleteById(idlibro);
 		return "redirect:/libros/" + autor.getIdautor();
- 
+
 	}
 
 	@GetMapping("/updatelibro/{idlibro}")
@@ -125,14 +124,14 @@ public class Controlador {
 		modelo.addAttribute("libro", libro);
 		return "libro/updateLibro";
 	}
- 
+
 	// LECTORES
 	@GetMapping("/lectores")
 	public String mostrarLectores(Model modelo) {
 		modelo.addAttribute("lectores", lectorservice.getAll());
-
 		return "lector/mostrar";
 	}
+
 	@PostMapping("/savelector")
 	public String saveLector(@ModelAttribute("lector") Lector lector) {
 		lectorservice.save(lector);
@@ -145,6 +144,7 @@ public class Controlador {
 		modelo.addAttribute("lector", lector);
 		return "lector/addLector";
 	}
+
 	@GetMapping("/updatelector/{idlector}")
 	public String updateLector(Model modelo, @PathVariable("idlector") long idlector) {
 		Lector lector = lectorservice.getById(idlector);
@@ -156,9 +156,9 @@ public class Controlador {
 	public String deleteLector(@PathVariable("idlector") long idlector, Model modelo) {
 		lectorservice.deleteById(idlector);
 		return "redirect:/lectores";
- 
+
 	}
- 
+
 	// PRESTAMOS
 	@GetMapping("/prestamos/{idlector}")
 	public String mostrarPrestamosLector(Model modelo, @PathVariable("idlector") long idlector) {
@@ -167,6 +167,7 @@ public class Controlador {
 		modelo.addAttribute("prestamos", prestamoservice.findByLector(lector));
 		return "prestamo/mostrar";
 	}
+
 	@PostMapping("/saveprestamo/{idlector}")
 	public String savePrestamo(@ModelAttribute("prestamo") Prestamo prestamo, @PathVariable("idlector") long idlector,
 			Model modelo) {
@@ -176,7 +177,7 @@ public class Controlador {
 		modelo.addAttribute("lector", lector);
 		return "redirect:/prestamos/" + idlector;
 	}
- 
+
 	@GetMapping("/addprestamo/{idlector}")
 	public String formPrestamo(Model modelo, @PathVariable("idlector") long idlector) {
 		Prestamo prestamo = new Prestamo();
@@ -186,6 +187,7 @@ public class Controlador {
 		modelo.addAttribute("copias", copiaservice.getAll());
 		return "prestamo/addPrestamo";
 	}
+
 	@GetMapping("/updateprestamo/{idprestamo}")
 	public String updatePrestamo(Model modelo, @PathVariable("idprestamo") long idprestamo) {
 		Prestamo prestamo = prestamoservice.getById(idprestamo);
@@ -193,16 +195,16 @@ public class Controlador {
 		modelo.addAttribute("prestamo", prestamo);
 		return "prestamo/updatePrestamo";
 	}
- 
+
 	@GetMapping("/deleteprestamo/{idprestamo}")
 	public String deletePrestamo(@PathVariable("idprestamo") long idprestamo, Model modelo) {
 		Lector lector = prestamoservice.getById(idprestamo).getLector();
 		modelo.addAttribute("lector", lector);
 		prestamoservice.deleteById(idprestamo);
 		return "redirect:/prestamos/" + lector.getIdlector();
- 
+
 	}
- 
+
 	// COPIAS
 	@GetMapping("/copias/{idlibro}")
 	public String mostrarCopiasLibro(Model modelo, @PathVariable("idlibro") long idlibro) {
@@ -211,6 +213,7 @@ public class Controlador {
 		modelo.addAttribute("copias", copiaservice.findByLibro(libro));
 		return "copia/mostrar";
 	}
+
 	@PostMapping("/savecopia/{idlibro}")
 	public String saveCopia(@ModelAttribute("copia") Copia copia, @PathVariable("idlibro") long idlibro, Model modelo) {
 		Libro libro = libroservice.getById(idlibro);
@@ -243,7 +246,7 @@ public class Controlador {
 		modelo.addAttribute("libro", libro);
 		copiaservice.deleteById(idcopia);
 		return "redirect:/copias/" + libro.getIdlibro();
- 
+
 	}
- 
+
 }

@@ -39,7 +39,7 @@ public class User {
 	@Transient
 	private boolean selected = false;
 
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "nSocio")
 	private Lector lector;
 

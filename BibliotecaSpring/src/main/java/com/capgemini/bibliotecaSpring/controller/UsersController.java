@@ -10,7 +10,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.bibliotecaSpring.model.Lector;
 import com.capgemini.bibliotecaSpring.model.User;
@@ -22,8 +21,7 @@ import com.capgemini.bibliotecaSpring.validators.SignUpFormValidator;
 
 import jakarta.servlet.http.HttpSession;
 
-@RestController
-@RequestMapping("/restuser")
+@Controller
 public class UsersController {
 
 	@Autowired

@@ -1,8 +1,6 @@
 package com.capgemini.bibliotecaSpring.model;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,14 +34,5 @@ public class Prestamo {
 	@ManyToOne
 	@JoinColumn(name = "nSocio")
 	private Lector lector;
-	
-	public LocalDate getFechaDevolucionEsperada() {
-	    if (fechaInicio != null) {
-	        return fechaInicio.plusDays(30);
-	    } else {
-	        return fechaFin; 
-	    }
-	}
-
 
 }

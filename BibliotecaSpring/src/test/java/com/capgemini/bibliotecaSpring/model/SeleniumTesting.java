@@ -64,6 +64,24 @@ public class SeleniumTesting {
 
 	}
 
+	public static void signIn(String user, String password) {
+		driver.findElement(By.id("login")).click();
+		driver.findElement(By.name("username")).sendKeys(user);
+		driver.findElement(By.name("password")).sendKeys(password);
+		driver.findElement(By.name("submit")).click();
+		WebElement texto;
+		try {
+//			espera(10000);
+			texto = driver.findElement(By.id("userLogedIn"));
+
+			assertEquals("Esta es la parte privada de la web", texto.getText());
+
+		} catch (NoSuchElementException e) {
+			fail("Usuario no esta en la pagina de inicio");
+		}
+
+	}
+	
 	public static void espera(int tiempo) {
 		try {
 			Thread.sleep(tiempo);
@@ -80,6 +98,10 @@ public class SeleniumTesting {
 	public static void logInAsAdmin() {
 		logIn("admin@gmail.com", "1234");
 
+	}
+	
+	public static void logout() {
+		driver.findElement(By.id("logout")).click();
 	}
 
 }

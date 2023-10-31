@@ -1,4 +1,4 @@
-package com.capgemini.bibliotecaSpring.model.Backend;
+package com.capgemini.bibliotecaSpring.model.backend;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -69,23 +69,23 @@ class TestLogicaLector {
 	 
 	 @Test
 	    public void testPrestar() {
-	        Lector lector = new Lector(); // Aquí debes completar con los atributos necesarios
-	        lector.setIdlector(1l); // Id de ejemplo
+	        Lector lector = new Lector();
+	        lector.setIdlector(1l); 
 
-	        Copia copia = new Copia(); // Aquí debes completar con los atributos necesarios
-	        copia.setEstado(EstadoCopia.BIBLIOTECA); // Establecer el estado de la copia
+	        Copia copia = new Copia();
+	        copia.setIdcopia(44l);
+	        copia.setEstado(EstadoCopia.BIBLIOTECA); 
 
 	        when(lectorRepositorio.findById(1l)).thenReturn(Optional.of(lector));
 	        when(copiaRepositorio.save(copia)).thenReturn(copia);
-	        // Puedes continuar con el mock y la simulación de otros métodos necesarios
+	       
 
-	        LocalDate fechaActual = LocalDate.now(); // Puedes establecer una fecha actual
-	        lectorService.prestar(1, fechaActual, copia);
+	        LocalDate fechaActual = LocalDate.now(); 
+	        lectorService.prestar(1l, fechaActual, copia);
 
-	        // Aquí puedes agregar aserciones para comprobar el resultado esperado
-	        assertEquals(EstadoCopia.PRESTADO, copia.getEstado()); // Verificar si la copia está prestada
+	        
+	        assertEquals(EstadoCopia.PRESTADO, copia.getEstado()); 
 	        System.out.println(copia);
-	        System.out.println(prestamoService.getAll());
 	    }
 	 
 	 @Test
