@@ -40,11 +40,11 @@ class LectorTest {
 	@Test
 	void test() {
 		SeleniumTesting.logInAsUser();
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			Thread.sleep(10000);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
 		
 	}
 
