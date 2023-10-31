@@ -18,3 +18,10 @@ BibliotecaSpring/.classpath
 BibliotecaSpring/.project
 *.prefs
 BibliotecaSpring/target/classes/static/img/Error Hibernate_ Objeto no guardado_files/*
+BibliotecaSpring/target/*
+BibliotecaSpring/target/*/*
+BibliotecaSpring/target/*/*/*
+BibliotecaSpring/target/classes/application.properties
+BibliotecaSpring/target/classes/application.properties
+BibliotecaSpring/src/main/resources/application.properties
+BibliotecaSpring/target/classes/application.properties

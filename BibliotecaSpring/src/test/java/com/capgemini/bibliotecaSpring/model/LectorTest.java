@@ -1,39 +1,52 @@
 package com.capgemini.bibliotecaSpring.model;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 class LectorTest {
+//	static WebDriver driver;
+	static WebDriver driver = SeleniumTesting.getDriver();
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		SeleniumTesting.setUpBeforeClass();
 
+		
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		SeleniumTesting.tearDownAfterClass();
+		
 	}
 
 	@BeforeEach
 	void setUp() throws Exception {
 		SeleniumTesting.setUp();
+
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
+		driver.quit();
 	}
 
 	@Test
 	void test() {
-		assertEquals(0, 0);
-//		fail("Not yet implemented"); // TODO
+		SeleniumTesting.logInAsUser();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 //	@Test
