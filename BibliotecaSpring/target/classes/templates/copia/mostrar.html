@@ -43,7 +43,7 @@
 		</table>
 		<div class="text-center my-2">
 			<a sec:authorize="hasRole('ADMIN')" th:href="@{'/admin/addcopia/'+${libro.idlibro}}"
-				class="btn btn-primary mr-2">Add copia</a>
+				class="btn btn-success mr-2">Add copia</a>
 			<a class="btn btn-secondary" th:href="@{'/libros/'+${libro.autor.idautor}}">Volver</a>
 		</div>
 	</div>
