@@ -2,11 +2,9 @@ package com.capgemini.bibliotecaSpring.service.serviceImpl;
 
 import java.time.LocalDate;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.bibliotecaSpring.model.Lector;
-import com.capgemini.bibliotecaSpring.model.User;
 import com.capgemini.bibliotecaSpring.repositorio.LectorRepositorio;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
 
@@ -14,8 +12,6 @@ import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
 public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> implements LectorService {
 
 	private final int MAX_LIBROS = 3;
-	@Autowired
-	LectorRepositorio lr;
 
 	@Override
 	public void devolver(long id, LocalDate date) {
@@ -33,12 +29,6 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 	public void multar(int dias) {
 		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public Lector findByUser(User user) {
-	
-		return lr.findByUser(user);
 	}
 
 }
