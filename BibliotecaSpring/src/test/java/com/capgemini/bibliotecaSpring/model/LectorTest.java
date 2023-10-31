@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class LectorTest {
 //	static WebDriver driver;
-	static WebDriver driver = SeleniumTesting.getDriver();
+//	static WebDriver driver = SeleniumTesting.getDriver();
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -34,7 +34,7 @@ class LectorTest {
 
 	@AfterEach
 	void tearDown() throws Exception {
-		driver.quit();
+		SeleniumTesting.getDriver().quit();
 	}
 
 	@Test
