@@ -30,9 +30,9 @@
 
 				</li>
 
-				<li sec:authorize="isAuthenticated()"><a sec:authorize="hasRole('USER')"
-						style="margin-right: 15px; color: #FFFFFF">
-						<span sec:authentication="principal.username" th:inline="text">
+				<li  class="nav-item" sec:authorize="isAuthenticated()"><a class="nav-link" sec:authorize="hasRole('USER')"
+						style="margin-right: 15px; text-decoration: none; color: whitesmoke;">
+						<span sec:authentication="principal.username">
 						</span></a></li>
 
 
