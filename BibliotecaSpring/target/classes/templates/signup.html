@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
 	<head th:replace="fragments/head" />
-	<title>BibliotecA</title>
+	<title>Sign up</title>
+	
+</head>
 <body>
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-		<h2 th:text="#{signup.message}"></h2>
+		<h2 style="text-align:center ;" th:text="#{signup.message}"></h2>
 		<form class="form-horizontal" method="post" action="/signup"
 			th:object="${user}">
 

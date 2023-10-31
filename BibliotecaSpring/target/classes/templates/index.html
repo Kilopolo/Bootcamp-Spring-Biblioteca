@@ -9,8 +9,10 @@
 
 <body>
 	<nav th:replace="fragments/nav" />
-	<h3>Bienvenido a la Biblioteca de Capgemini</h3>
-	<img class="img-fluid" th:src="@{/img/Capgemini_201x_logo.svg.png}" th:title="Logo">
+	<div class="container">
+		<h3 style="text-align: center;">Bienvenido a la Biblioteca de Capgemini</h3>
+		<img class="img-fluid" th:src="@{/img/Capgemini_201x_logo.svg.png}" th:title="Logo">
+	</div>
 	<footer th:replace="fragments/footer" />
 </body>
 

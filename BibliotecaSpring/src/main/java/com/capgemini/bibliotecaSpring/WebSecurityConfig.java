@@ -61,7 +61,7 @@ public class WebSecurityConfig {
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().requestMatchers("/admin/**").hasRole("ADMIN")
-		.requestMatchers("/user/**").hasRole("USER")
+				.requestMatchers("/user/**").hasRole("USER")
 //		.requestMatchers("/**").hasRole("USER")
 //		.requestMatchers("/**/**").hasRole("USER")
 				.requestMatchers("/anonymous*").anonymous().requestMatchers("/login*").permitAll();

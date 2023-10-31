@@ -17,7 +17,7 @@
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/libros}">Libros</a>
 				</li>
-				<li sec:authorize="hasRole('ADMIN')" class="nav-item">
+				<li class="nav-item">
 					<a class="nav-link" th:href="@{/autores}">Autor</a>
 				</li>
 				<li sec:authorize="hasRole('ADMIN')" class="nav-item dropdown">

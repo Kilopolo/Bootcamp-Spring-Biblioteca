@@ -21,7 +21,7 @@ import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LibroService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
  
 @Controller
-@RequestMapping({"/admin", "/"})
+@RequestMapping({ "/admin", "/" })
 public class Controlador {
  
 	@Autowired
