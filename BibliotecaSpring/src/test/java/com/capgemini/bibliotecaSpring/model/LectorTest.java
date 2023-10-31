@@ -1,20 +1,12 @@
 package com.capgemini.bibliotecaSpring.model;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.time.Duration;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 class LectorTest {
 
@@ -43,7 +35,7 @@ class LectorTest {
 		assertEquals(0, 0);
 //		fail("Not yet implemented"); // TODO
 	}
-	
+
 //	@Test
 //	public void register() throws InterruptedException {
 //		driver.findElement(By.linkText("REGISTER")).click();

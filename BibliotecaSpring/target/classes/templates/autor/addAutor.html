@@ -4,23 +4,29 @@
 <head>
 
 	<title>Add Autor</title>
-<head th:replace="fragments/head" />
+
+	<head th:replace="fragments/head" />
 </head>
 
 <body>
 
 	<nav th:replace="fragments/nav" />
+	<div class="container">
 		<h3>Nuevo Autor</h3>
 
 		<form action="#" th:action="@{/saveautor}" th:object="${autor}" method="post">
 			<input th:field="*{nombre}" type="text" placeholder="Escriba el nombre" class="form-control mb-4 col.4">
-			<input th:field="*{nacionalidad}" type="text" placeholder="Escriba la nacionalidad" class="form-control mb-4 col.4">
+			<input th:field="*{nacionalidad}" type="text" placeholder="Escriba la nacionalidad"
+				class="form-control mb-4 col.4">
 			<p> Fecha de nacimiento
-			<input th:field="*{fechaNacimiento}" type="date" class="form-control mb-4 col.4"></p>
+				<input th:field="*{fechaNacimiento}" type="date" class="form-control mb-4 col.4">
+			</p>
 			<button type="submit" class="btn btn-info col-2">Guardar autor</button>
 		</form>
+		<hr>
 		<a th:href="@{/autores}">Volver</a>
-		<footer th:replace="fragments/footer" />
+	</div>
+	<footer th:replace="fragments/footer" />
 </body>
 
 </html>

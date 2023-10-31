@@ -12,6 +12,7 @@ public class SeleniumTesting {
 	private static final String URL = "http://localhost:8080/";
 	static WebDriver driver;
 	static File logLocation;
+
 	public static void setUpBeforeClass() {
 		/*
 		 * #0 Configuraciones para poder usar mi WebDriver Cada Browser tiene distinta
@@ -43,9 +44,9 @@ public class SeleniumTesting {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		driver.manage().window().maximize(); // maximizo mi browser
 		// #2 Le indico al webdriver que visite la URL
-		driver.get(URL);
+		driver.get("https://www.selenium.dev/selenium/web/web-form.html");
 	}
-	
+
 	public static void tearDownAfterClass() {
 		// Duermo el proceso para ver las modificaciones
 //		Thread.sleep(5000);
@@ -58,12 +59,12 @@ public class SeleniumTesting {
 		System.clearProperty(ChromeDriverService.CHROME_DRIVER_LOG_LEVEL_PROPERTY);
 
 		driver.quit();
-		
+
 	}
+
 	public static void setUp() {
 		driver.get(URL);
 //		Thread.sleep(3000);//lo uso para quitar cookies manualmente
 	}
-	
 
 }

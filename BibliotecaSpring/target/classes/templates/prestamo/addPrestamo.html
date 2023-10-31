@@ -9,7 +9,8 @@
 
 <body>
 	<nav th:replace="fragments/nav" />
-	<h3>Nuevo Prestamo de: <span th:text="${lector.nombre}"></span> </h3>
+	<div class="container">
+	<h3>Nuevo Prestamo de: <span  style="color: darkblue;" th:text="${lector.nombre}"></span> </h3>
 	<form action="#" th:action="@{'/saveprestamo/'+${lector.idlector}}" th:object="${prestamo}" method="post">
 
 		<p>Fecha inicio
@@ -30,6 +31,7 @@
 	</form>
 	<hr>
 	<a th:href="@{'/prestamos/'+${lector.idlector}}">Volver</a>
+	</div>
 	<footer th:replace="fragments/footer" />
 </body>
 

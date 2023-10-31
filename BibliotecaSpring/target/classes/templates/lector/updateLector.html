@@ -9,7 +9,8 @@
 <body>
 
 	<nav th:replace="fragments/nav" />
-		<h3>Actualizar Socio: <span th:text="${lector.nombre}"> </span></h3>
+	<div class="container">
+		<h3>Actualizar Socio: <span style="color: darkblue;" th:text="${lector.nombre}"> </span></h3>
 
 		<form action="#" th:action="@{/savelector}" th:object="${lector}" method="post">
 			<input th:field="*{nombre}" type="text" placeholder="Escriba el nombre" class="form-control mb-4 col.4">
@@ -19,7 +20,9 @@
 			<input th:field="*{idlector}" type="hidden">
 			<button type="submit" class="btn btn-info col-2">Guardar socio</button>
 		</form>
+		<hr>
 		<a th:href="@{/admin/lectores}">Volver</a>
+	</div>
 	<footer th:replace="fragments/footer" />
 </body>
 
