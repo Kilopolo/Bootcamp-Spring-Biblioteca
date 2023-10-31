@@ -1,31 +1,26 @@
 package com.capgemini.bibliotecaSpring.service.serviceImpl;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.capgemini.bibliotecaSpring.Exceptions.LectorNotFoundException;
-import com.capgemini.bibliotecaSpring.Exceptions.MaximoLibrosPrestadosException;
-import com.capgemini.bibliotecaSpring.enumerados.EstadoCopia;
-import com.capgemini.bibliotecaSpring.model.Copia;
 import com.capgemini.bibliotecaSpring.model.Lector;
+<<<<<<< Updated upstream
 import com.capgemini.bibliotecaSpring.model.Libro;
 import com.capgemini.bibliotecaSpring.model.Multa;
 import com.capgemini.bibliotecaSpring.model.Prestamo;
 import com.capgemini.bibliotecaSpring.model.User;
 import com.capgemini.bibliotecaSpring.repositorio.CopiaRepositorio;
+=======
+>>>>>>> Stashed changes
 import com.capgemini.bibliotecaSpring.repositorio.LectorRepositorio;
-import com.capgemini.bibliotecaSpring.repositorio.MultaRepositorio;
-import com.capgemini.bibliotecaSpring.repositorio.PrestamoRepositorio;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
-import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
 
 @Service
 public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> implements LectorService {
 
+<<<<<<< Updated upstream
 	private static final int DIAS_MULTA = 0;
 	private static final int MAX_COPIAS = 3;
 	@Autowired
@@ -38,11 +33,15 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 	public PrestamoService prestamoservice;
 	@Autowired
 	public CopiaRepositorio copiarepo;
+=======
+	private final int MAX_LIBROS = 3;
+>>>>>>> Stashed changes
 
 	@Override
-	public void devolver(long id, LocalDate fechaDevuelto) {
-	    Optional<Lector> lectorOptional = lectorrepo.findById(id);
+	public void devolver(long id, LocalDate date) {
+		// TODO Auto-generated method stub
 
+<<<<<<< Updated upstream
 	    if (lectorOptional.isPresent()) {
 	        Lector lector = lectorOptional.get();
 	        List<Prestamo> prestamos=lector.getPrestamosLector();
@@ -106,27 +105,20 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 	private boolean isNotMoroso(Lector lector) {
 	    Multa multa = lector.getMulta();
 	    return multa == null || multa.getFFin() == null || multa.getFFin().isBefore(LocalDate.now());
+=======
+>>>>>>> Stashed changes
 	}
 
 	@Override
-	public void multar(long idLector, int diasRetraso) {
-	    if (diasRetraso > 0) {
-	        Optional<Lector> lector = lectorrepo.findById(idLector);
-	        if (lector.isPresent()) {
-	        	Lector l=lector.get();
-	            int numLibrosPrestados = l.getPrestamosLector().size();
-	            if (numLibrosPrestados >= DIAS_MULTA) {
-	                LocalDate fechaInicio = LocalDate.now();
-	                LocalDate fechaFinMulta = fechaInicio.plusDays(diasRetraso);
+	public void prestar(long id, LocalDate fechaAct) {
+		// TODO Auto-generated method stub
 
-	                Multa multa = new Multa();
-	                multa.setFInicio(fechaInicio);
-	                multa.setFFin(fechaFinMulta);
-	                multa.setLector(l);
-	                multarepo.save(multa);
-	            }
-	        }
-	    }
+	}
+
+	@Override
+	public void multar(int dias) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

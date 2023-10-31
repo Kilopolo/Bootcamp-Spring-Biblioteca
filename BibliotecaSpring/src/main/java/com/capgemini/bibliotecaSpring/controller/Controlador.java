@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.capgemini.bibliotecaSpring.enumerados.EstadoCopia;
 import com.capgemini.bibliotecaSpring.model.Autor;
 import com.capgemini.bibliotecaSpring.model.Copia;
 import com.capgemini.bibliotecaSpring.model.Lector;
@@ -173,6 +174,9 @@ public class Controlador {
 			Model modelo) {
 		Lector lector = lectorservice.getById(idlector);
 		prestamo.setLector(lector);
+		Copia copia = prestamo.getCopia();
+		copia.setEstado(EstadoCopia.PRESTADO);
+		prestamo.setCopia(copia);
 		prestamoservice.save(prestamo);
 		modelo.addAttribute("lector", lector);
 		return "redirect:/prestamos/" + idlector;
@@ -248,5 +252,10 @@ public class Controlador {
 		return "redirect:/copias/" + libro.getIdlibro();
 
 	}
+<<<<<<< Updated upstream
+=======
+	
+	
+>>>>>>> Stashed changes
 
 }

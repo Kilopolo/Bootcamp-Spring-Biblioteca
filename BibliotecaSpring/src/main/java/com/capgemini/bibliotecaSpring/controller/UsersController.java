@@ -7,16 +7,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.capgemini.bibliotecaSpring.enumerados.EstadoCopia;
+import com.capgemini.bibliotecaSpring.model.Copia;
 import com.capgemini.bibliotecaSpring.model.Lector;
+import com.capgemini.bibliotecaSpring.model.Prestamo;
 import com.capgemini.bibliotecaSpring.model.User;
 import com.capgemini.bibliotecaSpring.service.security.RolesService;
 import com.capgemini.bibliotecaSpring.service.security.SecurityService;
 import com.capgemini.bibliotecaSpring.service.serviceImpl.UsersServiceImpl;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.AutorService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.CopiaService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LibroService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
 import com.capgemini.bibliotecaSpring.validators.SignUpFormValidator;
 
 import jakarta.servlet.http.HttpSession;
@@ -38,9 +48,17 @@ public class UsersController {
 
 	@Autowired
 	private HttpSession httpSession;
-
+	
 	@Autowired
-	private LectorService lectorService;
+	LibroService libroservice;
+	@Autowired
+	AutorService autorservice;
+	@Autowired
+	LectorService lectorservice;
+	@Autowired
+	CopiaService copiaservice;
+	@Autowired
+	PrestamoService prestamoservice;
 
 	// GESTION DE LOGIN/REGISTRO
 
@@ -53,8 +71,8 @@ public class UsersController {
 //			return "signup";
 //		}
 		Lector l = new Lector("no-name", "no-phone", "no-direction");
-		lectorService.save(l);
-		Lector last = lectorService.getAll().getLast();
+		lectorservice.save(l);
+		Lector last = lectorservice.getAll().getLast();
 		// Asigno rol usuario
 		user.setRole(rolesService.getRoles()[0]);
 		user.setLector(last);
@@ -107,5 +125,49 @@ public class UsersController {
 		User activeUser = usersServiceImpl.getUserByEmail(email);
 		return activeUser;
 	}
+	//PRESTAMO USER
+		@GetMapping("/reservas")
+		public String mostrarPrestamosUser(Model modelo) {
+			User activeUser = getActiveUser();
+			Lector lector= activeUser.getLector();
+			modelo.addAttribute("lector", lector);
+			modelo.addAttribute("prestamos", prestamoservice.findByLector(lector));
+			return "prestamo/mostrarUser";
+		}
+
+		@PostMapping("/savereserva")
+		public String savePrestamoUser(@ModelAttribute("prestamo") Prestamo prestamo, Model modelo) {
+			User activeUser = getActiveUser();
+			Lector lector= activeUser.getLector();
+			prestamo.setLector(lector);
+			Copia copia = prestamo.getCopia();
+			copia.setEstado(EstadoCopia.PRESTADO);
+			prestamo.setCopia(copia);
+			prestamoservice.save(prestamo);
+			modelo.addAttribute("lector", lector);
+			return "redirect:/reservas";
+		}
+
+		@GetMapping("/addreserva")
+		public String formPrestamoUser(Model modelo) {
+			Prestamo prestamo = new Prestamo();
+			User activeUser = getActiveUser();
+			Lector lector= activeUser.getLector();
+			modelo.addAttribute("lector", lector);
+			modelo.addAttribute("prestamo", prestamo);
+			modelo.addAttribute("copias", copiaservice.getAll());
+			return "prestamo/addPrestamoUser";
+		}
+
+		//USER 
+		// LECTORES
+		@GetMapping("/perfil")
+		public String mostrarLectores(Model modelo) {
+			User activeUser = getActiveUser();
+			modelo.addAttribute("user", activeUser);
+			return "lector/perfil";
+		}
+
+
 
 }
