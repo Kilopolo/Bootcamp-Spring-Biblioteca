@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<header>
+
+	<head th:replace="fragments/head" />
+	<title>Biblioteca</title>
+</header>
+
+
+<body>
+	<nav th:replace="fragments/nav" />
+	<h3>Bienvenido a la Biblioteca de Capgemini</h3>
+	<img class="img-fluid" th:src="@{/img/Capgemini_201x_logo.svg.png}" th:title="Logo">
+	<footer th:replace="fragments/footer" />
+</body>
+
+</html>
