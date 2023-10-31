@@ -65,21 +65,7 @@ class TestLogicaLector {
 	void tearDown() throws Exception {
 	}
 
-	 @Test
-	    void testMultar() {
-	        Lector lector = new Lector(); // Crear objeto Lector para la prueba
-	        int diasRetraso = 5; // Establecer días de retraso
-
-	        // Simular el comportamiento del repositorio y el objeto Lector
-	        when(lectorRepositorio.findById(1L)).thenReturn(Optional.of(lector));
-	        // Simular el resto de operaciones necesarias para el método multar
-
-	        // Llamar al método multar
-	        lectorService.multar(1L, diasRetraso);
-
-	        // Verificar si el lector ha sido multado
-	        assertNotNull(lector.getMulta()); // Ejemplo de aserción, ajustar según tu lógica
-	    }
+	 
 	 
 	 @Test
 	    public void testPrestar() {
@@ -98,7 +84,24 @@ class TestLogicaLector {
 
 	        // Aquí puedes agregar aserciones para comprobar el resultado esperado
 	        assertEquals(EstadoCopia.PRESTADO, copia.getEstado()); // Verificar si la copia está prestada
-	        // Puedes añadir más aserciones dependiendo de la lógica que quieras validar
+	        System.out.println(copia);
+	        System.out.println(prestamoService.getAll());
+	    }
+	 
+	 @Test
+	    void testMultar() {
+	        Lector lector = new Lector(); // Crear objeto Lector para la prueba
+	        int diasRetraso = 5; // Establecer días de retraso
+
+	        // Simular el comportamiento del repositorio y el objeto Lector
+	        when(lectorRepositorio.findById(1L)).thenReturn(Optional.of(lector));
+	        // Simular el resto de operaciones necesarias para el método multar
+
+	        // Llamar al método multar
+	        lectorService.multar(1L, diasRetraso);
+
+	        // Verificar si el lector ha sido multado
+	        assertNotNull(lector.getMulta()); // Ejemplo de aserción, ajustar según tu lógica
 	    }
 
 	 

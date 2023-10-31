@@ -86,6 +86,7 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 		            
 		            prestamorepo.save(nuevoPrestamo);
 		            copiarepo.save(copia);
+		            //return nuevoPrestamo;
 		        } else {
 		            throw new MaximoLibrosPrestadosException();
 		        }
