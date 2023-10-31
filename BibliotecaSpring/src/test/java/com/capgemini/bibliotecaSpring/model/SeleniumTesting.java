@@ -33,23 +33,27 @@ public class SeleniumTesting {
 //		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 //		capabilities.setCapability("marionette", true);
 //		System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
-		System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
+		System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
+//		System.setProperty("webdriver.chrome.driver", "/maven-demo/src/test/resources/chromedriver/chromedriver.exe");
 		ChromeOptions options = new ChromeOptions();
-		options.addArguments("test-type");
-		options.addArguments("start-maximized");
-		options.addArguments("--window-size=1920,1080");
-		options.addArguments("--enable-precise-memory-info");
-		options.addArguments("--disable-popup-blocking");
-		options.addArguments("--disable-default-apps");
-		options.addArguments("test-type=browser");
+//		options.addArguments("test-type");
+//		options.addArguments("start-maximized");
+//		options.addArguments("--window-size=1920,1080");
+//		options.addArguments("--enable-precise-memory-info");
+//		options.addArguments("--disable-popup-blocking");
+//		options.addArguments("--disable-default-apps");
+//		options.addArguments("test-type=browser");
 		// #1 Creo el WebDriver (el objeto que contiene lo necesario para controlar el
 		// browser)
 		driver = new ChromeDriver(options);
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		driver.manage().window().maximize(); // maximizo mi browser
 		// #2 Le indico al webdriver que visite la URL
-//		driver.get("https://www.selenium.dev/selenium/web/web-form.html");
-		driver.get("https://demo.guru99.com/test/newtours/index.php");
+		driver.get(URL);
+//		driver.get("https://demo.guru99.com/test/newtours/index.php");
+//		logPrefs.enable(LogType.BROWSER, Level.ALL);
+		
+//		WebDriverManager.chromedriver().setup();
 	}
 
 	public static void tearDownAfterClass() {
@@ -70,6 +74,8 @@ public class SeleniumTesting {
 	public static void setUp() {
 //		driver.get(URL);
 //		Thread.sleep(3000);//lo uso para quitar cookies manualmente
+//		driver = WebDriverManager.chromedriver().create();
+//		driver = new ChromeDriver();
 	}
 
 	public static WebDriver getDriver() {

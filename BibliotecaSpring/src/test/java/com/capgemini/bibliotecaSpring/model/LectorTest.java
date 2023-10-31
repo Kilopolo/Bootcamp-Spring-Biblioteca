@@ -10,26 +10,31 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class LectorTest {
+//	static WebDriver driver;
 	static WebDriver driver = SeleniumTesting.getDriver();
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		SeleniumTesting.setUpBeforeClass();
 
+		
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		SeleniumTesting.tearDownAfterClass();
+		
 	}
 
 	@BeforeEach
 	void setUp() throws Exception {
 		SeleniumTesting.setUp();
+
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
+		driver.quit();
 	}
 
 	@Test
