@@ -23,17 +23,17 @@
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/libros}">Libros</a>
 				</li>
-				
+
 				<li sec:authorize="hasRole('USER')" class="nav-item">
 					<a class="nav-link" th:href="@{/libros}">sin autenticates</a>
 				</li>
 
 
-								<li sec:authorize="hasRole('ADMIN')" class="nav-item">
+				<li sec:authorize="hasRole('ADMIN')" class="nav-item">
 					<a class="nav-link" th:href="@{/autores}">Autor</a>
 				</li>
-				<li sec:authorize="hasRole('ADMIN')" id="users-menu" class="dropdown"><a
-						class="dropdown-toggle" data-toggle="dropdown" href="#">
+				<li sec:authorize="hasRole('ADMIN')" id="users-menu" class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="#">
 						. <span class="caret">Socios</span>
 					</a>
 					<ul class="dropdown-menu">
@@ -57,9 +57,9 @@
 
 
 				<li sec:authorize="isAuthenticated()"><a sec:authorize="hasRole('USER')"
-						style="margin-right: 15px; color: #FFFFFF" >
-								<span sec:authentication="principal.username" th:inline="text">
-			</span></a></li>
+						style="margin-right: 15px; color: #FFFFFF">
+						<span sec:authentication="principal.username" th:inline="text">
+						</span></a></li>
 
 
 			</ul>
