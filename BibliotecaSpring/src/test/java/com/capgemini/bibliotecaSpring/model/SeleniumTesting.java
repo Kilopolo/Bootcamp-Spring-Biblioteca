@@ -13,7 +13,8 @@ import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 public class SeleniumTesting {
-	private static final String URL = "http://localhost:8080/";
+	private static String URL = "http://localhost:8080/";
+	
 	static WebDriver driver;
 	static File logLocation;
 
@@ -33,7 +34,8 @@ public class SeleniumTesting {
 //		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 //		capabilities.setCapability("marionette", true);
 //		System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
-		System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver/chromedriver.exe");
+//		System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
 //		System.setProperty("webdriver.chrome.driver", "/maven-demo/src/test/resources/chromedriver/chromedriver.exe");
 		ChromeOptions options = new ChromeOptions();
 //		options.addArguments("test-type");
@@ -49,6 +51,7 @@ public class SeleniumTesting {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		driver.manage().window().maximize(); // maximizo mi browser
 		// #2 Le indico al webdriver que visite la URL
+//		URL = "https://www.google.es/";
 		driver.get(URL);
 //		driver.get("https://demo.guru99.com/test/newtours/index.php");
 //		logPrefs.enable(LogType.BROWSER, Level.ALL);
@@ -68,7 +71,7 @@ public class SeleniumTesting {
 		System.clearProperty(ChromeDriverService.CHROME_DRIVER_LOG_LEVEL_PROPERTY);
 
 		driver.quit();
-
+ 
 	}
 
 	public static void setUp() {
