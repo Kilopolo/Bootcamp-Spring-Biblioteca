@@ -59,13 +59,13 @@
 				</ul>
 			</li>
 				
-			<li class="nav-link" sec:authorize="!isAuthenticated()"><a  id="signup" th:href="@{/signup}" th:text="#{signup.message}" style="text-decoration: none; color: whitesmoke;">
+			<li class="nav-link" sec:authorize="!isAuthenticated()"><a id="signup"th:href="@{/signup}" th:text="#{signup.message}" style="text-decoration: none; color: whitesmoke;">
 					<span class="nav-item active glyphicon glyphicon-user"></span>
 				</a></li>
-			<li class="nav-link" sec:authorize="!isAuthenticated()"><a id="login"  th:href="@{/login}" th:text="#{login.message}" style="text-decoration: none; color: whitesmoke;">
+			<li class="nav-link" sec:authorize="!isAuthenticated()"><a id="login" th:href="@{/login}" th:text="#{login.message}" style="text-decoration: none; color: whitesmoke;">
 					<span class="glyphicon glyphicon-log-in"></span>
 				</a></li>
-			<li class="nav-link" sec:authorize="isAuthenticated()"><a id="logout"  th:href="@{/logout}" th:text="#{logout.message}" style="text-decoration: none; color: whitesmoke;">
+			<li class="nav-link" sec:authorize="isAuthenticated()"><a id="logout" th:href="@{/logout}" th:text="#{logout.message}" style="text-decoration: none; color: whitesmoke;">
 					<span class=" nav-item active glyphicon glyphicon-log-out"></span>
 				</a></li>
 			<!--				</ul>-->

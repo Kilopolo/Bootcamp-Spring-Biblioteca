@@ -19,6 +19,7 @@ import com.capgemini.bibliotecaSpring.service.serviceInterfaces.CopiaService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LibroService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.UserService;
 
 @Controller
 @RequestMapping({ "/admin", "/" })
@@ -34,6 +35,8 @@ public class Controlador {
 	CopiaService copiaservice;
 	@Autowired
 	PrestamoService prestamoservice;
+	@Autowired
+	UserService userservice;
 
 	@GetMapping("/")
 	public String index() {
@@ -129,6 +132,7 @@ public class Controlador {
 	@GetMapping("/lectores")
 	public String mostrarLectores(Model modelo) {
 		modelo.addAttribute("lectores", lectorservice.getAll());
+
 		return "lector/mostrar";
 	}
 

@@ -2,9 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+
 	<head th:replace="fragments/head" />
 	<title>Add Lector</title>
-	
+
 </head>
 
 <body>
@@ -18,6 +19,7 @@
 			<input th:field="*{telefono}" type="text" placeholder="Escriba el telefono" class="form-control mb-4 col.4">
 			<input th:field="*{direccion}" type="text" placeholder="Escriba la dirección "
 				class="form-control mb-4 col.4">
+			<br>
 			<button type="submit" class="btn btn-info col-2">Guardar socio</button>
 		</form>
 		<hr>
