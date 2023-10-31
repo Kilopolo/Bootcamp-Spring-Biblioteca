@@ -61,6 +61,9 @@ public class WebSecurityConfig {
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().requestMatchers("/admin/**").hasRole("ADMIN")
+		.requestMatchers("/user/**").hasRole("USER")
+//		.requestMatchers("/**").hasRole("USER")
+//		.requestMatchers("/**/**").hasRole("USER")
 				.requestMatchers("/anonymous*").anonymous().requestMatchers("/login*").permitAll();
 		http.authorizeRequests(auth -> auth
 				.requestMatchers("/css/**", "/img/**", "/script/**", "/login/**", "/failure-login/**").permitAll())
@@ -106,6 +109,16 @@ public class WebSecurityConfig {
 			}
 		};
 	}
+
+//	@Bean
+//	public InMemoryUserDetailsManager userDetailsService() {
+//		UserDetails user1 = User.withUsername("david").password(encoder().encode("1234")).roles("USER")
+//				.build();
+//
+//		UserDetails admin = User.withUsername("admindavid").password(encoder().encode("1234")).roles("ADMIN")
+//				.build();
+//		return new InMemoryUserDetailsManager(user1, admin);
+//	}
 
 	/*
 	 * @Bean public InMemoryUserDetailsManager userDetailsService() { UserDetails

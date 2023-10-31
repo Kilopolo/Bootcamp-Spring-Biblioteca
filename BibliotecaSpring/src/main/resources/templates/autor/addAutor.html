@@ -9,7 +9,7 @@
 
 <body>
 
-		<header th:replace="~{fragment/fragment :: header}"> </header>
+	<nav th:replace="fragments/nav" />
 		<h3>Nuevo Autor</h3>
 
 		<form action="#" th:action="@{/saveAutor}" th:object="${autor}" method="post">
@@ -20,7 +20,7 @@
 			<input th:field="*{fechaNacimiento}" type="date" class="form-control mb-4 col.4"></p>
 			<button type="submit" class="btn btn-info col-2">Guardar autor</button>
 		</form>
-		<a th:href="@{/}">Volver</a>
+		<a th:href="@{/autores}">Volver</a>
 		<footer th:replace="fragments/footer" />
 </body>
 
