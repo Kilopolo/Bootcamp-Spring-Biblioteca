@@ -15,50 +15,24 @@
 							class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" sec:authorize="hasRole('ADMIN')" th:href="@{/admin/lectores}">Socios</a>
-				</li>
-				<!--				<li class="nav-item">-->
-				<!--					<a class="nav-link" th:href="@{/lectores}">Socios</a>-->
-				<!--				</li>-->
-				<li class="nav-item">
 					<a class="nav-link" th:href="@{/libros}">Libros</a>
 				</li>
-
-				<li sec:authorize="hasRole('USER')" class="nav-item">
-					<a class="nav-link" th:href="@{/libros}">sin autenticates</a>
-				</li>
-
-
 				<li sec:authorize="hasRole('ADMIN')" class="nav-item">
 					<a class="nav-link" th:href="@{/autores}">Autor</a>
 				</li>
-				<li sec:authorize="hasRole('ADMIN')" id="users-menu" class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#">
-						. <span class="caret">Socios</span>
+				<li sec:authorize="hasRole('ADMIN')" class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Socios
 					</a>
-					<ul class="dropdown-menu">
-						<li><a th:href="@{/lectores}">Ver listado</a></li>
-						<!--						<li><a href="#" >texto</a></li>-->
-					</ul>
+					<div    class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="nav-link dropdown-item"th:href="@{/admin/lectores}" style="color:black">Lista</a>
+
 				</li>
 
-				<!--				<li sec:authorize="isAuthenticated() && hasRole('ROLE_USER')" id="offers-menu" class="dropdown"><a-->
-				<!--					class="dropdown-toggle" data-toggle="dropdown" href="#"-->
-				<!--					th:text=#{manageOffers.message}> . <span class="caret"></span>-->
-				<!--				</a>-->
-				<!--					<ul class="dropdown-menu">-->
-				<!--						<li><a href="/offer/add" th:text=#{addOffers.message}></a></li>-->
-				<!--						<li><a href="/offer/ownList" th:text=#{ownOffers.message}></a></li>-->
-				<!--						<li><a href="/offer/list" th:text=#{showOffers.message}></a></li>-->
-				<!--					</ul></li>-->
-
-				<!--				<li id="buyButton" sec:authorize="isAuthenticated() && hasRole('ROLE_USER')"><a href="/offer/buyView" th:text="#{buyView.message}">-->
-				<!--				</a></li>-->
-
-
-				<li sec:authorize="isAuthenticated()"><a sec:authorize="hasRole('USER')"
-						style="margin-right: 15px; color: #FFFFFF">
-						<span sec:authentication="principal.username" th:inline="text">
+				<li  class="nav-item" sec:authorize="isAuthenticated()"><a class="nav-link" sec:authorize="hasRole('USER')"
+						style="margin-right: 15px; text-decoration: none; color: whitesmoke;">
+						<span sec:authentication="principal.username">
 						</span></a></li>
 
 
@@ -67,32 +41,31 @@
 				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			</form>
-			<!--				<ul class="mr-auto collapse navbar-collapse navbar-right">-->
-			<li class="dropdown nav-item active">
-				<a id="btnLanguage" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false">
+			
+				<li class="nav-item dropdown">
+					<a class="dropdown-toggle" id="btnLanguage" data-toggle="dropdown" role="button" aria-haspopup="true"
+					aria-expanded="false" style="text-decoration: none; color: whitesmoke;">
 					<span th:text="#{language.change}"></span>
-					<span class="caret"></span>
 				</a>
 				<ul id="languageDropdownMenuButton" class="dropdown-menu">
-					<li><a id="btnEnglish" value="EN"> <img th:src="@{/img/if_uk_flag.png}"
+					<li class="nav-item"><a class="nav-link"  id="btnEnglish" value="EN"> <img th:src="@{/img/if_uk_flag.png}"
 								style="border: 0; float: left; margin-right: 15px" /> <span
 								th:text="#{language.en}"></span>
 						</a></li>
-					<li><a id="btnSpanish" value="ES"> <img th:src="@{/img/if_spain_flag.png}"
+					<li class="nav-item"><a class="nav-link" id="btnSpanish" value="ES"> <img th:src="@{/img/if_spain_flag.png}"
 								style="border: 0; float: left; margin-right: 15px" /> <span
 								th:text="#{language.es}"></span>
 						</a></li>
 				</ul>
 			</li>
-
-			<li class="nav-link" sec:authorize="!isAuthenticated()"><a id="signup" th:href="@{/signup}" th:text="#{signup.message}">
+				
+			<li class="nav-link" sec:authorize="!isAuthenticated()"><a id="signup"th:href="@{/signup}" th:text="#{signup.message}" style="text-decoration: none; color: whitesmoke;">
 					<span class="nav-item active glyphicon glyphicon-user"></span>
 				</a></li>
-			<li class="nav-link" sec:authorize="!isAuthenticated()"><a id="login" th:href="@{/login}" th:text="#{login.message}">
+			<li class="nav-link" sec:authorize="!isAuthenticated()"><a id="login" th:href="@{/login}" th:text="#{login.message}" style="text-decoration: none; color: whitesmoke;">
 					<span class="glyphicon glyphicon-log-in"></span>
-				</a id="signup"></li>
-			<li class="nav-link" sec:authorize="isAuthenticated()"><a id="logout" th:href="@{/logout}" th:text="#{logout.message}">
+				</a></li>
+			<li class="nav-link" sec:authorize="isAuthenticated()"><a id="logout" th:href="@{/logout}" th:text="#{logout.message}" style="text-decoration: none; color: whitesmoke;">
 					<span class=" nav-item active glyphicon glyphicon-log-out"></span>
 				</a></li>
 			<!--				</ul>-->
