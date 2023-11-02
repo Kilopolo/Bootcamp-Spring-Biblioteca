@@ -102,11 +102,11 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 		}
 	}
 
-	private boolean isAvailableCopia(Copia copia, Lector lector) {
+	public boolean isAvailableCopia(Copia copia, Lector lector) {
 		return copia.getEstado() == EstadoCopia.BIBLIOTECA;
 	}
 
-	private boolean isNotMoroso(Lector lector) {
+	public boolean isNotMoroso(Lector lector) {
 		Multa multa = lector.getMulta();
 		return multa == null || multa.getFFin() == null || multa.getFFin().isBefore(LocalDate.now());
 	}

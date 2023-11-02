@@ -25,7 +25,7 @@ import com.capgemini.bibliotecaSpring.service.serviceInterfaces.UserService;
 @Controller
 @RequestMapping({ "/admin", "/" })
 public class PrestamoController {
-	
+
 	@Autowired
 	LectorService lectorservice;
 	@Autowired
@@ -34,6 +34,7 @@ public class PrestamoController {
 	PrestamoService prestamoservice;
 	@Autowired
 	UserService userservice;
+
 	@GetMapping("/prestamos/{idlector}")
 	public String mostrarPrestamosLector(Model modelo, @PathVariable("idlector") long idlector) {
 		Lector lector = lectorservice.getById(idlector);
@@ -51,6 +52,7 @@ public class PrestamoController {
 		prestamo.setLector(lector);
 		prestamo.setCopia(copia);
 		prestamo.setFechaInicio(LocalDate.now());
+		prestamo.setFechaFin(LocalDate.now().plusDays(30));
 		prestamoservice.save(prestamo);
 		modelo.addAttribute("lector", lector);
 		return "redirect:/prestamos/" + idlector;
@@ -58,12 +60,16 @@ public class PrestamoController {
 
 	@GetMapping("/addprestamo/{idlector}")
 	public String formPrestamo(Model modelo, @PathVariable("idlector") long idlector) {
-		Prestamo prestamo = new Prestamo();
-		Lector lector = lectorservice.getById(idlector);
+		Prestamo prestamo;
+		Lector lector;
+
+		prestamo = new Prestamo();
+		lector = lectorservice.getById(idlector);
 		prestamo.setFechaInicio(LocalDate.now());
+
 		modelo.addAttribute("lector", lector);
 		modelo.addAttribute("prestamo", prestamo);
-		modelo.addAttribute("copias",copiaservice.copiaBiblioteca());
+		modelo.addAttribute("copias", copiaservice.copiaBiblioteca());
 		return "prestamo/addPrestamo";
 	}
 
