@@ -1,4 +1,4 @@
-package com.capgemini.bibliotecaSpring.Exceptions;
+package com.capgemini.bibliotecaSpring.exceptions;
 
 public class LectorNotFoundException extends RuntimeException {
     /**

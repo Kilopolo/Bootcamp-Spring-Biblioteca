@@ -7,9 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.capgemini.bibliotecaSpring.Exceptions.LectorNotFoundException;
-import com.capgemini.bibliotecaSpring.Exceptions.MaximoLibrosPrestadosException;
 import com.capgemini.bibliotecaSpring.enumerados.EstadoCopia;
+import com.capgemini.bibliotecaSpring.exceptions.LectorNotFoundException;
+import com.capgemini.bibliotecaSpring.exceptions.MaximoLibrosPrestadosException;
 import com.capgemini.bibliotecaSpring.model.Copia;
 import com.capgemini.bibliotecaSpring.model.Lector;
 import com.capgemini.bibliotecaSpring.model.Libro;
@@ -21,6 +21,7 @@ import com.capgemini.bibliotecaSpring.repositorio.LectorRepositorio;
 import com.capgemini.bibliotecaSpring.repositorio.MultaRepositorio;
 import com.capgemini.bibliotecaSpring.repositorio.PrestamoRepositorio;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.MultaService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
 
 @Service
@@ -32,6 +33,8 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 	public LectorRepositorio lectorrepo;
 	@Autowired
 	public MultaRepositorio multarepo;
+	@Autowired
+	public MultaService multaService;
 	@Autowired
 	public PrestamoRepositorio prestamorepo;
 	@Autowired
@@ -114,22 +117,39 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 
 	@Override
 	public void multar(long idLector, int diasRetraso) {
+		int numLibrosPrestados=0;
 	    if (diasRetraso > 0) {
 	        Optional<Lector> lector = lectorrepo.findById(idLector);
 	        if (lector.isPresent()) {
 	        	Lector l=lector.get();
-	            int numLibrosPrestados = l.getPrestamosLector().size();
-	            if (numLibrosPrestados >= DIAS_MULTA) {
+	        	System.out.println(l);
+	        	if(l.getPrestamosLector() != null)
+	        		numLibrosPrestados = l.getPrestamosLector().size();
+	        	
+	            if (numLibrosPrestados >= MAX_COPIAS) {
 	                LocalDate fechaInicio = LocalDate.now();
-	                LocalDate fechaFinMulta = fechaInicio.plusDays(diasRetraso);
-
+	                LocalDate fechaFinMulta = fechaInicio.plusDays(diasRetraso*2);
+	                System.out.println("Estoy creando multa");
 	                Multa multa = new Multa();
 	                multa.setFInicio(fechaInicio);
+	                multa.setIdmulta(1l);
 	                multa.setFFin(fechaFinMulta);
 	                multa.setLector(l);
+	                System.out.println("he creando multa");
+	                lectorservice.save(l);
+	                System.out.println(lectorservice.getById(20l));
+	                System.out.println(multa);
+	                l.setMulta(multa);
 	                multarepo.save(multa);
+	                System.out.println("he guardado multa");
+	                
+//	                System.out.println(multarepo.findAll());
+//	                System.out.println(multaService.getAll());
+//	                System.out.println(multaService.getById(1l));
+	                System.out.println(l);
+	                
 	            }
-	        }
+	        }System.out.println("pasando de crear multa");
 	    }
 	}
 
