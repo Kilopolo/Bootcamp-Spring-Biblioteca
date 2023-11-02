@@ -49,21 +49,13 @@ public class SeleniumTesting {
 		driver.findElement(By.name("username")).sendKeys(user);
 		driver.findElement(By.name("password")).sendKeys(password);
 		driver.findElement(By.name("submit")).click();
-		WebElement texto;
-		try {
-//			espera(10000);
-			texto = driver.findElement(By.id("userLogedIn"));
-
-			assertEquals("Esta es la parte privada de la web", texto.getText());
-
-		} catch (NoSuchElementException e) {
-			fail("Usuario no esta en la pagina de inicio");
-		}
+		checkOnHomePage();
 
 	}
 
 	public static void signIn(String user, String password, String nombre, String telefono, String direccion) {
 		driver.findElement(By.id("signup")).click();
+		espera(10000);
 		driver.findElement(By.name("lector.nombre")).sendKeys(nombre);
 		driver.findElement(By.name("lector.telefono")).sendKeys(telefono);
 		driver.findElement(By.name("lector.direccion")).sendKeys(direccion);
@@ -71,6 +63,24 @@ public class SeleniumTesting {
 		driver.findElement(By.name("password")).sendKeys(password);
 		driver.findElement(By.name("passwordConfirm")).sendKeys(password);
 		driver.findElement(By.name("submit")).click();
+		checkOnHomePage();
+
+	}
+	private static void checkOnLoginPage() {
+		WebElement texto;
+		try {
+//			espera(10000);
+			texto = driver.findElement(By.id("loginPage"));
+
+//			assertEquals("Esta es la parte privada de la web", texto.getText());
+
+		} catch (NoSuchElementException e) {
+			fail("Usuario no esta en la pagina login");
+		}
+	}
+	
+	
+	private static void checkOnHomePage() {
 		WebElement texto;
 		try {
 //			espera(10000);
@@ -81,7 +91,6 @@ public class SeleniumTesting {
 		} catch (NoSuchElementException e) {
 			fail("Usuario no esta en la pagina de inicio");
 		}
-
 	}
 
 	public static void espera(int tiempo) {

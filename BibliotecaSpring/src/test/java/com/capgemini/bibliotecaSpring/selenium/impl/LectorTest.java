@@ -5,6 +5,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.capgemini.bibliotecaSpring.selenium.SeleniumTesting;
@@ -12,7 +13,7 @@ import com.capgemini.bibliotecaSpring.selenium.SeleniumTesting;
 @SpringBootTest
 class LectorTest {
 //	static WebDriver driver;
-//	static WebDriver driver = SeleniumTesting.getDriver();
+	static WebDriver driver = SeleniumTesting.getDriver();
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
