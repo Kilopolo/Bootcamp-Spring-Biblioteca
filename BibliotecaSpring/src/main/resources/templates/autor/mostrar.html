@@ -14,9 +14,16 @@
 		<table class="table table-striped table-responsive-md">
 			<thead>
 				<tr>
-					<th>Nombre</th>
-					<th>Nacionalidad</th>
-					<th>Fecha</th>
+					<th><a
+							th:href="@{'/pageautor/' + ${currentPage} + '?sortField=nombre&sortDir=' + ${reverseSortDir}}">Nombre</a>
+					</th>
+					<th><a
+							th:href="@{'/pageautor/' + ${currentPage} + '?sortField=nacionalidad&sortDir=' + ${reverseSortDir}}">Nacionalidad</a>
+					</th>
+					<th><a
+							th:href="@{'/pageautor/' + ${currentPage} + '?sortField=fechaNacimiento&sortDir=' + ${reverseSortDir}}">Fecha
+							nacimiento</a>
+					</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
@@ -35,9 +42,34 @@
 				</tr>
 			</tbody>
 		</table>
+		<div th:if="${totalPages>1}">
+
+			<div class="row col-sm-10">
+				<div class="col-sm-5">Total Filas: [[${totalItems}]]</div>
+				<div class="col-sm-1">
+					<a th:if="${currentPage < totalPages}"
+						th:href="@{'/pageautor/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+					<span th:unless="${currentPage < totalPages}">Anterior</span>
+				</div>
+				<div class="col-sm-3">
+					<span th:each="i:${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage !=1}"
+							th:href="@{'/pageautor/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">
+							[[${i}]]</a>
+						<span th:unless="${currentPage !=1}">[[${i}]]</span>
+					</span>
+				</div>
+
+				<div class="col-sm-1">
+					<a th:if="${currentPage != totalPages}"
+						th:href="@{'/pageautor/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+					<span th:unless="${currentPage != totalPages}">Último</span>
+				</div>
+
+			</div> <!-- cierra el row -->
+		</div> <!-- Cierra el if -->
 		<div class="text-center my-2">
-			<a  sec:authorize="hasRole('ADMIN')" th:href="@{'/admin/addautor'}"
-				class="btn btn-success">Add autor</a>
+			<a sec:authorize="hasRole('ADMIN')" th:href="@{'/admin/addautor'}" class="btn btn-success">Add autor</a>
 		</div>
 	</div>
 	<footer th:replace="fragments/footer" />
