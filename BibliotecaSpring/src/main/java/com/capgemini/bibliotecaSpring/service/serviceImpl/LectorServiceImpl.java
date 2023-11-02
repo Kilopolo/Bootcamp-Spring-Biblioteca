@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import com.capgemini.bibliotecaSpring.enumerados.EstadoCopia;
 import com.capgemini.bibliotecaSpring.exceptions.LectorNotFoundException;
 import com.capgemini.bibliotecaSpring.exceptions.MaximoLibrosPrestadosException;
@@ -52,6 +51,8 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 
 			if (prestamoADevolver != null) {
 				prestamoADevolver.setFechaFin(fechaDevuelto);
+				Copia copia = prestamoADevolver.getCopia();
+				copia.setEstado(EstadoCopia.BIBLIOTECA);
 				prestamos.remove(prestamoADevolver);
 				lectorrepo.save(lector);
 				prestamoservice.deleteById(id);

@@ -83,5 +83,15 @@ public class PrestamoController {
 		return "redirect:/prestamos/" + lector.getIdlector();
 
 	}
+	@GetMapping("/devolver/{idprestamo}")
+	public String devolverPrestamo(@PathVariable("idprestamo") long idprestamo, Model modelo) {
+		Lector lector = prestamoservice.getById(idprestamo).getLector();
+		Prestamo prestamo =prestamoservice.getById(idprestamo);
+		prestamo.setFechaFin(LocalDate.now());
+		LocalDate fechaFin= prestamo.getFechaFin();
+		lectorservice.devolver(lector.getIdlector(), fechaFin);
+		modelo.addAttribute("lector", lector);
+		return "redirect:/prestamos/" + lector.getIdlector();
+	}
 
 }
