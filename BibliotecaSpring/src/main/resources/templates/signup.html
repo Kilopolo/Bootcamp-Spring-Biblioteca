@@ -12,10 +12,12 @@
 		<h2 style="text-align:center ;" th:text="#{signup.message}"></h2>
 		<form class="form-horizontal" method="post" action="/signup"
 			th:object="${user}">
+			<div class="form-group">
 			<input th:field="*{lector.nombre}" type="text" placeholder="Escriba el nombre" class="form-control mb-4 col.4">
 			<input th:field="*{lector.telefono}" type="text" placeholder="Escriba el telefono" class="form-control mb-4 col.4">
 			<input th:field="*{lector.direccion}" type="text" placeholder="Escriba la dirección "
 				class="form-control mb-4 col.4">
+			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="email"
 					th:text="#{email.message}"></label>

@@ -137,8 +137,6 @@ public class Controlador {
 		return "lector/mostrar";
 	}
 
-	
-
 	@GetMapping("/updatelector/{id}")
 	public String updateLector(Model modelo, @PathVariable("id") long id) {
 		User user = userservice.getById(id);
@@ -149,9 +147,9 @@ public class Controlador {
 	@GetMapping("/deletelector/{id}")
 	public String deleteLector(@PathVariable("id") long id, Model modelo) {
 		User user = userservice.getById(id);
-		Lector lector= user.getLector();
-		lectorservice.deleteById(lector.getIdlector());
+		Lector lector = user.getLector();
 		userservice.deleteById(id);
+		lectorservice.deleteById(lector.getIdlector());
 		return "redirect:/lectores";
 
 	}
