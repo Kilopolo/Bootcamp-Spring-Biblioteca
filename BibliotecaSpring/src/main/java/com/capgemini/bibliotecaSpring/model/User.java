@@ -1,5 +1,7 @@
 package com.capgemini.bibliotecaSpring.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -40,6 +42,7 @@ public class User {
 	private boolean selected = false;
 
 	@OneToOne(fetch = FetchType.LAZY)
+	@JsonBackReference
 	@JoinColumn(name = "nSocio")
 	private Lector lector;
 
