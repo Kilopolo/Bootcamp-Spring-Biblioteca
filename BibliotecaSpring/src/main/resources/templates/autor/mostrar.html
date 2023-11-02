@@ -10,7 +10,8 @@
 <body>
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-		<h3>Autores</h3>
+		<h3 class="d-inline p-2">Autores</h3>
+		<img class="d-inline p-2" th:src="@{/img/pluma.png}" th:title="autor">
 		<table class="table table-striped table-responsive-md">
 			<thead>
 				<tr>
@@ -34,10 +35,12 @@
 					<td th:text="${autor.fechaNacimiento}"></td>
 					<td><a th:href="@{'/libros/'+${autor.idautor}}" class="btn btn-info">Ver libros</a>
 						<a sec:authorize="hasRole('ADMIN')" th:href="@{'/admin/updateautor/'+${autor.idautor}}"
-							class="btn btn-primary">Actualizar</a>
+							><img alt=""
+						src="/img/editar.png"></a>
 						<a sec:authorize="hasRole('ADMIN')"
 							th:onclick="return confirm('¿Estás seguro de que deseas eliminar este autor?')"
-							th:href="@{'/admin/deleteautor/'+${autor.idautor}}" class="btn btn-danger">Eliminar</a>
+							th:href="@{'/admin/deleteautor/'+${autor.idautor}}"><img alt=""
+						src="/img/eliminar.png"></a>
 					</td>
 				</tr>
 			</tbody>

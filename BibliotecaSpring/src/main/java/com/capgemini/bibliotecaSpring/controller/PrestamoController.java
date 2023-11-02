@@ -1,5 +1,9 @@
 package com.capgemini.bibliotecaSpring.controller;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,6 +50,7 @@ public class PrestamoController {
 		Copia copia = prestamo.getCopia();
 		copia.setEstado(EstadoCopia.PRESTADO);
 		prestamo.setCopia(copia);
+		prestamo.setFechaInicio(LocalDate.now());
 		prestamoservice.save(prestamo);
 		modelo.addAttribute("lector", lector);
 		return "redirect:/prestamos/" + idlector;
@@ -55,9 +60,10 @@ public class PrestamoController {
 	public String formPrestamo(Model modelo, @PathVariable("idlector") long idlector) {
 		Prestamo prestamo = new Prestamo();
 		Lector lector = lectorservice.getById(idlector);
+		prestamo.setFechaInicio(LocalDate.now());
 		modelo.addAttribute("lector", lector);
 		modelo.addAttribute("prestamo", prestamo);
-		modelo.addAttribute("copias", copiaservice.getAll());
+		modelo.addAttribute("copias",copiaservice.copiaBiblioteca());
 		return "prestamo/addPrestamo";
 	}
 

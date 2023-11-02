@@ -9,3 +9,7 @@ body {
 .container {
     flex: 1;
 }
+
+h3, h2{
+	margin-top: 10px;
+}
