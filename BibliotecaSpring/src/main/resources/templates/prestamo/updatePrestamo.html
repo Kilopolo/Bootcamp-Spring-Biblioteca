@@ -9,9 +9,8 @@
 <body>
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-	<h3>Actuliza Prestamo de: <span style="color: darkblue;" th:text="${lector.nombre}"></span> </h3>
+	<h3>Actualiza Prestamo: <span style="color: darkblue;" th:text="${lector.nombre}"></span> </h3>
 	<form action="#" th:action="@{'/saveprestamo/'+${lector.idlector}}" th:object="${prestamo}" method="post">
-		
 		<p>Fecha inicio
 		<input th:field="*{fechaInicio}" type="date"  class="form-control mb-4 col-4">
 		</p>

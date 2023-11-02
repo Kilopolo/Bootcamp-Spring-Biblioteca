@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.capgemini.bibliotecaSpring.model.Lector;
 import com.capgemini.bibliotecaSpring.model.User;
 import com.capgemini.bibliotecaSpring.service.security.RolesService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
@@ -35,25 +36,16 @@ public class InsertSampleDataService {
 		admin.setPassword(bCryptPasswordEncoder.encode("1234"));
 		admin.setRole(rolesService.getRoles()[1]);
 		usersService.save(admin);
-
+		Lector lector = new Lector("user", "123", "123");
+		lectorService.save(lector);
 		User user = new User();
 		user.setEmail("user@gmail.com");
 		user.setPassword(bCryptPasswordEncoder.encode("1234"));
 		user.setRole(rolesService.getRoles()[0]);
-		user.setLector(lectorService.getById(1));
+		user.setLector(lector);
 		usersService.save(user);
 		
-//		Copia copia= new Copia();
-//		Lector lector= new Lector();
 		
-//		LocalDate fechaAct = LocalDate.now();
-//		Prestamo nuevoPrestamo = new Prestamo();
-//        nuevoPrestamo.setIdprestamo(50l);
-//        nuevoPrestamo.setFechaInicio(fechaAct);
-//        nuevoPrestamo.setFechaFin(fechaAct.plusDays(30));
-//        nuevoPrestamo.setLector(lector);
-//        nuevoPrestamo.setCopia(copia);
-//        prestamoService.save(nuevoPrestamo);
 
 	}
 
