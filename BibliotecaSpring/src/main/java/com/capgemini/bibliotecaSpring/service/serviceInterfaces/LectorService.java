@@ -10,8 +10,16 @@ public interface LectorService extends ServiceS<Lector> {
 
 	public void devolver(long id, LocalDate fechaDevuelto);
 
-	public void prestar(long id, LocalDate fechaAct, Copia copia);
+	/**
+	 * {precondicion: multa == 0}
+	 * 
+	 * @param id
+	 * @param fechaAct
+	 */
 
+
+	public void prestar(long id, LocalDate fechaAct,Copia copia);
+	
 	void multar(long idLector, int diasRetraso);
 
 }

@@ -9,7 +9,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -38,7 +37,6 @@ public class Lector {
 	@OneToOne(mappedBy = "lector", fetch = FetchType.EAGER)
 	private Multa multa;
 	@OneToOne(mappedBy = "lector")
-	@JoinColumn(name = "iduser")
 	private User user;
 
 	public Lector(String nombre, String telefono, String direccion) {

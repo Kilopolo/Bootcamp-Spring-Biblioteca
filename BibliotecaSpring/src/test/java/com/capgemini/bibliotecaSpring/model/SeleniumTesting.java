@@ -79,7 +79,7 @@ public class SeleniumTesting {
 		}
 
 	}
-
+	
 	public static void espera(int tiempo) {
 		try {
 			Thread.sleep(tiempo);
@@ -96,6 +96,10 @@ public class SeleniumTesting {
 	public static void logInAsAdmin() {
 		logIn("admin@gmail.com", "1234");
 
+	}
+	
+	public static void logout() {
+		driver.findElement(By.id("logout")).click();
 	}
 
 	public static void logout() {

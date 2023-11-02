@@ -12,6 +12,20 @@ import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
 @Service
 public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> implements LectorService {
 
+	private final int MAX_LIBROS = 3;
+	private static final int DIAS_MULTA = 0;
+	private static final int MAX_COPIAS = 3;
+	@Autowired
+	public LectorRepositorio lectorrepo;
+	@Autowired
+	public MultaRepositorio multarepo;
+	@Autowired
+	public PrestamoRepositorio prestamorepo;
+	@Autowired
+	public PrestamoService prestamoservice;
+	@Autowired
+	public CopiaRepositorio copiarepo;
+
 	@Override
 	public void devolver(long id, LocalDate fechaDevuelto) {
 		// TODO Auto-generated method stub
