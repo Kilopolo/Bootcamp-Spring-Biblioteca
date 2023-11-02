@@ -1,4 +1,4 @@
-package com.capgemini.bibliotecaSpring.model.Backend;
+package com.capgemini.bibliotecaSpring.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

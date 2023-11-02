@@ -61,23 +61,6 @@ public class UsersController {
 
 	// GESTION DE LOGIN/REGISTRO
 
-	/*
-	 * @RequestMapping(value = "/signup", method = RequestMethod.POST) public String
-	 * signup(@ModelAttribute @Validated User user, BindingResult result) {
-	 * 
-	 * // TODO validar datos // signUpFormValidator.validate(user, result); // if
-	 * (result.hasErrors()) { // return "signup"; // } Lector l = new
-	 * Lector("no-name", "no-phone", "no-direction"); lectorservice.save(l); Lector
-	 * last = lectorservice.getAll().getLast(); // Asigno rol usuario
-	 * user.setRole(rolesService.getRoles()[0]); user.setLector(last);
-	 * 
-	 * usersServiceImpl.addUser(user);
-	 * 
-	 * System.out.println("" + l.toString());
-	 * securityService.autoLogin(user.getEmail(), user.getPasswordConfirm()); //
-	 * securityService.autoLogin(user.getEmail(), user.getPasswordConfirm()); return
-	 * "redirect:/login"; }
-	 */
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public String signup(@ModelAttribute @Validated User user, BindingResult result) {
 
@@ -86,7 +69,7 @@ public class UsersController {
 //		if (result.hasErrors()) {
 //			return "signup";
 //		}
-		Lector lector= user.getLector();
+		Lector lector = user.getLector();
 		lectorservice.save(lector);
 		// Asigno rol usuario
 		user.setRole(rolesService.getRoles()[0]);
@@ -99,7 +82,6 @@ public class UsersController {
 //		securityService.autoLogin(user.getEmail(), user.getPasswordConfirm());
 		return "redirect:/login";
 	}
-	
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signup(Model model) {

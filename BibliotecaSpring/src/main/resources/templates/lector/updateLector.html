@@ -14,12 +14,14 @@
 		<h3>Actualizar Socio: <span style="color: darkblue;" th:text="${user.lector.nombre}"> </span></h3>
 
 		<form class="form-horizontal" method="post" action="/signup" th:object="${user}">
-			<input th:field="*{lector.nombre}" type="text" placeholder="Escriba el nombre"
-				class="form-control mb-4 col.4">
-			<input th:field="*{lector.telefono}" type="text" placeholder="Escriba el telefono"
-				class="form-control mb-4 col.4">
-			<input th:field="*{lector.direccion}" type="text" placeholder="Escriba la dirección "
-				class="form-control mb-4 col.4">
+			<div class="form-group">
+				<input th:field="*{lector.nombre}" type="text" placeholder="Escriba el nombre"
+					class="form-control mb-4 col.4">
+				<input th:field="*{lector.telefono}" type="text" placeholder="Escriba el telefono"
+					class="form-control mb-4 col.4">
+				<input th:field="*{lector.direccion}" type="text" placeholder="Escriba la dirección "
+					class="form-control mb-4 col.4">
+			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="email" th:text="#{email.message}"></label>
 				<div class="col-sm-10">
@@ -50,6 +52,7 @@
 		<hr>
 		<a th:href="@{/admin/lectores}">Volver</a>
 	</div>
+	<div style="margin: 5px; padding: 5px;"></div>
 	<footer th:replace="fragments/footer" />
 </body>
 

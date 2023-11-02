@@ -27,27 +27,26 @@ import com.capgemini.bibliotecaSpring.repositorio.PrestamoRepositorio;
 import com.capgemini.bibliotecaSpring.service.serviceImpl.LectorServiceImpl;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
 
-
 @ExtendWith(MockitoExtension.class)
 class TestLogicaLector {
-	
+
 	@Mock
-    private MultaRepositorio multaRepositorio;
+	private MultaRepositorio multaRepositorio;
 
-	 @Mock
-	    private LectorRepositorio lectorRepositorio;
+	@Mock
+	private LectorRepositorio lectorRepositorio;
 
-    @Mock
-    private PrestamoRepositorio prestamoRepositorio;
+	@Mock
+	private PrestamoRepositorio prestamoRepositorio;
 
-    @Mock
-    private PrestamoService prestamoService;
+	@Mock
+	private PrestamoService prestamoService;
 
-    @Mock
-    private CopiaRepositorio copiaRepositorio;
+	@Mock
+	private CopiaRepositorio copiaRepositorio;
 
-    @InjectMocks
-    private LectorServiceImpl lectorService;
+	@InjectMocks
+	private LectorServiceImpl lectorService;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -65,44 +64,39 @@ class TestLogicaLector {
 	void tearDown() throws Exception {
 	}
 
-	 
-	 
-	 @Test
-	    public void testPrestar() {
-	        Lector lector = new Lector();
-	        lector.setIdlector(1l); 
+	@Test
+	public void testPrestar() {
+		Lector lector = new Lector();
+		lector.setIdlector(1l);
 
-	        Copia copia = new Copia();
-	        copia.setIdcopia(44l);
-	        copia.setEstado(EstadoCopia.BIBLIOTECA); 
+		Copia copia = new Copia();
+		copia.setIdcopia(44l);
+		copia.setEstado(EstadoCopia.BIBLIOTECA);
 
-	        when(lectorRepositorio.findById(1l)).thenReturn(Optional.of(lector));
-	        when(copiaRepositorio.save(copia)).thenReturn(copia);
-	       
+		when(lectorRepositorio.findById(1l)).thenReturn(Optional.of(lector));
+		when(copiaRepositorio.save(copia)).thenReturn(copia);
 
-	        LocalDate fechaActual = LocalDate.now(); 
-	        lectorService.prestar(1l, fechaActual, copia);
+		LocalDate fechaActual = LocalDate.now();
+		lectorService.prestar(1l, fechaActual, copia);
 
-	        
-	        assertEquals(EstadoCopia.PRESTADO, copia.getEstado()); 
-	        System.out.println(copia);
-	    }
-	 
-	 @Test
-	    void testMultar() {
-	        Lector lector = new Lector(); // Crear objeto Lector para la prueba
-	        int diasRetraso = 5; // Establecer días de retraso
+		assertEquals(EstadoCopia.PRESTADO, copia.getEstado());
+		System.out.println(copia);
+	}
 
-	        // Simular el comportamiento del repositorio y el objeto Lector
-	        when(lectorRepositorio.findById(1L)).thenReturn(Optional.of(lector));
-	        // Simular el resto de operaciones necesarias para el método multar
+	@Test
+	void testMultar() {
+		Lector lector = new Lector(); // Crear objeto Lector para la prueba
+		int diasRetraso = 5; // Establecer días de retraso
 
-	        // Llamar al método multar
-	        lectorService.multar(1L, diasRetraso);
+		// Simular el comportamiento del repositorio y el objeto Lector
+		when(lectorRepositorio.findById(1L)).thenReturn(Optional.of(lector));
+		// Simular el resto de operaciones necesarias para el método multar
 
-	        // Verificar si el lector ha sido multado
-	        assertNotNull(lector.getMulta()); // Ejemplo de aserción, ajustar según tu lógica
-	    }
+		// Llamar al método multar
+		lectorService.multar(1L, diasRetraso);
 
-	 
+		// Verificar si el lector ha sido multado
+		assertNotNull(lector.getMulta()); // Ejemplo de aserción, ajustar según tu lógica
+	}
+
 }
