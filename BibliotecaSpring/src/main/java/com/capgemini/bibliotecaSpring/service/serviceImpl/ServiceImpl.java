@@ -12,20 +12,19 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.capgemini.bibliotecaSpring.service.ServiceS;
 
-
-public abstract class ServiceImpl<S,T> implements ServiceS<T> {
+public abstract class ServiceImpl<S, T> implements ServiceS<T> {
 
 	@Autowired
 	S repo;
-	
+
 	public ServiceImpl() {
 		super();
 	}
 
 	@Override
 	public T getById(long id) {
-		
-		Optional<T> opt = ((JpaRepository<T,Long>) repo).findById(id);
+
+		Optional<T> opt = ((JpaRepository<T, Long>) repo).findById(id);
 		T o = null;
 		if (opt.isPresent()) {
 			o = opt.get();
@@ -37,33 +36,31 @@ public abstract class ServiceImpl<S,T> implements ServiceS<T> {
 
 	@Override
 	public List<T> getAll() {
-		return ((JpaRepository<T,Long>) repo).findAll();
-	
+		return ((JpaRepository<T, Long>) repo).findAll();
+
 	}
 
 	@Override
 	public void save(T c) {
-		((JpaRepository<T,Long>) repo).save(c);
-	
+		((JpaRepository<T, Long>) repo).save(c);
+
 	}
 
 	@Override
 	public void deleteById(long id) {
-		((JpaRepository<T,Long>) repo).deleteById(id);
-	
+		((JpaRepository<T, Long>) repo).deleteById(id);
+
 	}
 
 	@Override
-	public Page<T> findPaginated(int pageNum, int pageSize, 
-			String sortField, String sortDirection) {
-		// if reducido --> variable = logica ? true : false 
-		Sort sort=sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name())?
-				    Sort.by(sortField).ascending():
-					Sort.by(sortField).descending();
-					
-		Pageable pageable=PageRequest.of(pageNum -1, pageSize, sort);
-		
-		return ((JpaRepository<T,Long>) repo).findAll(pageable);
+	public Page<T> findPaginated(int pageNum, int pageSize, String sortField, String sortDirection) {
+		// if reducido --> variable = logica ? true : false
+		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending()
+				: Sort.by(sortField).descending();
+
+		Pageable pageable = PageRequest.of(pageNum - 1, pageSize, sort);
+
+		return ((JpaRepository<T, Long>) repo).findAll(pageable);
 	}
 
 }

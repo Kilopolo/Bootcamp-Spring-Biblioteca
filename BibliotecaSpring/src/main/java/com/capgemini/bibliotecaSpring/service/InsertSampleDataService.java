@@ -18,30 +18,29 @@ public class InsertSampleDataService {
 
 	@Autowired
 	private RolesService rolesService;
-	
+
 	@Autowired
 	private LectorService lectorService;
 	@Autowired
 	private PasswordEncoder bCryptPasswordEncoder;
-	
+
 	@PostConstruct
 	public void init() {
 
-	
+		/** al parecer si que funciona **/
 		User admin = new User();
 		admin.setEmail("admin@gmail.com");
 		admin.setPassword(bCryptPasswordEncoder.encode("1234"));
 		admin.setRole(rolesService.getRoles()[1]);
 		usersService.save(admin);
-		
+
 		User user = new User();
 		user.setEmail("user@gmail.com");
 		user.setPassword(bCryptPasswordEncoder.encode("1234"));
 		user.setRole(rolesService.getRoles()[0]);
 		user.setLector(lectorService.getById(1));
 		usersService.save(user);
-		
-	}
 
+	}
 
 }

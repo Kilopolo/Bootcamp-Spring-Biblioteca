@@ -8,12 +8,9 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -64,13 +61,16 @@ public class WebSecurityConfig {
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().requestMatchers("/admin/**").hasRole("ADMIN")
-		.requestMatchers("/user/**").hasRole("USER")
+				.requestMatchers("/user/**").hasRole("USER")
 //		.requestMatchers("/**").hasRole("USER")
 //		.requestMatchers("/**/**").hasRole("USER")
 				.requestMatchers("/anonymous*").anonymous().requestMatchers("/login*").permitAll();
 		http.authorizeRequests(auth -> auth
 				.requestMatchers("/css/**", "/img/**", "/script/**", "/login/**", "/failure-login/**").permitAll())
-				.formLogin((form) -> form.loginPage("/login").permitAll());
+				.formLogin(
+						(form) -> form.loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/home", true)
+								// ... other configuration
+								.permitAll());
 
 //                .requestMatchers("/user/list").hasAuthority("ADMIN")
 //                .requestMatchers("/autor/**").hasAuthority("ADMIN")
@@ -123,6 +123,16 @@ public class WebSecurityConfig {
 //		return new InMemoryUserDetailsManager(user1, admin);
 //	}
 
+	/*
+	 * @Bean public InMemoryUserDetailsManager userDetailsService() { UserDetails
+	 * user1 =
+	 * User.withUsername("david").password(encoder().encode("1234")).roles("USER")
+	 * .build();
+	 * 
+	 * UserDetails admin =
+	 * User.withUsername("admindavid").password(encoder().encode("1234")).roles(
+	 * "ADMIN") .build(); return new InMemoryUserDetailsManager(user1, admin); }
+	 */
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();

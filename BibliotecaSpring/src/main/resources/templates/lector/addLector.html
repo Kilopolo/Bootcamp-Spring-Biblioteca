@@ -2,14 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+
 	<head th:replace="fragments/head" />
 	<title>Add Lector</title>
-	
+
 </head>
 
 <body>
 
 	<nav th:replace="fragments/nav" />
+	<div class="container">
 		<h3>Nuevo Socio</h3>
 
 		<form action="#" th:action="@{/savelector}" th:object="${lector}" method="post">
@@ -19,7 +21,9 @@
 				class="form-control mb-4 col.4">
 			<button type="submit" class="btn btn-info col-2">Guardar socio</button>
 		</form>
-		<a th:href="@{/}">Volver</a>
+		<hr>
+		<a th:href="@{/admin/lectores}">Volver</a>
+	</div>
 	<footer th:replace="fragments/footer" />
 </body>
 

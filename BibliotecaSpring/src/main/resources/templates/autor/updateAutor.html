@@ -8,9 +8,8 @@
 
 <body>
 	<nav th:replace="fragments/nav" />
-	<h3>Autor: <span th:text="${autor.nombre}"> </span></h3>
-	<h3>Nacionalidad: <span th:text="${autor.nacionalidad}"></span> </h3>
-	<h3>fecha nacimiento: <span th:text="${autor.fechaNacimiento}"></span> </h3>
+	<div class="container">
+	<h3>Actualizar Autor: <span style="color: darkblue;" th:text="${autor.nombre}"> </span></h3>
 	<form action="#" th:action="@{/saveautor}" th:object="${autor}" method="post">
 		<input th:field="*{nombre}" type="text" placeholder="Nombre" class="form-control mb-4 col-4">
 		<input th:field="*{Nacionalidad}" type="text" placeholder="Nacionalidad" class="form-control mb-4 col-4">
@@ -21,7 +20,8 @@
 		<button type="submit" class="btn btn-info col-2">Guardar autor</button>
 	</form>
 	<hr>
-	<a th:href="@{/autores}">Volver</a>
+	<a class="text-center my-2" th:href="@{/autores}">Volver</a>
+	</div>
 	<footer th:replace="fragments/footer" />
 </body>
 

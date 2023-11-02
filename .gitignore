@@ -1,15 +1,20 @@
 
-BibliotecaSpring/target/*
-BibliotecaSpring/target/*.*
-
-
-
-BibliotecaSpring/pom.xml
 *.class
 BibliotecaSpring/.factorypath
 BibliotecaSpring/.classpath
 *.jar
 BibliotecaSpring/.project
 *.prefs
+
+
+BibliotecaSpring/target/*
+BibliotecaSpring/target/*.*
 BibliotecaSpring/target/classes/static/img/Error Hibernate_ Objeto no guardado_files/*
 BibliotecaSpring/target/classes/chromedriver/chromedriver.exe
+BibliotecaSpring/target/*
+BibliotecaSpring/target/*/*
+BibliotecaSpring/target/*/*/*
+BibliotecaSpring/target/classes/application.properties
+BibliotecaSpring/target/classes/application.properties
+BibliotecaSpring/src/main/resources/application.properties
+BibliotecaSpring/target/classes/application.properties

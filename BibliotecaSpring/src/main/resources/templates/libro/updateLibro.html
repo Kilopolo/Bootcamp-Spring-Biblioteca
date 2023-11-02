@@ -8,8 +8,8 @@
 
 <body>
 	<nav th:replace="fragments/nav" />
-	<h3>Libro: <span th:text="${libro.titulo}"> </span></h3>
-	<h3> Autor: <span th:text="${autor.nombre}"></span> </h3>
+	<div class="container">
+	<h3>Libro: <span style="color: darkblue;" th:text="${libro.titulo}"> </span> Autor: <span  style="color: darkblue;" th:text="${autor.nombre}"></h3>
 	<form action="#" th:action="@{'/savelibro/'+${autor.idautor}}" th:object="${libro}" method="post">
 		<input th:field="*{titulo}" type="text" placeholder="Título" class="form-control mb-4 col-4">
 		<input th:field="*{editorial}" type="text" placeholder="Editorial" class="form-control mb-4 col-4">
@@ -29,6 +29,7 @@
 	</form>
 	<hr>
 	<a th:href="@{'/libros/'+${autor.idautor}}">Volver</a>
+	</div>
 	<footer th:replace="fragments/footer" />
 </body>
 

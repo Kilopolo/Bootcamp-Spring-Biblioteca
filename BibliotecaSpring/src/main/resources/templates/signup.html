@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
 	<head th:replace="fragments/head" />
-	<title>BibliotecA</title>
+	<title>Sign up</title>
+	
+</head>
 <body>
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-		<h2 th:text="#{signup.message}"></h2>
+		<h2 style="text-align:center ;" th:text="#{signup.message}"></h2>
 		<form class="form-horizontal" method="post" action="/signup"
 			th:object="${user}">
-
+			<input th:field="*{lector.nombre}" type="text" placeholder="Escriba el nombre" class="form-control mb-4 col.4">
+			<input th:field="*{lector.telefono}" type="text" placeholder="Escriba el telefono" class="form-control mb-4 col.4">
+			<input th:field="*{lector.direccion}" type="text" placeholder="Escriba la dirección "
+				class="form-control mb-4 col.4">
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="email"
 					th:text="#{email.message}"></label>

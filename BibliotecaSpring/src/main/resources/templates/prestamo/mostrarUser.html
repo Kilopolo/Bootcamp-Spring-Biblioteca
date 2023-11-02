@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<head th:replace="fragments/head" />
+	<title>Mostrar prestamos</title>
+</head>
+
+<body>
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<table class="table table-striped table-responsive-md">
+			<h3>Prestamos Socio <span  style="color: darkblue;" th:text="${lector.nombre}"></span> </h3>
+			<thead>
+				<tr>
+					<th>Fecha incio</th>
+					<th>Fecha Fin</th>
+					<th>Copia</th>
+					<th>Estado</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="prestamo:${prestamos}">
+					<td th:text="${prestamo.fechaInicio}"></td>
+					<td th:text="${prestamo.fechaFin}"></td>
+					<td th:text="${prestamo.copia.libro.titulo}"></td>
+					<td th:text="${prestamo.copia.estado}"></td>
+					<td><a th:href="@{'/updateprestamo/'+${prestamo.idprestamo}}" class="btn btn-primary">Actualizar</a>
+						<a th:onclick="return confirm('¿Estás seguro de que deseas eliminar este prestamo?')"
+							th:href="@{'/deleteprestamo/'+${prestamo.idprestamo}}" class="btn btn-danger">Eliminar</a>
+					</td>
+				</tr>
+				<tr th:if="${#lists.isEmpty(prestamos)}">
+					<td colspan="5" style="color: red; text-align: center;font-weight: bold;">No hay prestamos</td>
+				</tr>
+				<tr th:if="${!#lists.isEmpty(prestamos)}">
+					<th colspan="3" style="text-align: center;font-weight: bold;">Total:
+					</th>
+					<td colspan="2" th:text="${prestamos.size()}" style="color: green;font-weight: bold;"></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="text-center my-2">
+			<a th:href="@{/addreserva}" class="btn btn-success mr-2">Add reserva</a>
+			<a class="btn btn-secondary" th:href="@{/lectores}">Volver</a>
+		</div>
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+
+</html>
