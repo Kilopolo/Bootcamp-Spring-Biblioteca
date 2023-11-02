@@ -87,53 +87,59 @@ class TestLogicaLector {
 //	        System.out.println(copia);
 //	    }
 	 
+//	 @Test
+//	 void testMultar() {
+//		 Multa multa = new Multa(40l,LocalDate.now(),LocalDate.now().plusDays(10),null);
+//		 User user=new User(33l,"ppe@gemeil.com","sextime","sextime","USER",false,null);
+//		 Lector lector = new Lector();
+//		 
+//		    lector.setIdlector(20L);
+//		    lector.setNombre("juanpedro");
+//		    lector.setTelefono("657757665");
+//		    lector.setDireccion("calle falsa");
+//		    lector.setPrestamosLector(new ArrayList<Prestamo>());
+//		    lector.setMulta(multa);
+//		    lector.setUser(user);
+//		    multa.setLector(lector);
+//		    user.setLector(lector);
+//
+//		    // Simular préstamos con retraso
+//		    Prestamo prestamo1 = new Prestamo();
+//		    prestamo1.setFechaFin(LocalDate.now().minusDays(7)); 
+//		    prestamo1.setIdprestamo(1l);
+//		    Prestamo prestamo2 = new Prestamo();
+//		    prestamo2.setIdprestamo(2l);
+//		    prestamo2.setFechaFin(LocalDate.now().minusDays(5)); 
+//		    Prestamo prestamo3 = new Prestamo();
+//		    prestamo3.setIdprestamo(3l);
+//		    prestamo3.setFechaFin(LocalDate.now().minusDays(3)); 
+//		    Prestamo prestamo4 = new Prestamo();
+//		    prestamo4.setIdprestamo(4l);
+//		    prestamo4.setFechaFin(LocalDate.now().minusDays(2)); 
+//		    
+//		    List<Prestamo> prestamos = new ArrayList<>();
+//		    prestamos.add(prestamo1);
+//		    prestamos.add(prestamo2);
+//		    prestamos.add(prestamo3);
+//		    prestamos.add(prestamo4);
+//		    lector.setPrestamosLector(prestamos);
+//
+//		    when(lectorRepositorio.findById(1L)).thenReturn(Optional.of(lector));
+//
+//		    int diasRetraso = 5;
+//		    lectorService.multar(1L, diasRetraso);
+//
+//		    // Verificar si se ha generado la multa
+//		    assertNotNull(lector.getMulta());
+//		    System.out.println("Multa generada: " + lector.getMulta());
+//		    System.out.println("Días de multa: " + diasRetraso);
+//		}
+
 	 @Test
-	 void testMultar() {
-		 Multa multa = new Multa(40l,LocalDate.now(),LocalDate.now().plusDays(10),null);
-		 User user=new User(33l,"ppe@gemeil.com","sextime","sextime","USER",false,null);
-		 Lector lector = new Lector();
-		 
-		    lector.setIdlector(20L);
-		    lector.setNombre("juanpedro");
-		    lector.setTelefono("657757665");
-		    lector.setDireccion("calle falsa");
-		    lector.setPrestamosLector(new ArrayList<Prestamo>());
-		    lector.setMulta(multa);
-		    lector.setUser(user);
-		    multa.setLector(lector);
-		    user.setLector(lector);
-
-		    // Simular préstamos con retraso
-		    Prestamo prestamo1 = new Prestamo();
-		    prestamo1.setFechaFin(LocalDate.now().minusDays(7)); 
-		    prestamo1.setIdprestamo(1l);
-		    Prestamo prestamo2 = new Prestamo();
-		    prestamo2.setIdprestamo(2l);
-		    prestamo2.setFechaFin(LocalDate.now().minusDays(5)); 
-		    Prestamo prestamo3 = new Prestamo();
-		    prestamo3.setIdprestamo(3l);
-		    prestamo3.setFechaFin(LocalDate.now().minusDays(3)); 
-		    Prestamo prestamo4 = new Prestamo();
-		    prestamo4.setIdprestamo(4l);
-		    prestamo4.setFechaFin(LocalDate.now().minusDays(2)); 
-		    
-		    List<Prestamo> prestamos = new ArrayList<>();
-		    prestamos.add(prestamo1);
-		    prestamos.add(prestamo2);
-		    prestamos.add(prestamo3);
-		    prestamos.add(prestamo4);
-		    lector.setPrestamosLector(prestamos);
-
-		    when(lectorRepositorio.findById(1L)).thenReturn(Optional.of(lector));
-
-		    int diasRetraso = 5;
-		    lectorService.multar(1L, diasRetraso);
-
-		    // Verificar si se ha generado la multa
-		    assertNotNull(lector.getMulta());
-		    System.out.println("Multa generada: " + lector.getMulta());
-		    System.out.println("Días de multa: " + diasRetraso);
-		}
-
+	 void testPrestamoById() {
+		 Long nSocio = 2L; 
+	        List<Prestamo> prestamos = lectorRepositorio.findPrestamosByNSocioAndEstadoBiblioteca(nSocio);
+	        assertEquals(1, prestamos.size()); 
+	    }
 	 
 }

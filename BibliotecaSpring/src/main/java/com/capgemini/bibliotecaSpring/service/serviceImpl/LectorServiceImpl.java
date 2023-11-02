@@ -27,8 +27,9 @@ import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
 @Service
 public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> implements LectorService {
 
-	private static final int DIAS_MULTA = 0;
-	private static final int MAX_COPIAS = 3;
+	
+	private static final int MULTA_POR_DIA_DE_RETRASO = 2;
+    private static final int MAX_LIBROS_PRESTADOS = 3;
 	@Autowired
 	public LectorRepositorio lectorrepo;
 	@Autowired
@@ -43,6 +44,15 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 	public LectorService lectorservice;
 	@Autowired
 	public CopiaRepositorio copiarepo;
+	
+	@Autowired
+    public LectorServiceImpl(LectorRepositorio lectorrepo) {
+        this.lectorrepo = lectorrepo;
+    }
+	
+	public List<Prestamo> obtenerPrestamosPorNSocio(Long nSocio) {
+        return lectorrepo.findPrestamosByNSocioAndEstadoBiblioteca(nSocio);
+    }
 
 	@Override
 	public void devolver(long id, LocalDate fechaDevuelto) {
@@ -117,40 +127,25 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 
 	@Override
 	public void multar(long idLector, int diasRetraso) {
-		int numLibrosPrestados=0;
-	    if (diasRetraso > 0) {
-	        Optional<Lector> lector = lectorrepo.findById(idLector);
-	        if (lector.isPresent()) {
-	        	Lector l=lector.get();
-	        	System.out.println(l);
-	        	if(l.getPrestamosLector() != null)
-	        		numLibrosPrestados = l.getPrestamosLector().size();
-	        	
-	            if (numLibrosPrestados >= MAX_COPIAS) {
+		 Optional<Lector> lectorOptional = lectorrepo.findById(idLector);
+
+	        if (lectorOptional.isPresent()) {
+	            Lector lector = lectorOptional.get();
+	            List<Prestamo> prestamos = lector.getPrestamosLector();  //ultimo de los prestados "DEVUELTO" el ultimo
+
+	            int numLibrosPrestados = (prestamos != null) ? prestamos.size() : 0;
+
+	            if (numLibrosPrestados >= MAX_LIBROS_PRESTADOS && diasRetraso > 0) {
 	                LocalDate fechaInicio = LocalDate.now();
-	                LocalDate fechaFinMulta = fechaInicio.plusDays(diasRetraso*2);
-	                System.out.println("Estoy creando multa");
-	                Multa multa = new Multa();
-	                multa.setFInicio(fechaInicio);
-	                multa.setIdmulta(1l);
-	                multa.setFFin(fechaFinMulta);
-	                multa.setLector(l);
-	                System.out.println("he creando multa");
-	                lectorservice.save(l);
-	                System.out.println(lectorservice.getById(20l));
-	                System.out.println(multa);
-	                l.setMulta(multa);
-	                multarepo.save(multa);
-	                System.out.println("he guardado multa");
-	                
-//	                System.out.println(multarepo.findAll());
-//	                System.out.println(multaService.getAll());
-//	                System.out.println(multaService.getById(1l));
-	                System.out.println(l);
-	                
+	                LocalDate fechaFinMulta = fechaInicio.plusDays(diasRetraso * MULTA_POR_DIA_DE_RETRASO);
+
+	                lector.setMulta(new Multa(1L, fechaInicio, fechaFinMulta, lector)); // Suponiendo que existe una clase Multa
+
+	                lectorrepo.save(lector);
 	            }
-	        }System.out.println("pasando de crear multa");
+	        } else {
+	            throw new LectorNotFoundException(idLector);
+	        }
 	    }
-	}
 
 }
