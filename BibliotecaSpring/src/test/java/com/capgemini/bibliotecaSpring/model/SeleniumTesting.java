@@ -4,14 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.io.File;
-import java.time.Duration;
 import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 public class SeleniumTesting {
@@ -81,7 +79,7 @@ public class SeleniumTesting {
 		}
 
 	}
-	
+
 	public static void espera(int tiempo) {
 		try {
 			Thread.sleep(tiempo);
@@ -99,7 +97,7 @@ public class SeleniumTesting {
 		logIn("admin@gmail.com", "1234");
 
 	}
-	
+
 	public static void logout() {
 		driver.findElement(By.id("logout")).click();
 	}

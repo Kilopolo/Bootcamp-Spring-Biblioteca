@@ -38,7 +38,7 @@ public class Lector {
 	@OneToOne(mappedBy = "lector", fetch = FetchType.EAGER)
 	private Multa multa;
 	@OneToOne(mappedBy = "lector")
-	@JoinColumn(name="iduser")
+	@JoinColumn(name = "iduser")
 	private User user;
 
 	public Lector(String nombre, String telefono, String direccion) {

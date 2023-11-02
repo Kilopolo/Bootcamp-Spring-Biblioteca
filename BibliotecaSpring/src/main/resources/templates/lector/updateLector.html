@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+
 	<head th:replace="fragments/head" />
 	<title>Update Lector</title>
 </head>
@@ -10,14 +11,40 @@
 
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-		<h3>Actualizar Socio: <span style="color: darkblue;" th:text="${lector.nombre}"> </span></h3>
+		<h3>Actualizar Socio: <span style="color: darkblue;" th:text="${user.lector.nombre}"> </span></h3>
 
-		<form action="#" th:action="@{/savelector}" th:object="${lector}" method="post">
-			<input th:field="*{nombre}" type="text" placeholder="Escriba el nombre" class="form-control mb-4 col.4">
-			<input th:field="*{telefono}" type="text" placeholder="Escriba el telefono" class="form-control mb-4 col.4">
-			<input th:field="*{direccion}" type="text" placeholder="Escriba la dirección "
+		<form class="form-horizontal" method="post" action="/signup" th:object="${user}">
+			<input th:field="*{lector.nombre}" type="text" placeholder="Escriba el nombre"
 				class="form-control mb-4 col.4">
-			<input th:field="*{idlector}" type="hidden">
+			<input th:field="*{lector.telefono}" type="text" placeholder="Escriba el telefono"
+				class="form-control mb-4 col.4">
+			<input th:field="*{lector.direccion}" type="text" placeholder="Escriba la dirección "
+				class="form-control mb-4 col.4">
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="email" th:text="#{email.message}"></label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="email" placeholder="example@example.com"
+						required="true" /><span class="text-danger" th:if="${#fields.hasErrors('email')}"
+						th:errors="*{email}"></span>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="password" th:text="#{password.message}"></label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" name="password" required='true' />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="passwordConfirm" th:text="#{repeat.message}"></label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" required='true' name="passwordConfirm" /><span
+						class="text-danger" th:if="${#fields.hasErrors('passwordConfirm')}"
+						th:errors="*{passwordConfirm}"></span>
+
+				</div>
+			</div>
+			<input th:field="*{id}" type="hidden">
 			<button type="submit" class="btn btn-info col-2">Guardar socio</button>
 		</form>
 		<hr>

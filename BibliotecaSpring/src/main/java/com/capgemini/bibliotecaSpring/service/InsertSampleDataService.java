@@ -27,7 +27,7 @@ public class InsertSampleDataService {
 	@PostConstruct
 	public void init() {
 
-		/**al parecer si que funciona**/
+		/** al parecer si que funciona **/
 		User admin = new User();
 		admin.setEmail("admin@gmail.com");
 		admin.setPassword(bCryptPasswordEncoder.encode("1234"));

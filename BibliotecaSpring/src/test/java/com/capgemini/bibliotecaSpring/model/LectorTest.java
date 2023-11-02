@@ -5,7 +5,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
@@ -17,13 +16,12 @@ class LectorTest {
 	static void setUpBeforeClass() throws Exception {
 		SeleniumTesting.setUpBeforeClass();
 
-		
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		SeleniumTesting.tearDownAfterClass();
-		
+
 	}
 
 	@BeforeEach
@@ -45,7 +43,7 @@ class LectorTest {
 //		} catch (InterruptedException e) {
 //			e.printStackTrace();
 //		}
-		
+
 	}
 
 //	@Test

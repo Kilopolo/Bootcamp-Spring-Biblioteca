@@ -15,11 +15,13 @@ import com.capgemini.bibliotecaSpring.model.Copia;
 import com.capgemini.bibliotecaSpring.model.Lector;
 import com.capgemini.bibliotecaSpring.model.Libro;
 import com.capgemini.bibliotecaSpring.model.Prestamo;
+import com.capgemini.bibliotecaSpring.model.User;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.AutorService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.CopiaService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LibroService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.UserService;
 
 @Controller
 @RequestMapping({ "/admin", "/" })
@@ -35,6 +37,8 @@ public class Controlador {
 	CopiaService copiaservice;
 	@Autowired
 	PrestamoService prestamoservice;
+	@Autowired
+	UserService userservice;
 
 	@GetMapping("/")
 	public String index() {
@@ -129,33 +133,22 @@ public class Controlador {
 	// LECTORES
 	@GetMapping("/lectores")
 	public String mostrarLectores(Model modelo) {
-		modelo.addAttribute("lectores", lectorservice.getAll());
+		modelo.addAttribute("users", userservice.getAll());
 		return "lector/mostrar";
 	}
 
-	@PostMapping("/savelector")
-	public String saveLector(@ModelAttribute("lector") Lector lector) {
-		lectorservice.save(lector);
-		return "redirect:/lectores";
-	}
+	
 
-	@GetMapping("/addlector")
-	public String formLector(Model modelo) {
-		Lector lector = new Lector();
-		modelo.addAttribute("lector", lector);
-		return "lector/addLector";
-	}
-
-	@GetMapping("/updatelector/{idlector}")
-	public String updateLector(Model modelo, @PathVariable("idlector") long idlector) {
-		Lector lector = lectorservice.getById(idlector);
-		modelo.addAttribute("lector", lector);
+	@GetMapping("/updatelector/{id}")
+	public String updateLector(Model modelo, @PathVariable("id") long id) {
+		User user = userservice.getById(id);
+		modelo.addAttribute("user", user);
 		return "lector/updateLector";
 	}
 
-	@GetMapping("/deletelector/{idlector}")
-	public String deleteLector(@PathVariable("idlector") long idlector, Model modelo) {
-		lectorservice.deleteById(idlector);
+	@GetMapping("/deletelector/{id}")
+	public String deleteLector(@PathVariable("id") long id, Model modelo) {
+		userservicio.deleteById(id);
 		return "redirect:/lectores";
 
 	}
@@ -252,10 +245,5 @@ public class Controlador {
 		return "redirect:/copias/" + libro.getIdlibro();
 
 	}
-<<<<<<< Updated upstream
-=======
-	
-	
->>>>>>> Stashed changes
 
 }
