@@ -40,6 +40,9 @@ class LectorTest {
 	@Test
 	void testVerLectores() {
 		SeleniumTesting.logInAsAdmin();
+		
+		
+		
 //		try {
 //			Thread.sleep(10000);
 //		} catch (InterruptedException e) {
