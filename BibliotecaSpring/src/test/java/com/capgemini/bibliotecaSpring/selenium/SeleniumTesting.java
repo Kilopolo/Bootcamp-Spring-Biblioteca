@@ -12,7 +12,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-
 public class SeleniumTesting {
 	private static String URL = "http://localhost:8080/";
 
@@ -63,10 +62,14 @@ public class SeleniumTesting {
 
 	}
 
-	public static void signIn(String user, String password) {
-		driver.findElement(By.id("login")).click();
-		driver.findElement(By.name("username")).sendKeys(user);
+	public static void signIn(String user, String password, String nombre, String telefono, String direccion) {
+		driver.findElement(By.id("signup")).click();
+		driver.findElement(By.name("lector.nombre")).sendKeys(nombre);
+		driver.findElement(By.name("lector.telefono")).sendKeys(telefono);
+		driver.findElement(By.name("lector.direccion")).sendKeys(direccion);
+		driver.findElement(By.name("email")).sendKeys(user);
 		driver.findElement(By.name("password")).sendKeys(password);
+		driver.findElement(By.name("passwordConfirm")).sendKeys(password);
 		driver.findElement(By.name("submit")).click();
 		WebElement texto;
 		try {
@@ -99,7 +102,7 @@ public class SeleniumTesting {
 
 	}
 
-	public static void logout() {
+	public static void logOut() {
 		driver.findElement(By.id("logout")).click();
 	}
 
