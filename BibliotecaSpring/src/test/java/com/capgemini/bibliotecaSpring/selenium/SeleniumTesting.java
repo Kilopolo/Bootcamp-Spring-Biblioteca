@@ -1,6 +1,7 @@
 package com.capgemini.bibliotecaSpring.selenium;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -66,21 +67,21 @@ public class SeleniumTesting {
 		checkOnHomePage();
 
 	}
-	private static void checkOnLoginPage() {
+
+	public static void checkOnLoginPage() {
 		WebElement texto;
-		try {
+//		try {
 //			espera(10000);
-			texto = driver.findElement(By.id("loginPage"));
-
+		texto = driver.findElement(By.id("loginPage"));
+		assertNotEquals(texto, null);
 //			assertEquals("Esta es la parte privada de la web", texto.getText());
-
-		} catch (NoSuchElementException e) {
-			fail("Usuario no esta en la pagina login");
-		}
+//
+//		} catch (NoSuchElementException e) {
+//			fail("Usuario no esta en la pagina login");
+//		}
 	}
-	
-	
-	private static void checkOnHomePage() {
+
+	public static void checkOnHomePage() {
 		WebElement texto;
 		try {
 //			espera(10000);

@@ -58,6 +58,9 @@ class CommonTests {
 		String usr = "testSignUpAndLogIn@email.com";
 		String pssd = "1234";
 		SeleniumTesting.signIn(usr, pssd, "Nombre", "123456789", "Calle Ejemplo");
+		SeleniumTesting.checkOnLoginPage();
+		SeleniumTesting.logOut();
+		
 		SeleniumTesting.logIn(usr, pssd);
 	}
 
