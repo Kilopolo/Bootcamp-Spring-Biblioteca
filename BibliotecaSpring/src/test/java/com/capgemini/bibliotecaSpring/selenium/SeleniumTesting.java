@@ -1,4 +1,4 @@
-package com.capgemini.bibliotecaSpring.model;
+package com.capgemini.bibliotecaSpring.selenium;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
