@@ -3,6 +3,7 @@ package com.capgemini.bibliotecaSpring.model;
 import java.util.List;
 
 import com.capgemini.bibliotecaSpring.enumerados.EstadoCopia;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -35,9 +36,11 @@ public class Copia {
 	@Enumerated(value = EnumType.STRING)
 	private EstadoCopia estado;
 	@ManyToOne
+	@JsonBackReference
 	@JoinColumn(name = "idlibro")
 	private Libro libro;
 	@OneToMany(mappedBy = "copia", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@JsonBackReference
 	private List<Prestamo> prestamosCopia;
 
 }

@@ -2,6 +2,8 @@ package com.capgemini.bibliotecaSpring.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,6 +41,7 @@ public class Lector {
 	private Multa multa;
 	@OneToOne(mappedBy = "lector")
 	@JoinColumn(name="iduser")
+	@JsonBackReference
 	private User user;
 
 	public Lector(String nombre, String telefono, String direccion) {

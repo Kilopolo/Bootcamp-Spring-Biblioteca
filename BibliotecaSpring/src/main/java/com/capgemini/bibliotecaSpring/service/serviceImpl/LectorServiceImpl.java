@@ -37,6 +37,8 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 	@Autowired
 	public PrestamoService prestamoservice;
 	@Autowired
+	public LectorService lectorservice;
+	@Autowired
 	public CopiaRepositorio copiarepo;
 
 	@Override
@@ -80,12 +82,14 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 
 		        if (isAvailableCopia(copia, lector) && isNotMoroso(lector)) {
 		            copia.setEstado(EstadoCopia.PRESTADO);
+		            
 		            Prestamo nuevoPrestamo = new Prestamo();
 		            nuevoPrestamo.setIdprestamo(50l);
 		            nuevoPrestamo.setFechaInicio(fechaAct);
 		            nuevoPrestamo.setFechaFin(fechaAct.plusDays(30));
 		            nuevoPrestamo.setLector(lector);
 		            nuevoPrestamo.setCopia(copia);
+		            
 		            System.out.println(nuevoPrestamo);
 		            prestamoservice.save(nuevoPrestamo);
 		            System.out.println(prestamoservice.getAll());
