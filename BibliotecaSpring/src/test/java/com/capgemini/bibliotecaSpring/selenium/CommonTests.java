@@ -28,7 +28,7 @@ class CommonTests {
 
 	@AfterEach
 	void tearDown() throws Exception {
-		SeleniumTesting.getDriver().quit();
+		SeleniumTesting.tearDown();
 	}
 
 	@Test
@@ -43,6 +43,7 @@ class CommonTests {
 
 	@Test
 	void testLogOut() {
+		SeleniumTesting.logInAsUser();
 		SeleniumTesting.logOut();
 	}
 
@@ -58,10 +59,10 @@ class CommonTests {
 		String usr = "testSignUpAndLogIn@email.com";
 		String pssd = "1234";
 		SeleniumTesting.signIn(usr, pssd, "Nombre", "123456789", "Calle Ejemplo");
-		SeleniumTesting.checkOnLoginPage();
-		SeleniumTesting.logOut();
-		
+//		SeleniumTesting.checkOnLoginPage();
+				
 		SeleniumTesting.logIn(usr, pssd);
+//		SeleniumTesting.logOut();
 	}
 
 }

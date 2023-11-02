@@ -65,10 +65,10 @@ public class UsersController {
 	public String signup(@ModelAttribute @Validated User user, BindingResult result) {
 
 		// TODO validar datos
-//		signUpFormValidator.validate(user, result);
-//		if (result.hasErrors()) {
-//			return "signup";
-//		}
+		signUpFormValidator.validate(user, result);
+		if (result.hasErrors()) {
+			return "signup";
+		}
 		Lector lector = user.getLector();
 		lectorservice.save(lector);
 		// Asigno rol usuario

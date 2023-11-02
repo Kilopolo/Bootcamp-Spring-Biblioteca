@@ -2,9 +2,12 @@ package com.capgemini.bibliotecaSpring.selenium;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.time.Duration;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
@@ -21,24 +24,25 @@ public class SeleniumTesting {
 
 	public static void setUpBeforeClass() {
 		System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver/chromedriver.exe");
-		ChromeOptions options = new ChromeOptions();
-
-		driver = new ChromeDriver(options);
-//		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		driver.manage().window().maximize();
-		driver.get(URL);
 	}
 
 	public static void tearDownAfterClass() {
-
 		driver.quit();
 
 	}
 
-	public static void setUp() {
+	public static void tearDown() {
+		driver.quit();
+	}
 
-//		driver = new ChromeDriver();
-//		driver.get(URL);
+	public static void setUp() {
+		ChromeOptions options = new ChromeOptions();
+
+		driver = new ChromeDriver(options);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.manage().window().maximize();
+		driver.get(URL);
+
 	}
 
 	public static WebDriver getDriver() {
@@ -54,6 +58,15 @@ public class SeleniumTesting {
 
 	}
 
+	/**
+	 * Vamos a la login page
+	 * 
+	 * @param user
+	 * @param password
+	 * @param nombre
+	 * @param telefono
+	 * @param direccion
+	 */
 	public static void signIn(String user, String password, String nombre, String telefono, String direccion) {
 		driver.findElement(By.id("signup")).click();
 		espera(10000);
@@ -64,21 +77,17 @@ public class SeleniumTesting {
 		driver.findElement(By.name("password")).sendKeys(password);
 		driver.findElement(By.name("passwordConfirm")).sendKeys(password);
 		driver.findElement(By.name("submit")).click();
-		checkOnHomePage();
+		checkOnLoginPage();
 
 	}
 
+//	static WebDriverWait wait = new WebDriverWait(driver,1);
 	public static void checkOnLoginPage() {
 		WebElement texto;
-//		try {
-//			espera(10000);
+		espera(10000);
 		texto = driver.findElement(By.id("loginPage"));
 		assertNotEquals(texto, null);
-//			assertEquals("Esta es la parte privada de la web", texto.getText());
-//
-//		} catch (NoSuchElementException e) {
-//			fail("Usuario no esta en la pagina login");
-//		}
+
 	}
 
 	public static void checkOnHomePage() {
@@ -114,6 +123,13 @@ public class SeleniumTesting {
 
 	public static void logOut() {
 		driver.findElement(By.id("logout")).click();
+	}
+
+	public static void checkNumberOfUsersOnList(WebDriver driver, int expectedSize) {
+		// Contamos el número de filas de notas
+		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", 2);
+//		CUIDADO AL AÑADIR MAS USUARIOS EN PRUEBAS ANTERIORES
+		assertTrue(elementos.size() == expectedSize);
 	}
 
 }
