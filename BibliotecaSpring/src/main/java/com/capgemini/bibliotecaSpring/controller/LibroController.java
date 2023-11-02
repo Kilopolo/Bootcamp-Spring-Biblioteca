@@ -1,6 +1,9 @@
 package com.capgemini.bibliotecaSpring.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.capgemini.bibliotecaSpring.model.Autor;
 import com.capgemini.bibliotecaSpring.model.Libro;
@@ -34,8 +38,7 @@ public class LibroController {
 
 	@GetMapping("/libros")
 	public String mostrarTodoLibros(Model modelo) {
-		modelo.addAttribute("libros", libroservice.getAll());
-		return "libro/mostrarTodos";
+		return findPaginatedLibro(1, "titulo", "asc", modelo);
 	}
 
 	@PostMapping("/savelibro/{idautor}")
@@ -71,6 +74,22 @@ public class LibroController {
 		modelo.addAttribute("autor", libro.getAutor());
 		modelo.addAttribute("libro", libro);
 		return "libro/updateLibro";
+	}
+	
+	// Paginacion
+	@GetMapping("/pagelibro/{pageNo}")
+	public String findPaginatedLibro(@PathVariable (value="pageNo") int pageNo, @RequestParam ("sortField") String sortField,@RequestParam ("sortDir") String sortDir, Model modelo ) {
+		int pageSize= 5;
+		Page<Libro> page = libroservice.findPaginated(pageNo, pageSize, sortField, sortDir);
+		List<Libro> libros= page.getContent();//Ya viene recortada --> slice
+		modelo.addAttribute("sortDir", sortDir);
+		modelo.addAttribute("sortField", sortField);
+		modelo.addAttribute("currentPage", pageNo);
+		modelo.addAttribute("totalPages", page.getTotalPages()); //Total de paginas
+		modelo.addAttribute("totalItems", page.getTotalElements()); //Total de elements por pagina
+		modelo.addAttribute("libros", libros);
+		modelo.addAttribute("reverseSortDir", sortDir.equalsIgnoreCase("asc") ? "desc" : "asc");
+		return "libro/mostrarTodos";
 	}
 
 }
