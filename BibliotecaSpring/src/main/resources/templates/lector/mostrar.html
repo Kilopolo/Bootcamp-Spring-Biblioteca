@@ -29,7 +29,7 @@
 					<td th:text="${user.email}">Email</td>
 					<td>
 						<a th:if="${user.lector != null}" th:href="@{'/prestamos/' + ${user.lector.idlector}}" class="btn btn-info">Ver prestamos</a>
-						<a th:if="${user.lector != null}" th:href="@{'/multas/' + ${user.lector.idlector}}" class="btn btn-warning">Ver multas</a>
+						<a th:if="${user.lector != null}" th:href="@{'/multas/' + ${user.lector.idlector}}" class="btn btn-warning" style="color: whitesmoke;">Ver multas</a>
 						<a th:href="@{'/admin/updatelector/' + ${user.id}}" class="btn btn-primary">Actualizar</a>
 						<a th:onclick="return confirm('¿Estás seguro de que deseas eliminar este socio?')"
 							th:href="@{'/admin/deletelector/' + ${user.id}}" class="btn btn-danger">Eliminar</a>
