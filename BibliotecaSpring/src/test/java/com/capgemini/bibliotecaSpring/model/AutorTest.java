@@ -1,15 +1,14 @@
-package com.capgemini.bibliotecaSpring.model.backend;
+package com.capgemini.bibliotecaSpring.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.capgemini.bibliotecaSpring.model.Autor;
-import com.capgemini.bibliotecaSpring.model.Libro;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.AutorService;
 
 @SpringBootTest
@@ -35,13 +34,13 @@ class AutorTest {
 		assertEquals("Bram Stoker", autor.getNombre());
 	}
 
-//	@Test
-//	void testSave() {
-//		Autor autor = new Autor(10L, "Cervantes", "Española", LocalDate.of(1547, 9, 29), new ArrayList<Libro>());
-//		autorservice.save(autor);
-//		assertEquals("Cervantes", autor.getNombre());
-//		System.out.println("Test 2: " + autorservice.getById(10L).getNombre());
-//	}
+	@Test
+	void testSave() {
+		Autor autor = new Autor(10L, "Cervantes", "Española", LocalDate.of(1547, 9, 29), new ArrayList<Libro>());
+		autorservice.save(autor);
+		assertEquals("Cervantes", autor.getNombre());
+		System.out.println("Test 2: " + autorservice.getById(10L).getNombre());
+	}
 
 	@Test
 	void testDeleteById() {
