@@ -1,7 +1,7 @@
 package com.capgemini.bibliotecaSpring.model.Backend;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -80,15 +80,11 @@ class TestLogicaLector {
 		lectorService.prestar(1l, fechaActual, copia);
 
 		assertEquals(EstadoCopia.PRESTADO, copia.getEstado());
-		System.out.println(copia);
+		System.out.println(copia); 
+	    lectorService.prestar(1l, fechaActual, copia);
+	    assertEquals(EstadoCopia.PRESTADO, copia.getEstado()); 
+	    System.out.println(copia);
 	}
-	        LocalDate fechaActual = LocalDate.now(); 
-	        lectorService.prestar(1l, fechaActual, copia);
-	        
-	        
-	        assertEquals(EstadoCopia.PRESTADO, copia.getEstado()); 
-	        System.out.println(copia);
-	    }
 	 
 	
 	@Test

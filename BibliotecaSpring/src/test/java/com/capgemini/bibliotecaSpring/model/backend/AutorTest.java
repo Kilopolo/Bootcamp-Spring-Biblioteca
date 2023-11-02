@@ -4,11 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.capgemini.bibliotecaSpring.model.Autor;
+import com.capgemini.bibliotecaSpring.model.Libro;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.AutorService;
 
 @SpringBootTest
