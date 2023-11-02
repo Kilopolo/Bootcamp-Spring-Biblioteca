@@ -15,7 +15,6 @@ import com.capgemini.bibliotecaSpring.model.Lector;
 import com.capgemini.bibliotecaSpring.model.Libro;
 import com.capgemini.bibliotecaSpring.model.Multa;
 import com.capgemini.bibliotecaSpring.model.Prestamo;
-import com.capgemini.bibliotecaSpring.model.User;
 import com.capgemini.bibliotecaSpring.repositorio.CopiaRepositorio;
 import com.capgemini.bibliotecaSpring.repositorio.LectorRepositorio;
 import com.capgemini.bibliotecaSpring.repositorio.MultaRepositorio;
@@ -56,73 +55,72 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 
 	@Override
 	public void devolver(long id, LocalDate fechaDevuelto) {
-	    Optional<Lector> lectorOptional = lectorrepo.findById(id);
+		Optional<Lector> lectorOptional = lectorrepo.findById(id);
 
-	    if (lectorOptional.isPresent()) {
-	        Lector lector = lectorOptional.get();
-	        List<Prestamo> prestamos=lector.getPrestamosLector();
-	        Prestamo prestamoADevolver = encontrarPrestamoPorNSocio(prestamos, id);
+		if (lectorOptional.isPresent()) {
+			Lector lector = lectorOptional.get();
+			List<Prestamo> prestamos = lector.getPrestamosLector();
+			Prestamo prestamoADevolver = encontrarPrestamoPorNSocio(prestamos, id);
 
-	        if (prestamoADevolver != null) {
-	            prestamoADevolver.setFechaFin(fechaDevuelto);
-	            prestamos.remove(prestamoADevolver);
-	            lectorrepo.save(lector);
-	            prestamoservice.deleteById(id);
-	        }
-	    } else {
-	    	throw new LectorNotFoundException(id);
-	    }
+			if (prestamoADevolver != null) {
+				prestamoADevolver.setFechaFin(fechaDevuelto);
+				prestamos.remove(prestamoADevolver);
+				lectorrepo.save(lector);
+				prestamoservice.deleteById(id);
+			}
+		} else {
+			throw new LectorNotFoundException(id);
+		}
 	}
 
 	private Prestamo encontrarPrestamoPorNSocio(List<Prestamo> prestamos, Long nSocio) {
-	    for (Prestamo prestamo : prestamos) {
-	        Lector lector = prestamo.getLector();
-	        if (lector != null && lector.getIdlector().equals(nSocio)) {
-	            return prestamo;
-	        }
-	    }
-	    return null;
+		for (Prestamo prestamo : prestamos) {
+			Lector lector = prestamo.getLector();
+			if (lector != null && lector.getIdlector().equals(nSocio)) {
+				return prestamo;
+			}
+		}
+		return null;
 	}
 
-	
 	@Override
-	public void prestar(long id, LocalDate fechaAct,Copia copia) {
-		 Optional<Lector> lectorOptional = lectorrepo.findById(id);
-		    
-		    if (lectorOptional.isPresent()) {
-		        Lector lector = lectorOptional.get();
-		        Libro libro = copia.getLibro();
+	public void prestar(long id, LocalDate fechaAct, Copia copia) {
+		Optional<Lector> lectorOptional = lectorrepo.findById(id);
 
-		        if (isAvailableCopia(copia, lector) && isNotMoroso(lector)) {
-		            copia.setEstado(EstadoCopia.PRESTADO);
-		            
-		            Prestamo nuevoPrestamo = new Prestamo();
-		            nuevoPrestamo.setIdprestamo(50l);
-		            nuevoPrestamo.setFechaInicio(fechaAct);
-		            nuevoPrestamo.setFechaFin(fechaAct.plusDays(30));
-		            nuevoPrestamo.setLector(lector);
-		            nuevoPrestamo.setCopia(copia);
-		            
-		            System.out.println(nuevoPrestamo);
-		            prestamoservice.save(nuevoPrestamo);
-		            System.out.println(prestamoservice.getAll());
-		            copiarepo.save(copia);
-		            //return nuevoPrestamo;
-		        } else {
-		            throw new MaximoLibrosPrestadosException();
-		        }
-		    } else {
-		        throw new LectorNotFoundException(id);
-		    }
+		if (lectorOptional.isPresent()) {
+			Lector lector = lectorOptional.get();
+			Libro libro = copia.getLibro();
+
+			if (isAvailableCopia(copia, lector) && isNotMoroso(lector)) {
+				copia.setEstado(EstadoCopia.PRESTADO);
+
+				Prestamo nuevoPrestamo = new Prestamo();
+				nuevoPrestamo.setIdprestamo(50l);
+				nuevoPrestamo.setFechaInicio(fechaAct);
+				nuevoPrestamo.setFechaFin(fechaAct.plusDays(30));
+				nuevoPrestamo.setLector(lector);
+				nuevoPrestamo.setCopia(copia);
+
+				System.out.println(nuevoPrestamo);
+				prestamoservice.save(nuevoPrestamo);
+				System.out.println(prestamoservice.getAll());
+				copiarepo.save(copia);
+				// return nuevoPrestamo;
+			} else {
+				throw new MaximoLibrosPrestadosException();
+			}
+		} else {
+			throw new LectorNotFoundException(id);
 		}
+	}
 
 	private boolean isAvailableCopia(Copia copia, Lector lector) {
-	    return copia.getEstado() == EstadoCopia.BIBLIOTECA;
+		return copia.getEstado() == EstadoCopia.BIBLIOTECA;
 	}
 
 	private boolean isNotMoroso(Lector lector) {
-	    Multa multa = lector.getMulta();
-	    return multa == null || multa.getFFin() == null || multa.getFFin().isBefore(LocalDate.now());
+		Multa multa = lector.getMulta();
+		return multa == null || multa.getFFin() == null || multa.getFFin().isBefore(LocalDate.now());
 	}
 
 	@Override

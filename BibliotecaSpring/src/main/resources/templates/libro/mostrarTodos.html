@@ -15,12 +15,24 @@
 			<h3>Libros</h3>
 			<thead>
 				<tr>
-					<th>Título</th>
-					<th>Autor</th>
-					<th>Editorial</th>
-					<th>Año</th>
-					<th>Género</th>
-					<th>Total copias</th>
+					<th><a
+							th:href="@{'/pagelibro/' + ${currentPage} + '?sortField=titulo&sortDir=' + ${reverseSortDir}}">Título</a>
+					</th>
+					<th><a
+							th:href="@{'/pagelibro/' + ${currentPage} + '?sortField=autor&sortDir=' + ${reverseSortDir}}">Autor</a>
+					</th>
+					<th><a
+							th:href="@{'/pagelibro/' + ${currentPage} + '?sortField=editorial&sortDir=' + ${reverseSortDir}}">Editorial</a>
+					</th>
+					<th><a
+							th:href="@{'/pagelibro/' + ${currentPage} + '?sortField=anyo&sortDir=' + ${reverseSortDir}}">Año</a>
+					</th>
+					<th><a
+							th:href="@{'/pagelibro/' + ${currentPage} + '?sortField=tipo&sortDir=' + ${reverseSortDir}}">Tipo</a>
+					</th>
+					<th><a
+							th:href="@{'/pagelibro/' + ${currentPage} + '?sortField=copias&sortDir=' + ${reverseSortDir}}">Editorial</a>
+					</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
@@ -36,6 +48,31 @@
 				</tr>
 			</tbody>
 		</table>
+		<div th:if="${totalPages>1}">
+
+			<div class="row col-sm-10">
+				<div class="col-sm-5">Total Filas: [[${totalItems}]]</div>
+				<div class="col-sm-1">
+					<a th:if="${currentPage < totalPages}" th:href="@{'/pagelibro/' + ${currentPage + 1}+ '?sortField=' + 
+		${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+					<span th:unless="${currentPage < totalPages}">Anterior</span>
+				</div>
+				<div class="col-sm-3">
+					<span th:each="i:${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage !=1}"
+							th:href="@{'/pagelibro/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">
+							[[${i}]]</a>
+						<span th:unless="${currentPage !=1}">[[${i}]]</span>
+					</span>
+				</div>
+
+				<div class="col-sm-1">
+					<a th:if="${currentPage < totalPages}" th:href="@{'/pagelibro/' + ${totalPages}+ 
+		'?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+					<span th:unless="${currentPage < totalPages}">Último</span>
+				</div>
+			</div> <!-- cierra el row -->
+		</div> <!-- Cierra el if -->
 	</div>
 	<footer th:replace="fragments/footer" />
 </body>

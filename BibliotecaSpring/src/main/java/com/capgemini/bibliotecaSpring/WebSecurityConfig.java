@@ -67,12 +67,10 @@ public class WebSecurityConfig {
 				.requestMatchers("/anonymous*").anonymous().requestMatchers("/login*").permitAll();
 		http.authorizeRequests(auth -> auth
 				.requestMatchers("/css/**", "/img/**", "/script/**", "/login/**", "/failure-login/**").permitAll())
-				.formLogin((form) -> form 
-		                .loginPage("/login")
-		                .loginProcessingUrl("/login")
-		                .defaultSuccessUrl("/home", true)
-		            // ... other configuration
-		                .permitAll());
+				.formLogin(
+						(form) -> form.loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/home", true)
+								// ... other configuration
+								.permitAll());
 
 //                .requestMatchers("/user/list").hasAuthority("ADMIN")
 //                .requestMatchers("/autor/**").hasAuthority("ADMIN")

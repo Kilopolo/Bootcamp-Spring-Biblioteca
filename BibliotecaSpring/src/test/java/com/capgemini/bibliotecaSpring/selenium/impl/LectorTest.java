@@ -1,12 +1,13 @@
-package com.capgemini.bibliotecaSpring.model;
+package com.capgemini.bibliotecaSpring.selenium.impl;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.capgemini.bibliotecaSpring.selenium.SeleniumTesting;
 
 @SpringBootTest
 class LectorTest {
@@ -17,13 +18,12 @@ class LectorTest {
 	static void setUpBeforeClass() throws Exception {
 		SeleniumTesting.setUpBeforeClass();
 
-		
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		SeleniumTesting.tearDownAfterClass();
-		
+
 	}
 
 	@BeforeEach
@@ -38,14 +38,17 @@ class LectorTest {
 	}
 
 	@Test
-	void test() {
-		SeleniumTesting.logInAsUser();
+	void testVerLectores() {
+		SeleniumTesting.logInAsAdmin();
+		
+		
+		
 //		try {
 //			Thread.sleep(10000);
 //		} catch (InterruptedException e) {
 //			e.printStackTrace();
 //		}
-		
+
 	}
 
 //	@Test

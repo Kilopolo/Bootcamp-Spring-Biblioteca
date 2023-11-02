@@ -1,18 +1,12 @@
 package com.capgemini.bibliotecaSpring.service;
 
-import java.time.LocalDate;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.capgemini.bibliotecaSpring.model.Copia;
-import com.capgemini.bibliotecaSpring.model.Lector;
-import com.capgemini.bibliotecaSpring.model.Prestamo;
 import com.capgemini.bibliotecaSpring.model.User;
 import com.capgemini.bibliotecaSpring.service.security.RolesService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
-import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.UserService;
 
 import jakarta.annotation.PostConstruct;
@@ -35,7 +29,7 @@ public class InsertSampleDataService {
 	@PostConstruct
 	public void init() {
 
-		/**al parecer si que funciona**/
+		/** al parecer si que funciona **/
 		User admin = new User();
 		admin.setEmail("admin@gmail.com");
 		admin.setPassword(bCryptPasswordEncoder.encode("1234"));

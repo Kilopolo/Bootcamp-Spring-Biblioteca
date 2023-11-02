@@ -22,13 +22,13 @@ public class PrestamoServiceImpl extends ServiceImpl<PrestamoRepositorio, Presta
 		// TODO Auto-generated method stub
 		return pr.findByLector(lector);
 	}
-	
+
 	public LocalDate getFechaDevolucionEsperada(LocalDate fechaInicio) {
-	    if (fechaInicio != null) {
-	        return fechaInicio.plusDays(30);
-	    } else {
-	        return fechaInicio; 
-	    }
+		if (fechaInicio != null) {
+			return fechaInicio.plusDays(30);
+		} else {
+			return fechaInicio;
+		}
 	}
 
 }
