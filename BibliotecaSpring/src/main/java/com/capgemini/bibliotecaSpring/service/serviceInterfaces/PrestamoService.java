@@ -10,6 +10,11 @@ import com.capgemini.bibliotecaSpring.service.ServiceS;
 
 public interface PrestamoService extends ServiceS<Prestamo> {
 	List<Prestamo> findByLector(Lector lector);
-	//Paginación para mostrar elementos por pagina (numero de pagina, elementos de la pagina, ordenacion y direccion)
-		Page<Prestamo> findPaginated(int pageNum, int pageSize, String sortField, String sortDirection);
+
+	// Paginación para mostrar elementos por pagina (numero de pagina, elementos de
+	// la pagina, ordenacion y direccion)
+	Page<Prestamo> findPaginated(int pageNum, int pageSize, String sortField, String sortDirection);
+	
+	
+
 }
