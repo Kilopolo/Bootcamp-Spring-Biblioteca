@@ -102,8 +102,5 @@ public class SeleniumTesting {
 		driver.findElement(By.id("logout")).click();
 	}
 
-	public static void logout() {
-		driver.findElement(By.id("logout")).click();
-	}
 
 }

@@ -21,6 +21,7 @@ import com.capgemini.bibliotecaSpring.service.serviceInterfaces.CopiaService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LibroService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.UserService;
 
 @Controller
 @RequestMapping({ "/admin", "/" })
@@ -36,6 +37,8 @@ public class Controlador {
 	CopiaService copiaservice;
 	@Autowired
 	PrestamoService prestamoservice;
+	@Autowired
+	UserService userservice;
 
 	@GetMapping("/")
 	public String index() {
@@ -145,7 +148,10 @@ public class Controlador {
 
 	@GetMapping("/deletelector/{id}")
 	public String deleteLector(@PathVariable("id") long id, Model modelo) {
-		userservicio.deleteById(id);
+		User user = userservice.getById(id);
+		Lector lector= user.getLector();
+		lectorservice.deleteById(lector.getIdlector());
+		userservice.deleteById(id);
 		return "redirect:/lectores";
 
 	}
