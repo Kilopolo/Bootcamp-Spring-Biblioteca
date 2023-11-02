@@ -7,9 +7,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.capgemini.bibliotecaSpring.Exceptions.LectorNotFoundException;
-import com.capgemini.bibliotecaSpring.Exceptions.MaximoLibrosPrestadosException;
+
 import com.capgemini.bibliotecaSpring.enumerados.EstadoCopia;
+import com.capgemini.bibliotecaSpring.exceptions.LectorNotFoundException;
+import com.capgemini.bibliotecaSpring.exceptions.MaximoLibrosPrestadosException;
 import com.capgemini.bibliotecaSpring.model.Copia;
 import com.capgemini.bibliotecaSpring.model.Lector;
 import com.capgemini.bibliotecaSpring.model.Libro;

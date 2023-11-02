@@ -1,23 +1,16 @@
 
-BibliotecaSpring/target/classes/META-INF/maven/com.capgemini.BibliotecaSpring/BibliotecaSpring/pom.properties
-BibliotecaSpring/target/classes/META-INF/maven/com.capgemini.BibliotecaSpring/BibliotecaSpring/pom.properties
-BibliotecaSpring/target/classes/META-INF/MANIFEST.MF
-BibliotecaSpring/target/classes/com/capgemini/bibliotecaSpring/model/Multa.class
-BibliotecaSpring/target/classes/com/capgemini/bibliotecaSpring/model/Libro.class
-BibliotecaSpring/target/classes/com/capgemini/bibliotecaSpring/model/Lector.class
-BibliotecaSpring/target/classes/com/capgemini/bibliotecaSpring/model/Copia.class
-BibliotecaSpring/target/classes/com/capgemini/bibliotecaSpring/model/BaseEntity.class
-BibliotecaSpring/target/classes/com/capgemini/bibliotecaSpring/model/Autor.class
-
-
-BibliotecaSpring/pom.xml
 *.class
 BibliotecaSpring/.factorypath
 BibliotecaSpring/.classpath
 *.jar
 BibliotecaSpring/.project
 *.prefs
+
+
+BibliotecaSpring/target/*
+BibliotecaSpring/target/*.*
 BibliotecaSpring/target/classes/static/img/Error Hibernate_ Objeto no guardado_files/*
+BibliotecaSpring/target/classes/chromedriver/chromedriver.exe
 BibliotecaSpring/target/*
 BibliotecaSpring/target/*/*
 BibliotecaSpring/target/*/*/*
@@ -25,3 +18,5 @@ BibliotecaSpring/target/classes/application.properties
 BibliotecaSpring/target/classes/application.properties
 BibliotecaSpring/src/main/resources/application.properties
 BibliotecaSpring/target/classes/application.properties
+BibliotecaSpring/target/classes/application.properties
+*.descarga
