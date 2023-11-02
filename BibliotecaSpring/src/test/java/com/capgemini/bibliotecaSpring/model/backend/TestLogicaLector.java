@@ -82,7 +82,15 @@ class TestLogicaLector {
 		assertEquals(EstadoCopia.PRESTADO, copia.getEstado());
 		System.out.println(copia);
 	}
-
+	        LocalDate fechaActual = LocalDate.now(); 
+	        lectorService.prestar(1l, fechaActual, copia);
+	        
+	        
+	        assertEquals(EstadoCopia.PRESTADO, copia.getEstado()); 
+	        System.out.println(copia);
+	    }
+	 
+	
 	@Test
 	void testMultar() {
 		Lector lector = new Lector(); // Crear objeto Lector para la prueba

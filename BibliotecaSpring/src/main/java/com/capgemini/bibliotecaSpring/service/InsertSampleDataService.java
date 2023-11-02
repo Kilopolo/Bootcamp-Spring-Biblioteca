@@ -1,12 +1,18 @@
 package com.capgemini.bibliotecaSpring.service;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.capgemini.bibliotecaSpring.model.Copia;
+import com.capgemini.bibliotecaSpring.model.Lector;
+import com.capgemini.bibliotecaSpring.model.Prestamo;
 import com.capgemini.bibliotecaSpring.model.User;
 import com.capgemini.bibliotecaSpring.service.security.RolesService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.UserService;
 
 import jakarta.annotation.PostConstruct;
@@ -15,6 +21,8 @@ import jakarta.annotation.PostConstruct;
 public class InsertSampleDataService {
 	@Autowired
 	private UserService usersService;
+//	@Autowired
+//	private PrestamoService prestamoService;
 
 	@Autowired
 	private RolesService rolesService;
@@ -40,6 +48,18 @@ public class InsertSampleDataService {
 		user.setRole(rolesService.getRoles()[0]);
 		user.setLector(lectorService.getById(1));
 		usersService.save(user);
+		
+//		Copia copia= new Copia();
+//		Lector lector= new Lector();
+		
+//		LocalDate fechaAct = LocalDate.now();
+//		Prestamo nuevoPrestamo = new Prestamo();
+//        nuevoPrestamo.setIdprestamo(50l);
+//        nuevoPrestamo.setFechaInicio(fechaAct);
+//        nuevoPrestamo.setFechaFin(fechaAct.plusDays(30));
+//        nuevoPrestamo.setLector(lector);
+//        nuevoPrestamo.setCopia(copia);
+//        prestamoService.save(nuevoPrestamo);
 
 	}
 

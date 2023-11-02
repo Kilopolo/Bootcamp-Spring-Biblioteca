@@ -3,6 +3,7 @@ package com.capgemini.bibliotecaSpring.model;
 import java.util.List;
 
 import com.capgemini.bibliotecaSpring.enumerados.TipoLibro;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -41,9 +42,11 @@ public class Libro {
 	@Column
 	private int anyo;
 	@ManyToOne
+	@JsonBackReference
 	@JoinColumn(name = "idautor")
 	private Autor autor;
 	@OneToMany(mappedBy = "libro", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@JsonBackReference
 	private List<Copia> copias;
 
 }
