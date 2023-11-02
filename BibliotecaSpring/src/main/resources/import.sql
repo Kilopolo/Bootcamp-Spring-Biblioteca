@@ -10,7 +10,7 @@ INSERT INTO `projecto_capgemini_biblioteca`.`autores` (`fec_nac`, `nacionalidad`
 INSERT INTO `projecto_capgemini_biblioteca`.`autores` (`fec_nac`, `nacionalidad`, `nombre`) VALUES ('1927-03-06', 'Colombia', 'Gabriel García Márquez');
 
 -- Lectores
-
+INSERT INTO `projecto_capgemini_biblioteca`.`lectores` (`n_socio`, `direccion`, `nombre`, `telefono`) VALUES ('1', 'Asturias', 'David', '666666666');
 INSERT INTO `projecto_capgemini_biblioteca`.`lectores` (`n_socio`, `direccion`, `nombre`, `telefono`) VALUES ('2', 'Madrid', 'Laura', '611111111');
 INSERT INTO `projecto_capgemini_biblioteca`.`lectores` (`n_socio`, `direccion`, `nombre`, `telefono`) VALUES ('3', 'Barcelona', 'Carlos', '622222222');
 INSERT INTO `projecto_capgemini_biblioteca`.`lectores` (`n_socio`, `direccion`, `nombre`, `telefono`) VALUES ('4', 'Valencia', 'Elena', '633333333');

@@ -10,7 +10,7 @@
 
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-		<h3>Actualiza Copia: <span style="color: darkblue;" th:text="${libro.titulo}"></span> </h3>
+		<h3>Actualizar Copia: <span style="color: darkblue;" th:text="${libro.titulo}"></span> </h3>
 
 		<form action="#" th:action="@{'/savecopia/'+${libro.idlibro}}" th:object="${copia}" method="post">
 			<input th:field="*{libro.idlibro}" type="hidden">

@@ -27,8 +27,7 @@
 					<td th:text="${prestamo.fechaFin}"></td>
 					<td th:text="${prestamo.copia.libro.titulo}"></td>
 					<td th:text="${prestamo.copia.estado}"></td>
-					<td><a class="btn btn-danger" th:href="@{'/devolver/'+${prestamo.idprestamo}}">Devolver</a>
-						<a th:href="@{'/updateprestamo/'+${prestamo.idprestamo}}"><img alt=""
+					<td><a th:href="@{'/updateprestamo/'+${prestamo.idprestamo}}"><img alt=""
 						src="/img/editar.png"></a>
 						<a th:onclick="return confirm('¿Estás seguro de que deseas eliminar este prestamo?')"
 							th:href="@{'/deleteprestamo/'+${prestamo.idprestamo}}" ><img alt=""

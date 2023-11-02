@@ -9,7 +9,7 @@
 <body>
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-	<h3>Actualiza libro: <span style="color: darkblue;" th:text="${libro.titulo}"> </span> Autor: <span  style="color: darkblue;" th:text="${autor.nombre}"></h3>
+	<h3>Libro: <span style="color: darkblue;" th:text="${libro.titulo}"> </span> Autor: <span  style="color: darkblue;" th:text="${autor.nombre}"></h3>
 	<form action="#" th:action="@{'/savelibro/'+${autor.idautor}}" th:object="${libro}" method="post">
 		<input th:field="*{titulo}" type="text" placeholder="Título" class="form-control mb-4 col-4">
 		<input th:field="*{editorial}" type="text" placeholder="Editorial" class="form-control mb-4 col-4">

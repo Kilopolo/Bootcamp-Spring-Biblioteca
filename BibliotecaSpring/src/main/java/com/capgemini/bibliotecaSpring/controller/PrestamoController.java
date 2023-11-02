@@ -47,9 +47,9 @@ public class PrestamoController {
 	public String savePrestamo(@ModelAttribute("prestamo") Prestamo prestamo, @PathVariable("idlector") long idlector,
 			Model modelo) {
 		Lector lector = lectorservice.getById(idlector);
+		prestamo.setLector(lector);
 		Copia copia = prestamo.getCopia();
 		copia.setEstado(EstadoCopia.PRESTADO);
-		prestamo.setLector(lector);
 		prestamo.setCopia(copia);
 		prestamo.setFechaInicio(LocalDate.now());
 		prestamo.setFechaFin(LocalDate.now().plusDays(30));
@@ -89,18 +89,5 @@ public class PrestamoController {
 		return "redirect:/prestamos/" + lector.getIdlector();
 
 	}
-	
-	@GetMapping("/devolver/{idprestamo}")
-	public String devolverPrestamo(@PathVariable("idprestamo") long idprestamo, Model modelo) {
-		Lector lector = prestamoservice.getById(idprestamo).getLector();
-		Prestamo prestamo =prestamoservice.getById(idprestamo);
-		prestamo.setFechaFin(LocalDate.now());
-		LocalDate fechaFin= prestamo.getFechaFin();
-		lectorservice.devolver(lector.getIdlector(), fechaFin);
-		modelo.addAttribute("lector", lector);
-		return "redirect:/prestamos/" + lector.getIdlector();
-
-	}
-	
 
 }
