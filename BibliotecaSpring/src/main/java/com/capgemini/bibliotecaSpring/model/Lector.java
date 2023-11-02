@@ -3,6 +3,7 @@ package com.capgemini.bibliotecaSpring.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -35,15 +36,14 @@ public class Lector {
 	private String telefono;
 	@Column
 	private String direccion;
+	@JsonManagedReference //Es para la devolucion de listas en relaciones one to many.
 	@OneToMany(mappedBy = "lector", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<Prestamo> prestamosLector;
 	@OneToOne(mappedBy = "lector", fetch = FetchType.EAGER)
 	private Multa multa;
 	@OneToOne(mappedBy = "lector")
 	@JoinColumn(name="iduser")
-	@JsonBackReference
 	private User user;
-
 	public Lector(String nombre, String telefono, String direccion) {
 		super();
 		this.nombre = nombre;
