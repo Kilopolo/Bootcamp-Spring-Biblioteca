@@ -3,19 +3,18 @@ package com.capgemini.bibliotecaSpring.service.serviceImpl;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
- 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
- 
-import com.capgemini.bibliotecaSpring.Exceptions.LectorNotFoundException;
-import com.capgemini.bibliotecaSpring.Exceptions.MaximoLibrosPrestadosException;
+
 import com.capgemini.bibliotecaSpring.enumerados.EstadoCopia;
+import com.capgemini.bibliotecaSpring.exceptions.LectorNotFoundException;
+import com.capgemini.bibliotecaSpring.exceptions.MaximoLibrosPrestadosException;
 import com.capgemini.bibliotecaSpring.model.Copia;
 import com.capgemini.bibliotecaSpring.model.Lector;
 import com.capgemini.bibliotecaSpring.model.Libro;
 import com.capgemini.bibliotecaSpring.model.Multa;
 import com.capgemini.bibliotecaSpring.model.Prestamo;
-import com.capgemini.bibliotecaSpring.model.User;
 import com.capgemini.bibliotecaSpring.repositorio.CopiaRepositorio;
 import com.capgemini.bibliotecaSpring.repositorio.LectorRepositorio;
 import com.capgemini.bibliotecaSpring.repositorio.MultaRepositorio;
