@@ -82,7 +82,7 @@ class TestLogicaLector {
 
 	        LocalDate fechaActual = LocalDate.now(); 
 	        lectorService.prestar(1l, fechaActual, copia);
-
+	        
 	        
 	        assertEquals(EstadoCopia.PRESTADO, copia.getEstado()); 
 	        System.out.println(copia);

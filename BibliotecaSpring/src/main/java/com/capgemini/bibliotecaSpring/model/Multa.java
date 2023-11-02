@@ -2,6 +2,8 @@ package com.capgemini.bibliotecaSpring.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -30,6 +32,7 @@ public class Multa {
 	@Column
 	private LocalDate fFin;
 	@JoinColumn(name = "nSocio")
+	@JsonBackReference
 	@OneToOne(fetch = FetchType.EAGER)
 	private Lector lector;
 }
