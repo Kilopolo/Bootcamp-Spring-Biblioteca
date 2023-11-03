@@ -1,12 +1,8 @@
 package com.capgemini.bibliotecaSpring;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-
-import com.capgemini.bibliotecaSpring.repositorio.LectorRepositorio;
-import com.capgemini.bibliotecaSpring.service.serviceInterfaces.AutorService;
 
 @SpringBootApplication
 public class MainBiblioteca {
