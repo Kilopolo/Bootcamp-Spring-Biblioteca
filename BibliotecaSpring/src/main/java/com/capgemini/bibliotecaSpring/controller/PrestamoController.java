@@ -19,7 +19,7 @@ import com.capgemini.bibliotecaSpring.service.serviceInterfaces.UserService;
 @Controller
 @RequestMapping({ "/admin", "/" })
 public class PrestamoController {
-	
+
 	@Autowired
 	LectorService lectorservice;
 	@Autowired
@@ -28,8 +28,7 @@ public class PrestamoController {
 	PrestamoService prestamoservice;
 	@Autowired
 	UserService userservice;
-	
-	
+
 	@GetMapping("/prestamos/{idlector}")
 	public String mostrarPrestamosLector(Model modelo, @PathVariable("idlector") long idlector) {
 		Lector lector = lectorservice.getById(idlector);
@@ -50,12 +49,22 @@ public class PrestamoController {
 
 	@GetMapping("/addprestamo/{idlector}")
 	public String formPrestamo(Model modelo, @PathVariable("idlector") long idlector) {
-		Prestamo prestamo = new Prestamo();
 		Lector lector = lectorservice.getById(idlector);
+		String returnTo="prestamo/addPrestamo";
+		
+		//si tienes mas de 3 prestamos no debes acceder a añadir prestamo
+		if (lector.getPrestamosLector().size() < 3) {
+			Prestamo prestamo;
+			prestamo = new Prestamo();
+			modelo.addAttribute("prestamo", prestamo);
+		} else {
+			return "redirect:/prestamos/" + idlector;
+		}
+
 		modelo.addAttribute("lector", lector);
-		modelo.addAttribute("prestamo", prestamo);
-		modelo.addAttribute("copias",copiaservice.copiaBiblioteca());
-		return "prestamo/addPrestamo";
+
+		modelo.addAttribute("copias", copiaservice.copiaBiblioteca());
+		return returnTo ;
 	}
 
 	@GetMapping("/updateprestamo/{idprestamo}")
@@ -63,7 +72,7 @@ public class PrestamoController {
 		Prestamo prestamo = prestamoservice.getById(idprestamo);
 		modelo.addAttribute("lector", prestamo.getLector());
 		modelo.addAttribute("prestamo", prestamo);
-		modelo.addAttribute("copias",copiaservice.copiaBiblioteca());
+		modelo.addAttribute("copias", copiaservice.copiaBiblioteca());
 		return "prestamo/updatePrestamo";
 	}
 
@@ -76,8 +85,10 @@ public class PrestamoController {
 		return "redirect:/prestamos/" + lector.getIdlector();
 
 	}
+
 	@GetMapping("/devolver/{idprestamo}")
 	public String devolverPrestamo(@PathVariable("idprestamo") long idprestamo, Model modelo) {
+		
 		Lector lector = prestamoservice.getById(idprestamo).getLector();
 		lectorservice.devolver(lector, idprestamo);
 		modelo.addAttribute("lector", lector);

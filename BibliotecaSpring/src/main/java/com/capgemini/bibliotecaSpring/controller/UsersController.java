@@ -148,12 +148,24 @@ public class UsersController {
 
 	@GetMapping("/addreserva")
 	public String formPrestamoUser(Model modelo) {
-		Prestamo prestamo = new Prestamo();
+//		Prestamo prestamo = new Prestamo();
 		User activeUser = getActiveUser();
 		Lector lector = activeUser.getLector();
+//		String returnTo="prestamo/addPrestamo";
+		
+		//si tienes mas de 3 prestamos no debes acceder a añadir prestamo
+		if (lector.getPrestamosLector().size() < 3) {
+			Prestamo prestamo;
+			prestamo = new Prestamo();
+			modelo.addAttribute("prestamo", prestamo);
+		} else {
+			return "redirect:/reservas";
+		}
+
 		modelo.addAttribute("lector", lector);
-		modelo.addAttribute("prestamo", prestamo);
-		modelo.addAttribute("copias",copiaservice.copiaBiblioteca());
+
+		modelo.addAttribute("copias", copiaservice.copiaBiblioteca());
+//		return returnTo ;
 		return "prestamo/addPrestamoUser";
 	}
 	@GetMapping("/deletereserva/{idprestamo}")

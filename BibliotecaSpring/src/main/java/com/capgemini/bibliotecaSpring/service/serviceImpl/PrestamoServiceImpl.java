@@ -49,7 +49,8 @@ public class PrestamoServiceImpl extends ServiceImpl<PrestamoRepositorio, Presta
 	public void borrar(Prestamo prestamo) {
 		Copia copia = prestamo.getCopia();
 		copia.setEstado(EstadoCopia.BIBLIOTECA);
-		deleteById(prestamo.getIdprestamo());;
+		deleteById(prestamo.getIdprestamo());
+		
 	}
 	
 	@Override

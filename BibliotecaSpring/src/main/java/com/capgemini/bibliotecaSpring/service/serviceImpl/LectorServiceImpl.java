@@ -42,9 +42,9 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 		Prestamo prestamoADevolver = encontrarPrestamoPorNSocio(prestamos, lector.getIdlector());
 		if (prestamoADevolver != null) {
 			prestamoADevolver.setFechaFin(LocalDate.now());
-			if(prestamorepo.restraso(prestamoADevolver)) {
+//			if(prestamorepo.restraso(prestamoADevolver)) {
 				multar(lector.getIdlector(), prestamoADevolver);
-			}
+//			}
 				
 			Copia copia = prestamoADevolver.getCopia();
 			copia.setEstado(EstadoCopia.BIBLIOTECA);
@@ -74,7 +74,7 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 		if (lectorOptional.isPresent()) {
 			Lector lector = lectorOptional.get();
 			Libro libro = copia.getLibro();
-
+ 
 			if (isAvailableCopia(copia, lector) && isNotMoroso(lector)) {
 				copia.setEstado(EstadoCopia.PRESTADO);
 
