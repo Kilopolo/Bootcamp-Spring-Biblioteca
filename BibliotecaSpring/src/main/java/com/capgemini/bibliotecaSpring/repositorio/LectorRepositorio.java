@@ -14,11 +14,10 @@ import com.capgemini.bibliotecaSpring.model.Prestamo;
 public interface LectorRepositorio extends JpaRepository<Lector, Long> {
 
 	//-hacer la query para coger el ultimo prestamo devuelto y coger la fecha para comparar y multar
-	@Query("SELECT p FROM lectores l " +
-            "INNER JOIN prestamos p ON p.n_socio = l.n_socio " +
-            "LEFT JOIN copias c ON c.idcopia = p.idcopia " +
-            "WHERE c.estado = 'BIBLIOTECA' " +
-            "AND l.n_socio = :nSocio")
-    List<Prestamo> findPrestamosByNSocioAndEstadoBiblioteca(@Param("nSocio") Long nSocio);
+	@Query(value ="SELECT * FROM lectores as l\r\n"
+			+ "inner join prestamos p on p.n_socio= l.n_socio\r\n"
+			+ "left join copias c on c.idcopia=p.idcopia\r\n"
+			+ "where c.estado ='BIBLIOTECA' AND l.n_socio= ?1", nativeQuery=true)
+    List<Prestamo> findPrestamosByNSocioAndEstadoBiblioteca(Long nSocio);
 
 }

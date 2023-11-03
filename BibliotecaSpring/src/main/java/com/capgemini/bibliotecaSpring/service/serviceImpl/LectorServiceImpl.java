@@ -95,15 +95,12 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 				copia.setEstado(EstadoCopia.PRESTADO);
 
 				Prestamo nuevoPrestamo = new Prestamo();
-				nuevoPrestamo.setIdprestamo(50l);
-				nuevoPrestamo.setFechaInicio(fechaAct);
+//				nuevoPrestamo.setIdprestamo(50l);	que se autogenere
+				nuevoPrestamo.setFechaInicio(LocalDate.now());
 				nuevoPrestamo.setFechaFin(fechaAct.plusDays(30));
 				nuevoPrestamo.setLector(lector);
 				nuevoPrestamo.setCopia(copia);
-
-				System.out.println(nuevoPrestamo);
 				prestamoservice.save(nuevoPrestamo);
-				System.out.println(prestamoservice.getAll());
 				copiarepo.save(copia);
 				// return nuevoPrestamo;
 			} else {

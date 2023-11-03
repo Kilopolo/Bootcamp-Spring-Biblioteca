@@ -49,5 +49,10 @@ public class Lector {
 		this.telefono = telefono;
 		this.direccion = direccion;
 	}
+	@Override
+	public String toString() {
+		return "Lector [idlector=" + idlector + ", nombre=" + nombre + ", telefono=" + telefono + ", direccion="
+				+ direccion + ", multa=" + multa + ", user=" + user + "]";
+	}
 
 }

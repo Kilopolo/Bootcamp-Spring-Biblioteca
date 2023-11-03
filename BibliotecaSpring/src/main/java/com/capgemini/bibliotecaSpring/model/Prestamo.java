@@ -38,5 +38,10 @@ public class Prestamo {
 	@JsonBackReference
 	@JoinColumn(name = "nSocio")
 	private Lector lector;
+	@Override
+	public String toString() {
+		return "Prestamo [idprestamo=" + idprestamo + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin
+				+ ", copia=" + copia + ", lector=" + lector + "]";
+	}
 
 }
