@@ -39,7 +39,7 @@
 					<td colspan="5" style="color: red; text-align: center;font-weight: bold;">No hay prestamos</td>
 				</tr>
 				<tr th:if="${!#lists.isEmpty(prestamos)}">
-					<th colspan="3" style="text-align: center;font-weight: bold;">Total:
+					<th colspan="4" style="text-align: center;font-weight: bold;">Total:
 					</th>
 					<td colspan="2" th:text="${prestamos.size()}" style="color: green;font-weight: bold;"></td>
 				</tr>
