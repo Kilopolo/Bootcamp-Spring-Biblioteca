@@ -79,7 +79,7 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 		if (lectorOptional.isPresent()) {
 			Lector lector = lectorOptional.get();
 			Libro libro = copia.getLibro();
-
+ 
 			if (isAvailableCopia(copia, lector) && isNotMoroso(lector)) {
 				copia.setEstado(EstadoCopia.PRESTADO);
 

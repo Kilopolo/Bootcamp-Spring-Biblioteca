@@ -99,6 +99,7 @@ public class PrestamoController {
 		Prestamo prestamo =prestamoservice.getById(idprestamo);
 		prestamo.setFechaFin(LocalDate.now());
 		LocalDate fechaFin= prestamo.getFechaFin();
+		
 		lectorservice.devolver(lector.getIdlector(), fechaFin);
 		modelo.addAttribute("lector", lector);
 		return "redirect:/prestamos/" + lector.getIdlector();
