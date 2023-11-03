@@ -71,7 +71,7 @@ class LibrosTest {
 		SeleniumTesting.logInAsAdmin(driver);
 		driver.findElement(By.linkText("Libros")).click();
 		SeleniumTesting.checkNumberOfUsersOnList(driver, 5);
-		SeleniumTesting.espera(1);
+//		SeleniumTesting.espera(1);
 
 	}
 
@@ -82,7 +82,7 @@ class LibrosTest {
 		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", 2);
 		List<WebElement> elementosId = SeleniumUtils.EsperaCargaPaginaxpath(driver, "//*[@id=\"5\"]", 2);
 		elementosId.get(0).click();
-		SeleniumTesting.espera(500);
+//		SeleniumTesting.espera(1);
 //		assertTrue((new WebDriverWait(driver, 2))
 //				.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id=\"31\"]"))));
 

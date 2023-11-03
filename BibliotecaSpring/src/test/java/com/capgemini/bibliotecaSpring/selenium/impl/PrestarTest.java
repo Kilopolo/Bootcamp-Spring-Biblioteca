@@ -68,16 +68,13 @@ class PrestarTest {
 	@Test
 	void testIrSociosDevolver() {
 		SeleniumTesting.logInAsAdmin(driver);
-		driver.findElement(By.linkText("Socios")).click();
-		SeleniumTesting.espera(2);
-		driver.findElement(By.name("Lista")).click();
-		SeleniumTesting.espera(2);
-		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", 2);
-		List<WebElement> elementosId = SeleniumUtils.EsperaCargaPaginaxpath(driver, "//*[@id=\"1\"]", 2);
-		driver.findElement(By.name("Ver prestamos")).click();
+//		driver.findElement(By.linkText("Socios")).click();
+		driver.get(URL+"/prestamos/1");
 		SeleniumTesting.espera(2);
 		List<WebElement> elementosSocio = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", 2);
 		driver.findElement(By.name("Devolver")).click();
+		List<WebElement> elementosId = SeleniumUtils.EsperaCargaPaginaxpath(driver, "//*[@id=\"5\"]", 2);
+		elementosId.get(0).click();
 		SeleniumTesting.espera(3);
 //		assertTrue((new WebDriverWait(driver, 2))
 //				.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id=\"31\"]"))));
