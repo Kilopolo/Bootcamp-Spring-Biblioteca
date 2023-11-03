@@ -1,5 +1,8 @@
 package com.capgemini.bibliotecaSpring.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.capgemini.bibliotecaSpring.enumerados.EstadoCopia;
+import com.capgemini.bibliotecaSpring.model.Copia;
 import com.capgemini.bibliotecaSpring.model.Lector;
 import com.capgemini.bibliotecaSpring.model.Prestamo;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.CopiaService;
@@ -52,7 +57,15 @@ public class PrestamoController {
 		Lector lector = lectorservice.getById(idlector);
 		String returnTo="prestamo/addPrestamo";
 		//si tienes mas de 3 prestamos no debes acceder a añadir prestamo
-		if (lector.getPrestamosLector().size() < 3) {
+		List<Prestamo> totalprestamos=prestamoservice.findByLector(lector);
+		List<Prestamo> prestamoPrestado = new ArrayList<Prestamo>();
+		for(Prestamo p : totalprestamos) {
+			Copia c = p.getCopia();
+			if(c.getEstado()==EstadoCopia.PRESTADO) {
+				prestamoPrestado.add(p);
+			}
+		}
+		if (prestamoPrestado.size() < 3 ) {
 			Prestamo prestamo;
 			prestamo = new Prestamo();
 			modelo.addAttribute("prestamo", prestamo);
@@ -61,7 +74,6 @@ public class PrestamoController {
 		}
 
 		modelo.addAttribute("lector", lector);
-
 		modelo.addAttribute("copias", copiaservice.copiaBiblioteca());
 		return returnTo ;
 	}

@@ -43,7 +43,6 @@ public class PrestamoServiceImpl extends ServiceImpl<PrestamoRepositorio, Presta
 		copia.setEstado(EstadoCopia.PRESTADO);
 		LocalDate fechaInicio = LocalDate.now();
 		LocalDate fechaFin = LocalDate.now().plusDays(30);
-		prestamo.setCopia(copia);
 		prestamo.setFechaInicio(fechaInicio);
 		prestamo.setFechaFin(fechaFin);
 		return pr.save(prestamo);
@@ -57,34 +56,37 @@ public class PrestamoServiceImpl extends ServiceImpl<PrestamoRepositorio, Presta
 
 	}
 
-	//Devuelve el libro a la biblioteca si está en plazo y cambia el estado de la copia
-	//Si esta restrasado cambia el estado de la copia
+	// Devuelve el libro a la biblioteca si está en plazo y cambia el estado de la
+	// copia
+	// Si esta restrasado cambia el estado de la copia
 	@Override
 	public void devolver(Prestamo prestamo) {
 		Copia copia = prestamo.getCopia();
 		LocalDate fechaDevuelta = LocalDate.now();
 		LocalDate FechaPrevista = prestamo.getFechaFin();
-	    int dias = (int) ChronoUnit.DAYS.between(FechaPrevista, fechaDevuelta);
-		
-		if (dias > 0) {
+		int dias = (int) ChronoUnit.DAYS.between(FechaPrevista, fechaDevuelta);
+		if (copia.getEstado() == EstadoCopia.PRESTADO) {
+			if (dias > 0) {
+				prestamo.setFechaFin(fechaDevuelta);
+				multar(prestamo.getLector(), dias);
+			}
+			copia.setEstado(EstadoCopia.BIBLIOTECA);
 			prestamo.setFechaFin(fechaDevuelta);
-			multar(prestamo.getLector(), dias);
-		} 
-		copia.setEstado(EstadoCopia.BIBLIOTECA);
-		prestamo.setCopia(copia);
-		prestamo.setFechaFin(fechaDevuelta);
-		pr.save(prestamo);
+			pr.save(prestamo);
+		} else {
+			System.out.println("Error");
+		}
 	}
-	
-	//Multar
-  public void multar(Lector lector, int dias) {
-	  LocalDate fechaInicio = LocalDate.now();
+
+	// Multar
+	public void multar(Lector lector, int dias) {
+		LocalDate fechaInicio = LocalDate.now();
 		LocalDate fechaFinMulta = fechaInicio.plusDays(dias);
 		Multa multa = new Multa();
 		multa.setFInicio(fechaInicio);
 		multa.setFFin(fechaFinMulta);
 		multa.setLector(lector);
 		mr.save(multa);
-		
-	}	
+
+	}
 }

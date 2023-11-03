@@ -1,5 +1,8 @@
 package com.capgemini.bibliotecaSpring.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.capgemini.bibliotecaSpring.enumerados.EstadoCopia;
+import com.capgemini.bibliotecaSpring.model.Copia;
 import com.capgemini.bibliotecaSpring.model.Lector;
 import com.capgemini.bibliotecaSpring.model.Prestamo;
 import com.capgemini.bibliotecaSpring.model.User;
@@ -164,7 +169,15 @@ public class UsersController {
 		User activeUser = getActiveUser();
 		Lector lector = activeUser.getLector();
 		//si tienes mas de 3 prestamos no debes acceder a añadir prestamo
-		if (lector.getPrestamosLector().size() < 3) {
+		List<Prestamo> totalprestamos=prestamoservice.findByLector(lector);
+		List<Prestamo> prestamoPrestado = new ArrayList<Prestamo>();
+		for(Prestamo p : totalprestamos) {
+			Copia c = p.getCopia();
+			if(c.getEstado()==EstadoCopia.PRESTADO) {
+				prestamoPrestado.add(p);
+			}
+		}
+		if (prestamoPrestado.size() < 3 ) {
 			Prestamo prestamo;
 			prestamo = new Prestamo();
 			modelo.addAttribute("prestamo", prestamo);
