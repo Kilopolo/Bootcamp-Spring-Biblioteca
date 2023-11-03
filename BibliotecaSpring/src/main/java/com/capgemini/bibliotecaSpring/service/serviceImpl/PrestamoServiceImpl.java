@@ -1,7 +1,7 @@
 package com.capgemini.bibliotecaSpring.service.serviceImpl;
 
 import java.time.LocalDate;
-import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import com.capgemini.bibliotecaSpring.enumerados.EstadoCopia;
 import com.capgemini.bibliotecaSpring.model.Copia;
 import com.capgemini.bibliotecaSpring.model.Lector;
+import com.capgemini.bibliotecaSpring.model.Multa;
 import com.capgemini.bibliotecaSpring.model.Prestamo;
+import com.capgemini.bibliotecaSpring.repositorio.MultaRepositorio;
 import com.capgemini.bibliotecaSpring.repositorio.PrestamoRepositorio;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
 
@@ -19,6 +21,8 @@ public class PrestamoServiceImpl extends ServiceImpl<PrestamoRepositorio, Presta
 
 	@Autowired
 	PrestamoRepositorio pr;
+	@Autowired
+	MultaRepositorio mr;
 
 	@Override
 	public List<Prestamo> findByLector(Lector lector) {
@@ -37,8 +41,8 @@ public class PrestamoServiceImpl extends ServiceImpl<PrestamoRepositorio, Presta
 	public Prestamo guardar(Prestamo prestamo) {
 		Copia copia = prestamo.getCopia();
 		copia.setEstado(EstadoCopia.PRESTADO);
-		LocalDate fechaInicio=LocalDate.now();
-		LocalDate fechaFin=LocalDate.now().plusDays(30);
+		LocalDate fechaInicio = LocalDate.now();
+		LocalDate fechaFin = LocalDate.now().plusDays(30);
 		prestamo.setCopia(copia);
 		prestamo.setFechaInicio(fechaInicio);
 		prestamo.setFechaFin(fechaFin);
@@ -50,29 +54,37 @@ public class PrestamoServiceImpl extends ServiceImpl<PrestamoRepositorio, Presta
 		Copia copia = prestamo.getCopia();
 		copia.setEstado(EstadoCopia.BIBLIOTECA);
 		deleteById(prestamo.getIdprestamo());
-		
-	}
-	
-	@Override
-	public boolean restraso(Prestamo prestamo) {
-		LocalDate fechai = prestamo.getFechaInicio();
-		LocalDate fechaf = prestamo.getFechaFin();
-		Period periodo = fechai.until(fechaf);
-		int dias = periodo.getDays();
-		Copia copia = prestamo.getCopia();
-		if(dias > 30) {
-			
-			copia.setEstado(EstadoCopia.RETRASO);
-			prestamo.setCopia(copia);
-			return true;
-			
-		}
-		else {
-			return false;
-		}
-		
-	}
-	
-	
 
+	}
+
+	//Devuelve el libro a la biblioteca si está en plazo y cambia el estado de la copia
+	//Si esta restrasado cambia el estado de la copia
+	@Override
+	public void devolver(Prestamo prestamo) {
+		Copia copia = prestamo.getCopia();
+		LocalDate fechaDevuelta = LocalDate.now();
+		LocalDate FechaPrevista = prestamo.getFechaFin();
+	    int dias = (int) ChronoUnit.DAYS.between(FechaPrevista, fechaDevuelta);
+		
+		if (dias > 0) {
+			prestamo.setFechaFin(fechaDevuelta);
+			multar(prestamo.getLector(), dias);
+		} 
+		copia.setEstado(EstadoCopia.BIBLIOTECA);
+		prestamo.setCopia(copia);
+		prestamo.setFechaFin(fechaDevuelta);
+		pr.save(prestamo);
+	}
+	
+	//Multar
+  public void multar(Lector lector, int dias) {
+	  LocalDate fechaInicio = LocalDate.now();
+		LocalDate fechaFinMulta = fechaInicio.plusDays(dias);
+		Multa multa = new Multa();
+		multa.setFInicio(fechaInicio);
+		multa.setFFin(fechaFinMulta);
+		multa.setLector(lector);
+		mr.save(multa);
+		
+	}	
 }

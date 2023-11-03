@@ -49,7 +49,7 @@ INSERT INTO `projecto_capgemini_biblioteca`.`copias` (`idlibro`, `estado`) VALUE
 
 
 -- Prestamos
-INSERT INTO `projecto_capgemini_biblioteca`.`prestamos` ( `fecha_inicio`, `idcopia`, `n_socio`) VALUES ( '2023-09-10', '1', '1');
+INSERT INTO `projecto_capgemini_biblioteca`.`prestamos` (`fecha_fin`, `fecha_inicio`, `idcopia`, `n_socio`) VALUES ( '2023-10-10','2023-09-10', '1', '1');
 INSERT INTO `projecto_capgemini_biblioteca`.`prestamos` (`fecha_fin`, `fecha_inicio`, `idcopia`, `n_socio`) VALUES ('2023-10-15', '2023-09-05', '2', '2');
 INSERT INTO `projecto_capgemini_biblioteca`.`prestamos` (`fecha_fin`, `fecha_inicio`, `idcopia`, `n_socio`) VALUES ('2023-12-28', '2023-12-18', '3', '3');
 INSERT INTO `projecto_capgemini_biblioteca`.`prestamos` (`fecha_fin`, `fecha_inicio`, `idcopia`, `n_socio`) VALUES ('2023-11-29', '2023-11-19', '4', '4');

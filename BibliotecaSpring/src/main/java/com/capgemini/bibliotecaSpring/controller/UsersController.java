@@ -24,6 +24,7 @@ import com.capgemini.bibliotecaSpring.service.serviceInterfaces.AutorService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.CopiaService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LibroService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.MultaService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.UserService;
 import com.capgemini.bibliotecaSpring.validators.SignUpFormValidator;
@@ -58,6 +59,8 @@ public class UsersController {
 	CopiaService copiaservice;
 	@Autowired
 	PrestamoService prestamoservice;
+	@Autowired
+	MultaService multaservice;
 	@Autowired
 	UserService userservice;
 	
@@ -125,6 +128,16 @@ public class UsersController {
 		User activeUser = usersServiceImpl.getUserByEmail(email);
 		return activeUser;
 	}
+	
+	//Multas
+	@GetMapping("/multauser")
+	public String mostrarMultasUser(Model modelo) {
+		User activeUser = getActiveUser();
+		Lector lector = activeUser.getLector();
+		modelo.addAttribute("lector", lector);
+		modelo.addAttribute("multas", multaservice.findByLector(lector));
+		return "multa/mostrar2";
+	}
 
 	// PRESTAMO USER
 	@GetMapping("/reservas")
@@ -147,12 +160,9 @@ public class UsersController {
 	}
 
 	@GetMapping("/addreserva")
-	public String formPrestamoUser(Model modelo) {
-//		Prestamo prestamo = new Prestamo();
+	public String formPrestamoUser(Model modelo ) {
 		User activeUser = getActiveUser();
 		Lector lector = activeUser.getLector();
-//		String returnTo="prestamo/addPrestamo";
-		
 		//si tienes mas de 3 prestamos no debes acceder a añadir prestamo
 		if (lector.getPrestamosLector().size() < 3) {
 			Prestamo prestamo;
@@ -161,11 +171,8 @@ public class UsersController {
 		} else {
 			return "redirect:/reservas";
 		}
-
 		modelo.addAttribute("lector", lector);
-
 		modelo.addAttribute("copias", copiaservice.copiaBiblioteca());
-//		return returnTo ;
 		return "prestamo/addPrestamoUser";
 	}
 	@GetMapping("/deletereserva/{idprestamo}")
@@ -189,7 +196,8 @@ public class UsersController {
 	@GetMapping("/devolverreserva/{idprestamo}")
 	public String devolverReserva(@PathVariable("idprestamo") long idprestamo, Model modelo) {
 		Lector lector = prestamoservice.getById(idprestamo).getLector();
-		lectorservice.devolver(lector, idprestamo);
+		Prestamo prestamo = prestamoservice.getById(idprestamo);
+		prestamoservice.devolver(prestamo);
 		modelo.addAttribute("lector", lector);
 		return "redirect:/reservas";
 	}

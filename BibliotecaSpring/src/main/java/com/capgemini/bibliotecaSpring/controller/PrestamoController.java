@@ -51,7 +51,6 @@ public class PrestamoController {
 	public String formPrestamo(Model modelo, @PathVariable("idlector") long idlector) {
 		Lector lector = lectorservice.getById(idlector);
 		String returnTo="prestamo/addPrestamo";
-		
 		//si tienes mas de 3 prestamos no debes acceder a añadir prestamo
 		if (lector.getPrestamosLector().size() < 3) {
 			Prestamo prestamo;
@@ -86,11 +85,11 @@ public class PrestamoController {
 
 	}
 
-	@GetMapping("/devolver/{idprestamo}")
+	@GetMapping("/devolverprestamo/{idprestamo}")
 	public String devolverPrestamo(@PathVariable("idprestamo") long idprestamo, Model modelo) {
-		
+		Prestamo prestamo = prestamoservice.getById(idprestamo);
 		Lector lector = prestamoservice.getById(idprestamo).getLector();
-		lectorservice.devolver(lector, idprestamo);
+		prestamoservice.devolver(prestamo);
 		modelo.addAttribute("lector", lector);
 		return "redirect:/prestamos/" + lector.getIdlector();
 	}
