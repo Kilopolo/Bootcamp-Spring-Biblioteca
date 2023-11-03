@@ -19,12 +19,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 
 public class SeleniumTesting {
-	private static String URL = "http://localhost:8080/";
 
-	static WebDriver driver;
-	static File logLocation;
 
-	public static void setUpBeforeClass() {
+	public static void setUpBeforeClass(WebDriver driver,String URL) {
 		System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver/chromedriver.exe");
 		ChromeOptions options = new ChromeOptions();
 
@@ -34,16 +31,16 @@ public class SeleniumTesting {
 		driver.get(URL);
 	}
 
-	public static void tearDownAfterClass() {
+	public static void tearDownAfterClass(WebDriver driver) {
 		driver.quit();
 
 	}
 
-	public static void tearDown() {
+	public static void tearDown(WebDriver driver) {
 		driver.quit();
 
 	}
-	public static void setUp() {
+	public static void setUp(WebDriver driver,String URL) {
 		ChromeOptions options = new ChromeOptions();
 
 		driver = new ChromeDriver(options);
@@ -52,15 +49,13 @@ public class SeleniumTesting {
 		driver.get(URL);
 	}
 
-	public static WebDriver getDriver() {
-			return driver;
-		}
-		public static void logIn(String user, String password) {
+
+		public static void logIn(WebDriver driver,String user, String password) {
 			driver.findElement(By.id("login")).click();
 			driver.findElement(By.name("username")).sendKeys(user);
 			driver.findElement(By.name("password")).sendKeys(password);
 			driver.findElement(By.name("submit")).click();
-		checkOnHomePage();
+		checkOnHomePage(driver);
 
 	}
 
@@ -73,7 +68,7 @@ public class SeleniumTesting {
 	 * @param telefono
 	 * @param direccion
 	 */
-	public static void signIn(String user, String password, String nombre, String telefono, String direccion) {
+	public static void signIn(WebDriver driver,String user, String password, String nombre, String telefono, String direccion) {
 		driver.findElement(By.id("signup")).click();
 		espera(10000);
 		driver.findElement(By.name("lector.nombre")).sendKeys(nombre);
@@ -83,11 +78,11 @@ public class SeleniumTesting {
 		driver.findElement(By.name("password")).sendKeys(password);
 		driver.findElement(By.name("passwordConfirm")).sendKeys(password);
 		driver.findElement(By.name("submit")).click();
-		checkOnLoginPage();
+		checkOnLoginPage(driver);
 
 	}
 
-	public static void checkOnHomePage() {
+	public static void checkOnHomePage(WebDriver driver) {
 		WebElement texto;
 		try {
 //			espera(10000);
@@ -98,7 +93,7 @@ public class SeleniumTesting {
 		}
 
 	}
-	public static void checkOnLoginPage() {
+	public static void checkOnLoginPage(WebDriver driver) {
 		WebElement texto;
 		espera(10000);
 		texto = driver.findElement(By.id("loginPage"));
@@ -113,17 +108,17 @@ public class SeleniumTesting {
 		}
 	}
 
-	public static void logInAsUser() {
-		logIn("user@gmail.com", "1234");
+	public static void logInAsUser(WebDriver driver) {
+		logIn(driver,"user@gmail.com", "1234");
 
 	}
 
-	public static void logInAsAdmin() {
-		logIn("admin@gmail.com", "1234");
+	public static void logInAsAdmin(WebDriver driver) {
+		logIn(driver,"admin@gmail.com", "1234");
 
 	}
 
-	public static void logOut() {
+	public static void logOut(WebDriver driver) {
 		driver.findElement(By.id("logout")).click();
 	}
 	
