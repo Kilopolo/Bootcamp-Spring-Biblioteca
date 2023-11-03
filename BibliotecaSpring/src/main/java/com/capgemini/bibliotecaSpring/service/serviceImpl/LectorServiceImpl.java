@@ -46,7 +46,6 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 		int diasRetraso = periodo.getDays();
 		if (diasRetraso > 0) {
 			prestamoADevolver.setFechaFin(LocalDate.now());
-			if(prestamorepo.restraso(prestamoADevolver)) {
 				multar(lector.getIdlector(), prestamoADevolver);
 			}
 				
@@ -55,10 +54,7 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 			prestamos.remove(prestamoADevolver);
 			lectorrepo.save(lector);
 			prestamorepo.delete(prestamoADevolver);
-		} else {
-			System.out.println("Error");
-
-		}
+		
 	}
 
 	private Prestamo encontrarPrestamoPorNSocio(List<Prestamo> prestamos, Long nSocio) {
