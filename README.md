@@ -34,6 +34,10 @@ Además de abordar las limitaciones actuales, hay algunas tareas pendientes que 
 
 Si te gustaría contribuir al desarrollo de la Biblioteca Bootcamp-Spring-Biblioteca, por favor consulta nuestra [Guía de Contribución](CONTRIBUTING.md) para obtener más información sobre cómo empezar. Apreciamos todas las contribuciones para hacer que la aplicación sea más sólida y confiable.
 
+## Tablero de Trello
+
+Puedes seguir nuestro progreso y conocer las tareas pendientes en nuestro tablero de Trello: [Biblioteca ABC en Trello](https://trello.com/invite/b/ptSax2rG/ATTIf2b5913509283e55dae7216f41c9284c2615324C/bibliotecaspring).
+
 ## Licencia
 
 Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
