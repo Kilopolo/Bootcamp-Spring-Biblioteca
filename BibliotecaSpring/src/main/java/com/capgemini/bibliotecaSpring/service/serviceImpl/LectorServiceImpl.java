@@ -34,46 +34,10 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 	public CopiaRepositorio copiarepo;
 
 
-	private Prestamo encontrarPrestamoPorNSocio(List<Prestamo> prestamos, Long nSocio) {
-		for (Prestamo prestamo : prestamos) {
-			Lector lector = prestamo.getLector();
-			if (lector != null && lector.getIdlector().equals(nSocio)) {
-				return prestamo;
-			}
-		}
-		return null;
-	}
-
 	private boolean isNotMoroso(Lector lector) {
 		Multa multa = lector.getMulta();
 		return multa == null || multa.getFFin() == null || multa.getFFin().isBefore(LocalDate.now());
 	}
 
-	@Override
-	public void multar(long idLector, Prestamo prestamo) {
-		LocalDate fechaDevuelta = LocalDate.now();
-		LocalDate fechaPrevista= prestamo.getFechaFin();
-		Period periodo = fechaDevuelta.until(fechaPrevista);
-		int diasRetraso = periodo.getDays();
-		if (diasRetraso > 0) {
-			Optional<Lector> lector = lectorrepo.findById(idLector);
-			Copia copia= prestamo.getCopia();
-			copia.setEstado(EstadoCopia.RETRASO);
-			if (lector.isPresent()) {
-				Lector l = lector.get();
-				int numLibrosPrestados = l.getPrestamosLector().size();
-				if (numLibrosPrestados >= DIAS_MULTA) {
-					LocalDate fechaInicio = LocalDate.now();
-					LocalDate fechaFinMulta = fechaInicio.plusDays(diasRetraso);
-
-					Multa multa = new Multa();
-					multa.setFInicio(fechaInicio);
-					multa.setFFin(fechaFinMulta);
-					multa.setLector(l);
-					multarepo.save(multa);
-				}
-			}
-		}
-	}
 
 }

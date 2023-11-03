@@ -83,6 +83,7 @@ public class PrestamoController {
 		prestamoservice.borrar(prestamo);
 		return "redirect:/prestamos/" + lector.getIdlector();
 
+		
 	}
 
 	@GetMapping("/devolverprestamo/{idprestamo}")
