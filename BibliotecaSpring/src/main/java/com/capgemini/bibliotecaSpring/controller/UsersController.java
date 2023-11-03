@@ -1,5 +1,7 @@
 package com.capgemini.bibliotecaSpring.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -146,6 +148,8 @@ public class UsersController {
 		Copia copia = prestamo.getCopia();
 		copia.setEstado(EstadoCopia.PRESTADO);
 		prestamo.setCopia(copia);
+		prestamo.setFechaInicio(LocalDate.now());
+		prestamo.setFechaFin(LocalDate.now().plusDays(30));
 		prestamoservice.save(prestamo);
 		modelo.addAttribute("lector", lector);
 		return "redirect:/reservas";
@@ -158,7 +162,7 @@ public class UsersController {
 		Lector lector = activeUser.getLector();
 		modelo.addAttribute("lector", lector);
 		modelo.addAttribute("prestamo", prestamo);
-		modelo.addAttribute("copias", copiaservice.getAll());
+		modelo.addAttribute("copias",copiaservice.copiaBiblioteca());
 		return "prestamo/addPrestamoUser";
 	}
 

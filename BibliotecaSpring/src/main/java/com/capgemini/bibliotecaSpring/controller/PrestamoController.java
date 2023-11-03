@@ -51,6 +51,7 @@ public class PrestamoController {
 		copia.setEstado(EstadoCopia.PRESTADO);
 		prestamo.setCopia(copia);
 		prestamo.setFechaInicio(LocalDate.now());
+		prestamo.setFechaFin(LocalDate.now().plusDays(30));
 		prestamoservice.save(prestamo);
 		modelo.addAttribute("lector", lector);
 		return "redirect:/prestamos/" + idlector;
@@ -60,7 +61,6 @@ public class PrestamoController {
 	public String formPrestamo(Model modelo, @PathVariable("idlector") long idlector) {
 		Prestamo prestamo = new Prestamo();
 		Lector lector = lectorservice.getById(idlector);
-		prestamo.setFechaInicio(LocalDate.now());
 		modelo.addAttribute("lector", lector);
 		modelo.addAttribute("prestamo", prestamo);
 		modelo.addAttribute("copias",copiaservice.copiaBiblioteca());
