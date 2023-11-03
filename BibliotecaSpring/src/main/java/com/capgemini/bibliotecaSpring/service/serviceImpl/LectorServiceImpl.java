@@ -20,7 +20,6 @@ import com.capgemini.bibliotecaSpring.repositorio.LectorRepositorio;
 import com.capgemini.bibliotecaSpring.repositorio.MultaRepositorio;
 import com.capgemini.bibliotecaSpring.repositorio.PrestamoRepositorio;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
-import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
 
 @Service
 public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> implements LectorService {
@@ -33,10 +32,6 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 	public MultaRepositorio multarepo;
 	@Autowired
 	public PrestamoRepositorio prestamorepo;
-	@Autowired
-	public PrestamoService prestamoservice;
-	@Autowired
-	public LectorService lectorservice;
 	@Autowired
 	public CopiaRepositorio copiarepo;
 
@@ -55,7 +50,7 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 				copia.setEstado(EstadoCopia.BIBLIOTECA);
 				prestamos.remove(prestamoADevolver);
 				lectorrepo.save(lector);
-				prestamoservice.deleteById(id);
+				prestamorepo.deleteById(id);
 			}
 		} else {
 			throw new LectorNotFoundException(id);
@@ -91,8 +86,8 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 				nuevoPrestamo.setCopia(copia);
 
 				System.out.println(nuevoPrestamo);
-				prestamoservice.save(nuevoPrestamo);
-				System.out.println(prestamoservice.getAll());
+				prestamorepo.save(nuevoPrestamo);
+				System.out.println(prestamorepo.findAll());
 				copiarepo.save(copia);
 				// return nuevoPrestamo;
 			} else {
