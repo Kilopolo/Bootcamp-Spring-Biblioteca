@@ -36,7 +36,7 @@ Si te gustaría contribuir al desarrollo de la Biblioteca Bootcamp-Spring-Biblio
 
 ## Tablero de Trello
 
-Puedes seguir nuestro progreso y conocer las tareas pendientes en nuestro tablero de Trello: [Biblioteca ABC en Trello](https://trello.com/invite/b/ptSax2rG/ATTIf2b5913509283e55dae7216f41c9284c2615324C/bibliotecaspring).
+Puedes seguir nuestro progreso y conocer las tareas pendientes en nuestro tablero de Trello: [Biblioteca Bootcamp-Spring-Biblioteca en Trello](https://trello.com/invite/b/ptSax2rG/ATTIf2b5913509283e55dae7216f41c9284c2615324C/bibliotecaspring).
 
 ## Licencia
 
