@@ -19,7 +19,7 @@ La Biblioteca ABC es una herramienta útil, pero actualmente tiene algunas limit
 
 2. **Validar Cantidad de Préstamos:** La aplicación no valida adecuadamente la cantidad de préstamos que un usuario puede realizar al mismo tiempo. Esto podría llevar a situaciones en las que un usuario tome prestados demasiados libros, lo que no es deseable desde una perspectiva de gestión de la biblioteca.
 
-3. **Validar Estado de los Préstamos:** Actualmente, no se realiza una validación adecuada del estado de los préstamos al permitir que un usuario tome prestados más libros. Por ejemplo, un usuario podría tener libros pendientes de devolución y aún así tomar prestados más libros.
+3. **Validar Estado de las copias en lista de prestamos:** Actualmente, no se realiza una validación adecuada del estado de la copias prestadas al permitir que un usuario tome prestados la misma copia y modifica ambos prestamos, creando discordancias y fallos en otros metodos.
 
 4. **Validar Multa para No Prestar Cuando Está Multado:** No existe una función que impida prestar libros a un usuario que tiene multas pendientes. Esto puede llevar a problemas de incumplimiento de pago de multas.
 
