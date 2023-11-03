@@ -11,5 +11,5 @@ import com.capgemini.bibliotecaSpring.model.Prestamo;
 @Repository
 public interface PrestamoRepositorio extends JpaRepository<Prestamo, Long> {
 	List<Prestamo> findByLector(Lector lector);
-	boolean restraso(Prestamo prestamo);
+	
 }
