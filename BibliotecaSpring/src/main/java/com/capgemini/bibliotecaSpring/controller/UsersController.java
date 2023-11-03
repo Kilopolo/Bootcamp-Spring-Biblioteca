@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.capgemini.bibliotecaSpring.enumerados.EstadoCopia;
-import com.capgemini.bibliotecaSpring.model.Copia;
 import com.capgemini.bibliotecaSpring.model.Lector;
 import com.capgemini.bibliotecaSpring.model.Prestamo;
 import com.capgemini.bibliotecaSpring.model.User;
@@ -145,15 +143,7 @@ public class UsersController {
 		User activeUser = getActiveUser();
 		Lector lector = activeUser.getLector();
 		prestamo.setLector(lector);
-		Copia copia = prestamo.getCopia();
-		copia.setEstado(EstadoCopia.PRESTADO);
-		LocalDate fechaInicio=LocalDate.now();
-		LocalDate fechaFin=LocalDate.now().plusDays(30);
-		prestamo.setCopia(copia);
-		prestamo.setFechaInicio(fechaInicio);
-		prestamo.setFechaFin(fechaFin);
-		prestamoservice.save(prestamo);
-		prestamoservice.save(prestamo);
+		prestamoservice.guardar(prestamo);
 		modelo.addAttribute("lector", lector);
 		return "redirect:/reservas";
 	}
@@ -163,10 +153,6 @@ public class UsersController {
 		Prestamo prestamo = new Prestamo();
 		User activeUser = getActiveUser();
 		Lector lector = activeUser.getLector();
-		LocalDate fechaInicio=LocalDate.now();
-		LocalDate fechaFin=LocalDate.now().plusDays(30);
-		prestamo.setFechaInicio(fechaInicio);
-		prestamo.setFechaFin(fechaFin);
 		modelo.addAttribute("lector", lector);
 		modelo.addAttribute("prestamo", prestamo);
 		modelo.addAttribute("copias",copiaservice.copiaBiblioteca());
@@ -177,9 +163,7 @@ public class UsersController {
 		Lector lector = prestamoservice.getById(idprestamo).getLector();
 		modelo.addAttribute("lector", lector);
 		Prestamo prestamo = prestamoservice.getById(idprestamo);
-		Copia copia = prestamo.getCopia();
-		copia.setEstado(EstadoCopia.BIBLIOTECA);
-		prestamoservice.deleteById(idprestamo);
+		prestamoservice.borrar(prestamo);
 		return "redirect:/reservas";
 
 	}

@@ -1,8 +1,6 @@
 package com.capgemini.bibliotecaSpring.controller;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,8 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.capgemini.bibliotecaSpring.enumerados.EstadoCopia;
-import com.capgemini.bibliotecaSpring.model.Copia;
 import com.capgemini.bibliotecaSpring.model.Lector;
 import com.capgemini.bibliotecaSpring.model.Prestamo;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.CopiaService;
@@ -47,14 +43,7 @@ public class PrestamoController {
 			Model modelo) {
 		Lector lector = lectorservice.getById(idlector);
 		prestamo.setLector(lector);
-		Copia copia = prestamo.getCopia();
-		copia.setEstado(EstadoCopia.PRESTADO);
-		LocalDate fechaInicio=LocalDate.now();
-		LocalDate fechaFin=LocalDate.now().plusDays(30);
-		prestamo.setCopia(copia);
-		prestamo.setFechaInicio(fechaInicio);
-		prestamo.setFechaFin(fechaFin);
-		prestamoservice.save(prestamo);
+		prestamoservice.guardar(prestamo);
 		modelo.addAttribute("lector", lector);
 		return "redirect:/prestamos/" + idlector;
 	}
@@ -63,10 +52,6 @@ public class PrestamoController {
 	public String formPrestamo(Model modelo, @PathVariable("idlector") long idlector) {
 		Prestamo prestamo = new Prestamo();
 		Lector lector = lectorservice.getById(idlector);
-		LocalDate fechaInicio=LocalDate.now();
-		LocalDate fechaFin=LocalDate.now().plusDays(30);
-		prestamo.setFechaInicio(fechaInicio);
-		prestamo.setFechaFin(fechaFin);
 		modelo.addAttribute("lector", lector);
 		modelo.addAttribute("prestamo", prestamo);
 		modelo.addAttribute("copias",copiaservice.copiaBiblioteca());
@@ -87,9 +72,7 @@ public class PrestamoController {
 		Lector lector = prestamoservice.getById(idprestamo).getLector();
 		modelo.addAttribute("lector", lector);
 		Prestamo prestamo = prestamoservice.getById(idprestamo);
-		Copia copia = prestamo.getCopia();
-		copia.setEstado(EstadoCopia.BIBLIOTECA);
-		prestamoservice.deleteById(idprestamo);
+		prestamoservice.borrar(prestamo);
 		return "redirect:/prestamos/" + lector.getIdlector();
 
 	}

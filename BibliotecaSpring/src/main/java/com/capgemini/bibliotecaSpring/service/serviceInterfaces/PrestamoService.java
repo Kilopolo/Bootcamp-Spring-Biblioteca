@@ -14,7 +14,8 @@ public interface PrestamoService extends ServiceS<Prestamo> {
 	// Paginación para mostrar elementos por pagina (numero de pagina, elementos de
 	// la pagina, ordenacion y direccion)
 	Page<Prestamo> findPaginated(int pageNum, int pageSize, String sortField, String sortDirection);
-	
+	 Prestamo guardar(Prestamo prestamo);
+	void borrar(Prestamo prestamo);
 	
 
 }
