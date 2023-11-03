@@ -147,9 +147,12 @@ public class UsersController {
 		prestamo.setLector(lector);
 		Copia copia = prestamo.getCopia();
 		copia.setEstado(EstadoCopia.PRESTADO);
+		LocalDate fechaInicio=LocalDate.now();
+		LocalDate fechaFin=LocalDate.now().plusDays(30);
 		prestamo.setCopia(copia);
-		prestamo.setFechaInicio(LocalDate.now());
-		prestamo.setFechaFin(LocalDate.now().plusDays(30));
+		prestamo.setFechaInicio(fechaInicio);
+		prestamo.setFechaFin(fechaFin);
+		prestamoservice.save(prestamo);
 		prestamoservice.save(prestamo);
 		modelo.addAttribute("lector", lector);
 		return "redirect:/reservas";
@@ -160,11 +163,46 @@ public class UsersController {
 		Prestamo prestamo = new Prestamo();
 		User activeUser = getActiveUser();
 		Lector lector = activeUser.getLector();
+		LocalDate fechaInicio=LocalDate.now();
+		LocalDate fechaFin=LocalDate.now().plusDays(30);
+		prestamo.setFechaInicio(fechaInicio);
+		prestamo.setFechaFin(fechaFin);
 		modelo.addAttribute("lector", lector);
 		modelo.addAttribute("prestamo", prestamo);
 		modelo.addAttribute("copias",copiaservice.copiaBiblioteca());
 		return "prestamo/addPrestamoUser";
 	}
+	@GetMapping("/deletereserva/{idprestamo}")
+	public String deleteReserva(@PathVariable("idprestamo") long idprestamo, Model modelo) {
+		Lector lector = prestamoservice.getById(idprestamo).getLector();
+		modelo.addAttribute("lector", lector);
+		Prestamo prestamo = prestamoservice.getById(idprestamo);
+		Copia copia = prestamo.getCopia();
+		copia.setEstado(EstadoCopia.BIBLIOTECA);
+		prestamoservice.deleteById(idprestamo);
+		return "redirect:/reservas";
+
+	}
+	@GetMapping("/updatereserva/{idprestamo}")
+	public String updateReserva(Model modelo, @PathVariable("idprestamo") long idprestamo) {
+		Prestamo prestamo = prestamoservice.getById(idprestamo);
+		modelo.addAttribute("lector", prestamo.getLector());
+		modelo.addAttribute("prestamo", prestamo);
+		modelo.addAttribute("copias",copiaservice.copiaBiblioteca());
+		return "prestamo/updatePrestamo";
+	}
+	
+	@GetMapping("/devolverreserva/{idprestamo}")
+	public String devolverReserva(@PathVariable("idprestamo") long idprestamo, Model modelo) {
+		Lector lector = prestamoservice.getById(idprestamo).getLector();
+		Prestamo prestamo =prestamoservice.getById(idprestamo);
+		prestamo.setFechaFin(LocalDate.now());
+		LocalDate fechaFin= prestamo.getFechaFin();
+		lectorservice.devolver(lector.getIdlector(), fechaFin);
+		modelo.addAttribute("lector", lector);
+		return "redirect:/reservas";
+	}
+
 
 	// USER
 	// LECTORES
