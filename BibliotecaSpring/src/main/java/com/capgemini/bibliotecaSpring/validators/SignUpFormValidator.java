@@ -27,7 +27,7 @@ public class SignUpFormValidator implements Validator {
 		if (usersServiceImpl.getUserByEmail(user.getEmail()) != null) {
 			errors.rejectValue("email", "Error.signup.email.duplicate");
 		}
-		if (user.getPassword().length() < 5 || user.getPassword().length() > 24) {
+		if (user.getPassword().length() < 1 || user.getPassword().length() > 240){
 			errors.rejectValue("password", "Error.signup.password.length");
 		}
 		if (user.getPasswordConfirm() != null)

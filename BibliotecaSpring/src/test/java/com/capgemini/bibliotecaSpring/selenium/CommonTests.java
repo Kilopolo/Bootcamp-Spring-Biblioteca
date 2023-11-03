@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class LogInOutSignUp {
+class CommonTests {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -30,13 +30,15 @@ class LogInOutSignUp {
 
 	@AfterEach
 	void tearDown() throws Exception {
-		SeleniumTesting.getDriver().quit();
+		SeleniumTesting.tearDown();
 	}
 
 	@Test
-	void testLogInAsAdmin() {
-		SeleniumTesting.logInAsAdmin();
+	void testLogOut() {
+		SeleniumTesting.logInAsUser();
+		SeleniumTesting.logOut();
 	}
+
 	
 	@Test
 	void testLogInAsUser() {
@@ -45,17 +47,20 @@ class LogInOutSignUp {
 	
 	@Test
 	void testSignUp() {
-		String usr = "testSignUp@testSignUp.testSignUp";
-		String pssd = "1234" ;
-		SeleniumTesting.signIn(usr,pssd);
+		String usr = "testSignUp@email.com";
+		String pssd = "1234";
+		SeleniumTesting.signIn(usr, pssd, "Nombre", "123456789", "Calle Ejemplo");
 	}
 	
 	@Test
 	void testSignUpAndLogIn() {
-		String usr = "testSignUpAndLogIn@testSignUpAndLogIn.testSignUpAndLogIn";
-		String pssd = "1234" ;
-		SeleniumTesting.signIn(usr,pssd);
-		SeleniumTesting.logIn(usr,pssd);
+		String usr = "testSignUpAndLogIn@email.com";
+		String pssd = "1234";
+		SeleniumTesting.signIn(usr, pssd, "Nombre", "123456789", "Calle Ejemplo");
+//		SeleniumTesting.checkOnLoginPage();
+
+		SeleniumTesting.logIn(usr, pssd);
+//		SeleniumTesting.logOut();
 	}
 
 

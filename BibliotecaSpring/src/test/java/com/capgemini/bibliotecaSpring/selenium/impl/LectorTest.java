@@ -5,6 +5,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.capgemini.bibliotecaSpring.selenium.SeleniumTesting;
@@ -34,14 +35,16 @@ class LectorTest {
 
 	@AfterEach
 	void tearDown() throws Exception {
-		SeleniumTesting.getDriver().quit();
+		SeleniumTesting.tearDown();
 	}
 
 	@Test
 	void testVerLectores() {
 		SeleniumTesting.logInAsAdmin();
-		
-		
+		SeleniumTesting.getDriver().findElement(By.linkText("Libros")).click();
+//		String st = "/html/body/div/table/tbody";
+		SeleniumTesting.checkNumberOfUsersOnList(SeleniumTesting.getDriver(), 5);
+		SeleniumTesting.espera(1);
 		
 //		try {
 //			Thread.sleep(10000);
