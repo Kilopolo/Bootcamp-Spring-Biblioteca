@@ -10,9 +10,9 @@
 <body>
 	<nav th:replace="fragments/nav" />
 	<div class="container">
+		<h3 class="d-inline p-2">Libros autor/a: <span style="color: darkblue;" th:text="${autor.nombre}"></span> </h3>
+		<img class="d-inline p-2" th:src="@{/img/libro.png}" th:title="libro">
 		<table class="table table-striped table-responsive-md">
-			<h3  class="d-inline p-2">Libros autor/a: <span style="color: darkblue;" th:text="${autor.nombre}"></span> </h3>
-			<img  class="d-inline p-2" th:src="@{/img/libro.png}" th:title="libro">
 			<thead>
 				<tr>
 					<th>Título</th>
@@ -31,11 +31,11 @@
 					<td th:text="${libro.tipo}"></td>
 					<td th:text="${#lists.size(libro.copias)}"></td>
 					<td><a th:href="@{'/copias/'+${libro.idlibro}}" class="btn btn-primary">Copias</a>
-						<a sec:authorize="hasRole('ADMIN')" th:href="@{'/admin/updatelibro/'+${libro.idlibro}}"><img alt=""
-						src="/img/editar.png"></a>
+						<a sec:authorize="hasRole('ADMIN')" th:href="@{'/admin/updatelibro/'+${libro.idlibro}}"><img
+								alt="" src="/img/editar.png"></a>
 						<a th:onclick="return confirm('¿Estás seguro de que deseas eliminar este libro?')"
-							sec:authorize="hasRole('ADMIN')" th:href="@{'/admin/deletelibro/'+${libro.idlibro}}"><img alt=""
-						src="/img/eliminar.png"></a>
+							sec:authorize="hasRole('ADMIN')" th:href="@{'/admin/deletelibro/'+${libro.idlibro}}"><img
+								alt="" src="/img/eliminar.png"></a>
 					</td>
 				</tr>
 			</tbody>

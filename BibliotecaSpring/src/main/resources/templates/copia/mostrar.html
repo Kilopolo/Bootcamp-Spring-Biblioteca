@@ -10,9 +10,9 @@
 <body>
 	<nav th:replace="fragments/nav" />
 	<div class="container">
+		<h3 class="d-inline p-2">Copias libro <span style="color: darkblue;" th:text="${libro.titulo}"></span> </h3>
+		<img class="d-inline p-2" th:src="@{/img/libro.png}" th:title="libro">
 		<table class="table table-striped table-responsive-md">
-			<h3  class="d-inline p-2">Copias libro <span  style="color: darkblue;" th:text="${libro.titulo}"></span> </h3>
-			<img  class="d-inline p-2" th:src="@{/img/libro.png}" th:title="libro">
 			<thead>
 				<tr>
 					<th>ID</th>
@@ -25,17 +25,15 @@
 					<td th:text="${copia.idcopia}"></td>
 					<td th:text="${copia.estado}"></td>
 					<td>
-						<a sec:authorize="hasRole('ADMIN')" th:href="@{'/admin/updatecopia/'+${copia.idcopia}}"
-							><img alt=""
-						src="/img/editar.png"></a>
+						<a sec:authorize="hasRole('ADMIN')" th:href="@{'/admin/updatecopia/'+${copia.idcopia}}"><img
+								alt="" src="/img/editar.png"></a>
 						<a th:onclick="return confirm('¿Estás seguro de que deseas eliminar esta copia?')"
-							sec:authorize="hasRole('ADMIN')" th:href="@{'/admin/deletecopia/'+${copia.idcopia}}"
-							><img alt=""
-						src="/img/eliminar.png"></a>
-						<a  sec:authorize="hasRole('USER')" th:href="@{/reservas}"  class="btn btn-primary">Reservar</a>
+							sec:authorize="hasRole('ADMIN')" th:href="@{'/admin/deletecopia/'+${copia.idcopia}}"><img
+								alt="" src="/img/eliminar.png"></a>
+						<a sec:authorize="hasRole('USER')" th:href="@{/reservas}" class="btn btn-primary">Reservar</a>
 					</td>
 				</tr>
-				<tr  th:if="${#lists.isEmpty(copias)}">
+				<tr th:if="${#lists.isEmpty(copias)}">
 					<td colspan="3" style="color: red; text-align: center;font-weight: bold;">No hay copias</td>
 				</tr>
 				<tr th:if="${!#lists.isEmpty(copias)}">
