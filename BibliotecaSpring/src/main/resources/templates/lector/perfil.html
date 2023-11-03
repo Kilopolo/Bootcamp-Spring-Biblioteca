@@ -11,7 +11,7 @@
 	<nav th:replace="fragments/nav" />
 	<div class="container">
 		<table class="table table-striped table-responsive-md">
-			<h3 class="d-inline p-2">Perfil <span style="color: darkblue;" th:text="${user.lector.nombre}"></span> </h3>
+			<h3 class="d-inline p-2">Perfil <span style="color: darkblue;" th:text="${user.lector.nombre}"></span></h3>
 			<img class="d-inline p-2" th:src="@{/img/socio.png}" th:title="socio">
 			<thead>
 				<tr>
@@ -28,7 +28,8 @@
 					<td th:text="${user.lector.nombre}"></td>
 					<td th:text="${user.lector.telefono}"></td>
 					<td th:text="${user.lector.direccion}"></td>
-					<<td>
+					<td>
+						<a th:href="@{/multauser}" class="btn btn-warning" style="color: whitesmoke;">Ver multas</a>
 						<a th:href="@{'/updateperfil/' + ${user.id}}"><img alt=""
 						src="/img/editar.png"></a>
 					</td>

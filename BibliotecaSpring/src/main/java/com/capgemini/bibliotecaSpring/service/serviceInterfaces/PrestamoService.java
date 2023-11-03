@@ -16,6 +16,6 @@ public interface PrestamoService extends ServiceS<Prestamo> {
 	Page<Prestamo> findPaginated(int pageNum, int pageSize, String sortField, String sortDirection);
 	 Prestamo guardar(Prestamo prestamo);
 	void borrar(Prestamo prestamo);
-	
-	boolean restraso(Prestamo prestamo);
+	void devolver(Prestamo prestamo);
+	void multar(Lector lector, int dias);
 }
