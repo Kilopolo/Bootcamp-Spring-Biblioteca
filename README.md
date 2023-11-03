@@ -13,17 +13,12 @@ La Biblioteca Bootcamp-Spring-Biblioteca es una aplicación de gestión de bibli
 
 ## Cosas que fallan
 
-La Biblioteca ABC es una herramienta útil, pero actualmente tiene algunas limitaciones y áreas en las que falla:
+La Biblioteca Bootcamp-Spring-Biblioteca es una herramienta útil, pero actualmente tiene algunas limitaciones y áreas en las que falla:
 
 1. **Control de Multas para Añadir Libro en el Lector:** Actualmente, no existe una funcionalidad completa para el control de multas al agregar un libro atrasado o dañado en el perfil del lector. Esto significa que los usuarios pueden devolver los libros con retraso sin que se les aplique una multa adecuada.
-
-2. **Validar Cantidad de Préstamos:** La aplicación no valida adecuadamente la cantidad de préstamos que un usuario puede realizar al mismo tiempo. Esto podría llevar a situaciones en las que un usuario tome prestados demasiados libros, lo que no es deseable desde una perspectiva de gestión de la biblioteca.
-
-3. **Validar Estado de las copias en lista de prestamos:** Actualmente, no se realiza una validación adecuada del estado de la copias prestadas al permitir que un usuario tome prestados la misma copia y modifica ambos prestamos, creando discordancias y fallos en otros metodos.
-
-4. **Validar Multa para No Prestar Cuando Está Multado:** No existe una función que impida prestar libros a un usuario que tiene multas pendientes. Esto puede llevar a problemas de incumplimiento de pago de multas.
-
-5. **Testing Multas:** Falta una suite de pruebas sólida para la funcionalidad de multas. Las pruebas son importantes para garantizar que las multas se calculen y apliquen correctamente.
+2. **Validar Estado de las copias en lista de prestamos:** Actualmente, no se realiza una validación adecuada del estado de la copias prestadas al permitir que un usuario tome prestados la misma copia y modifica ambos prestamos, creando discordancias y fallos en otros metodos como añadir prestamos y su control de copias.
+3. **Validar Multa para No Prestar Cuando Está Multado:** No existe una función que impida prestar libros a un usuario que tiene multas pendientes. Esto puede llevar a problemas de incumplimiento de pago de multas.
+4. **Testing Multas:** Falta una suite de pruebas sólida para la funcionalidad de multas. Las pruebas son importantes para garantizar que las multas se calculen y apliquen correctamente.
 
 ## Cosas que faltan por hacer
 
