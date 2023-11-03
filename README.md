@@ -1,9 +1,6 @@
 # Bootcamp-Spring-Biblioteca
 
-
-# Biblioteca ABC
-
-La Biblioteca ABC es una aplicación de gestión de bibliotecas que te permite administrar libros, préstamos y usuarios de manera eficiente.
+La Biblioteca Bootcamp-Spring-Biblioteca es una aplicación de gestión de bibliotecas que te permite administrar libros, préstamos y usuarios de manera eficiente.
 
 ## Características
 
@@ -30,7 +27,7 @@ La Biblioteca ABC es una herramienta útil, pero actualmente tiene algunas limit
 
 ## Cosas que faltan por hacer
 
-Además de abordar las limitaciones actuales, hay algunas tareas pendientes que mejorarían la Biblioteca ABC:
+Además de abordar las limitaciones actuales, hay algunas tareas pendientes que mejorarían la Biblioteca Bootcamp-Spring-Biblioteca:
 
 1. **Funcionalidad de Morosos:** Implementar una funcionalidad que marque a los usuarios como morosos cuando tengan multas pendientes y les limite la capacidad de realizar más préstamos.
 
@@ -40,7 +37,7 @@ Además de abordar las limitaciones actuales, hay algunas tareas pendientes que 
 
 ## Contribuir
 
-Si te gustaría contribuir al desarrollo de la Biblioteca ABC, por favor consulta nuestra [Guía de Contribución](CONTRIBUTING.md) para obtener más información sobre cómo empezar. Apreciamos todas las contribuciones para hacer que la aplicación sea más sólida y confiable.
+Si te gustaría contribuir al desarrollo de la Biblioteca Bootcamp-Spring-Biblioteca, por favor consulta nuestra [Guía de Contribución](CONTRIBUTING.md) para obtener más información sobre cómo empezar. Apreciamos todas las contribuciones para hacer que la aplicación sea más sólida y confiable.
 
 ## Licencia
 
@@ -48,6 +45,6 @@ Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE)
 
 ## Contacto
 
-Si tienes alguna pregunta o sugerencia, por favor contáctanos en [correo@example.com](mailto:correo@example.com) o crea un nuevo problema en este repositorio.
+Si tienes alguna pregunta o sugerencia, por favor contáctanos en [pablo.diaz-rubio@capgemini.com](mailto:pablo.diaz-rubio@capgemini.com) o crea un nuevo problema en este repositorio.
 
-¡Gracias por tu interés en la Biblioteca ABC!
+¡Gracias por tu interés en la Biblioteca Bootcamp-Spring-Biblioteca!
