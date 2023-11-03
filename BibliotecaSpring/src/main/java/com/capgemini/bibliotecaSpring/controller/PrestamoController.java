@@ -1,5 +1,9 @@
 package com.capgemini.bibliotecaSpring.controller;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,6 +50,8 @@ public class PrestamoController {
 		Copia copia = prestamo.getCopia();
 		copia.setEstado(EstadoCopia.PRESTADO);
 		prestamo.setCopia(copia);
+		prestamo.setFechaInicio(LocalDate.now());
+		prestamo.setFechaFin(LocalDate.now().plusDays(30));
 		prestamoservice.save(prestamo);
 		modelo.addAttribute("lector", lector);
 		return "redirect:/prestamos/" + idlector;
@@ -57,7 +63,7 @@ public class PrestamoController {
 		Lector lector = lectorservice.getById(idlector);
 		modelo.addAttribute("lector", lector);
 		modelo.addAttribute("prestamo", prestamo);
-		modelo.addAttribute("copias", copiaservice.getAll());
+		modelo.addAttribute("copias",copiaservice.copiaBiblioteca());
 		return "prestamo/addPrestamo";
 	}
 
@@ -76,6 +82,16 @@ public class PrestamoController {
 		prestamoservice.deleteById(idprestamo);
 		return "redirect:/prestamos/" + lector.getIdlector();
 
+	}
+	@GetMapping("/devolver/{idprestamo}")
+	public String devolverPrestamo(@PathVariable("idprestamo") long idprestamo, Model modelo) {
+		Lector lector = prestamoservice.getById(idprestamo).getLector();
+		Prestamo prestamo =prestamoservice.getById(idprestamo);
+		prestamo.setFechaFin(LocalDate.now());
+		LocalDate fechaFin= prestamo.getFechaFin();
+		lectorservice.devolver(lector.getIdlector(), fechaFin);
+		modelo.addAttribute("lector", lector);
+		return "redirect:/prestamos/" + lector.getIdlector();
 	}
 
 }

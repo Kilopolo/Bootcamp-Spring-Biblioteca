@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/head" />
 <title>Home</title>
@@ -8,15 +8,15 @@
 	<nav th:replace="fragments/nav" />
 	<div class="container" style="text-align: center">
 		<h2 th:text="#{welcome.message}"></h2>
-		<h3 id="userLogedIn"th:text="#{welcomesub.message}"></h3>
+		<h3 id="userLogedIn" th:text="#{welcomesub.message}"></h3>
 		<p th:text="#{usermessage.message}">
 		<p>
 		<p>
 			<span sec:authentication="principal.username" th:inline="text">
 			</span>
+
+			<img class="img-fluid" th:src="@{/img/hola.png}" th:title="Bienvenido">
 		</p>
-		<img class="img-fluid" th:src="@{/img/Capgemini_201x_logo.svg.png}" th:title="Logo">
-	
 	</div>
 
 	</div>

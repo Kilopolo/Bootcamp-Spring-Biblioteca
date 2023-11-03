@@ -1,5 +1,7 @@
 package com.capgemini.bibliotecaSpring.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +29,7 @@ import com.capgemini.bibliotecaSpring.service.serviceInterfaces.CopiaService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LectorService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.LibroService;
 import com.capgemini.bibliotecaSpring.service.serviceInterfaces.PrestamoService;
+import com.capgemini.bibliotecaSpring.service.serviceInterfaces.UserService;
 import com.capgemini.bibliotecaSpring.validators.SignUpFormValidator;
 
 import jakarta.servlet.http.HttpSession;
@@ -58,7 +62,9 @@ public class UsersController {
 	CopiaService copiaservice;
 	@Autowired
 	PrestamoService prestamoservice;
-
+	@Autowired
+	UserService userservice;
+	
 	// GESTION DE LOGIN/REGISTRO
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
@@ -142,6 +148,8 @@ public class UsersController {
 		Copia copia = prestamo.getCopia();
 		copia.setEstado(EstadoCopia.PRESTADO);
 		prestamo.setCopia(copia);
+		prestamo.setFechaInicio(LocalDate.now());
+		prestamo.setFechaFin(LocalDate.now().plusDays(30));
 		prestamoservice.save(prestamo);
 		modelo.addAttribute("lector", lector);
 		return "redirect:/reservas";
@@ -154,7 +162,7 @@ public class UsersController {
 		Lector lector = activeUser.getLector();
 		modelo.addAttribute("lector", lector);
 		modelo.addAttribute("prestamo", prestamo);
-		modelo.addAttribute("copias", copiaservice.getAll());
+		modelo.addAttribute("copias",copiaservice.copiaBiblioteca());
 		return "prestamo/addPrestamoUser";
 	}
 
@@ -165,6 +173,12 @@ public class UsersController {
 		User activeUser = getActiveUser();
 		modelo.addAttribute("user", activeUser);
 		return "lector/perfil";
+	}
+	@GetMapping("/updateperfil/{id}")
+	public String updateLector(Model modelo, @PathVariable("id") long id) {
+		User user = userservice.getById(id);
+		modelo.addAttribute("user", user);
+		return "lector/updatePerfil";
 	}
 
 }

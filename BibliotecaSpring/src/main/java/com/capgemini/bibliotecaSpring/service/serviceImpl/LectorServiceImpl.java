@@ -64,6 +64,8 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 
 			if (prestamoADevolver != null) {
 				prestamoADevolver.setFechaFin(fechaDevuelto);
+				Copia copia = prestamoADevolver.getCopia();
+				copia.setEstado(EstadoCopia.BIBLIOTECA);
 				prestamos.remove(prestamoADevolver);
 				lectorrepo.save(lector);
 				prestamoservice.deleteById(id);
