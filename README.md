@@ -43,3 +43,8 @@ Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE)
 Si tienes alguna pregunta o sugerencia, por favor contáctanos en [pablo.diaz-rubio@capgemini.com](mailto:pablo.diaz-rubio@capgemini.com) o crea un nuevo problema en este repositorio.
 
 ¡Gracias por tu interés en la Biblioteca Bootcamp-Spring-Biblioteca!
+
+## Colaboradores
+ - Pablo Díaz Rubio
+ - Patricia Fernández Sánchez
+ - David Santos Miguélez
