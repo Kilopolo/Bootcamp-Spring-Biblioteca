@@ -45,7 +45,7 @@
 					<td th:text="${libro.anyo}"></td>
 					<td th:text="${libro.tipo}"></td>
 					<td th:text="${#lists.size(libro.copias)}"></td>
-					<td><a th:href="@{'/copias/'+${libro.idlibro}}" class="btn btn-primary">Copias</a>
+					<td><a th:href="@{'/copias/'+${libro.idlibro}}" th:id="${libro.idlibro}" class="btn btn-primary">Copias</a>
 				</tr>
 			</tbody>
 		</table>

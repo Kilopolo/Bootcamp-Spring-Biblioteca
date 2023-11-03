@@ -16,12 +16,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-
-
 public class SeleniumTesting {
 
-
-	public static void setUpBeforeClass(WebDriver driver,String URL) {
+	public static void setUpBeforeClass(WebDriver driver, String URL) {
 		System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver/chromedriver.exe");
 		ChromeOptions options = new ChromeOptions();
 
@@ -40,7 +37,8 @@ public class SeleniumTesting {
 		driver.quit();
 
 	}
-	public static void setUp(WebDriver driver,String URL) {
+
+	public static void setUp(WebDriver driver, String URL) {
 		ChromeOptions options = new ChromeOptions();
 
 		driver = new ChromeDriver(options);
@@ -49,12 +47,11 @@ public class SeleniumTesting {
 		driver.get(URL);
 	}
 
-
-		public static void logIn(WebDriver driver,String user, String password) {
-			driver.findElement(By.id("login")).click();
-			driver.findElement(By.name("username")).sendKeys(user);
-			driver.findElement(By.name("password")).sendKeys(password);
-			driver.findElement(By.name("submit")).click();
+	public static void logIn(WebDriver driver, String user, String password) {
+		driver.findElement(By.id("login")).click();
+		driver.findElement(By.name("username")).sendKeys(user);
+		driver.findElement(By.name("password")).sendKeys(password);
+		driver.findElement(By.name("submit")).click();
 		checkOnHomePage(driver);
 
 	}
@@ -68,7 +65,8 @@ public class SeleniumTesting {
 	 * @param telefono
 	 * @param direccion
 	 */
-	public static void signIn(WebDriver driver,String user, String password, String nombre, String telefono, String direccion) {
+	public static void signIn(WebDriver driver, String user, String password, String nombre, String telefono,
+			String direccion) {
 		driver.findElement(By.id("signup")).click();
 		espera(10000);
 		driver.findElement(By.name("lector.nombre")).sendKeys(nombre);
@@ -93,12 +91,13 @@ public class SeleniumTesting {
 		}
 
 	}
+
 	public static void checkOnLoginPage(WebDriver driver) {
 		WebElement texto;
 		espera(10000);
 		texto = driver.findElement(By.id("loginPage"));
 		assertNotEquals(texto, null);
-		}
+	}
 
 	public static void espera(int tiempo) {
 		try {
@@ -109,19 +108,19 @@ public class SeleniumTesting {
 	}
 
 	public static void logInAsUser(WebDriver driver) {
-		logIn(driver,"user@gmail.com", "1234");
+		logIn(driver, "user@gmail.com", "1234");
 
 	}
 
 	public static void logInAsAdmin(WebDriver driver) {
-		logIn(driver,"admin@gmail.com", "1234");
+		logIn(driver, "admin@gmail.com", "1234");
 
 	}
 
 	public static void logOut(WebDriver driver) {
 		driver.findElement(By.id("logout")).click();
 	}
-	
+
 	public static void checkNumberOfUsersOnList(WebDriver driver, int expectedSize) {
 		// Contamos el número de filas de notas
 		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", 2);

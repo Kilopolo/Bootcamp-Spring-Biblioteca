@@ -1,6 +1,9 @@
 package com.capgemini.bibliotecaSpring.selenium.impl;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
+import java.time.Duration;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
@@ -11,6 +14,10 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.capgemini.bibliotecaSpring.selenium.SeleniumTesting;
@@ -25,46 +32,57 @@ class LibrosTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		SeleniumTesting.setUpBeforeClass(driver, URL);
+		System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver/chromedriver.exe");
+		ChromeOptions options = new ChromeOptions();
+
+		driver = new ChromeDriver(options);
+		driver.manage().window().maximize();
+		driver.get(URL);
 
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-		SeleniumTesting.tearDownAfterClass(driver);
+		driver.quit();
 
 	}
 
 	@BeforeEach
 	void setUp() throws Exception {
-		SeleniumTesting.setUp(driver, URL);
+		ChromeOptions options = new ChromeOptions();
+
+		driver = new ChromeDriver(options);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+		driver.manage().window().maximize();
+		driver.get(URL);
 
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		SeleniumTesting.tearDown(driver);
+		driver.quit();
 	}
 
 	@Test
-	void testVerLectores() {
+	void testVerLibros() {
 		SeleniumTesting.logInAsAdmin(driver);
 		driver.findElement(By.linkText("Libros")).click();
 		SeleniumTesting.checkNumberOfUsersOnList(driver, 5);
 		SeleniumTesting.espera(1);
 
-
 	}
-
 
 	@Test
 	void testIrCopiasLibro() {
 		SeleniumTesting.logInAsAdmin(driver);
 		driver.findElement(By.linkText("Libros")).click();
-		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
-				2);
-		
-	}
+		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", 2);
+		List<WebElement> elementosId = SeleniumUtils.EsperaCargaPaginaxpath(driver, "//*[@id=\"5\"]", 2);
+		elementosId.get(0).click();
+		SeleniumTesting.espera(500);
+//		assertTrue((new WebDriverWait(driver, 2))
+//				.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id=\"31\"]"))));
 
+	}
 
 }
