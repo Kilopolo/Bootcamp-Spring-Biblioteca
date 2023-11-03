@@ -18,34 +18,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class SeleniumTesting {
 
-	public static void setUpBeforeClass(WebDriver driver, String URL) {
-		System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver/chromedriver.exe");
-		ChromeOptions options = new ChromeOptions();
 
-		driver = new ChromeDriver(options);
-//		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		driver.manage().window().maximize();
-		driver.get(URL);
-	}
-
-	public static void tearDownAfterClass(WebDriver driver) {
-		driver.quit();
-
-	}
-
-	public static void tearDown(WebDriver driver) {
-		driver.quit();
-
-	}
-
-	public static void setUp(WebDriver driver, String URL) {
-		ChromeOptions options = new ChromeOptions();
-
-		driver = new ChromeDriver(options);
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		driver.manage().window().maximize();
-		driver.get(URL);
-	}
 
 	public static void logIn(WebDriver driver, String user, String password) {
 		driver.findElement(By.id("login")).click();
@@ -68,7 +41,7 @@ public class SeleniumTesting {
 	public static void signIn(WebDriver driver, String user, String password, String nombre, String telefono,
 			String direccion) {
 		driver.findElement(By.id("signup")).click();
-		espera(10000);
+
 		driver.findElement(By.name("lector.nombre")).sendKeys(nombre);
 		driver.findElement(By.name("lector.telefono")).sendKeys(telefono);
 		driver.findElement(By.name("lector.direccion")).sendKeys(direccion);
@@ -83,7 +56,6 @@ public class SeleniumTesting {
 	public static void checkOnHomePage(WebDriver driver) {
 		WebElement texto;
 		try {
-//			espera(10000);
 			texto = driver.findElement(By.id("userLogedIn"));
 			assertEquals("Esta es la parte privada de la web", texto.getText());
 		} catch (NoSuchElementException e) {
@@ -94,14 +66,14 @@ public class SeleniumTesting {
 
 	public static void checkOnLoginPage(WebDriver driver) {
 		WebElement texto;
-		espera(10000);
+
 		texto = driver.findElement(By.id("loginPage"));
 		assertNotEquals(texto, null);
 	}
 
 	public static void espera(int tiempo) {
 		try {
-			Thread.sleep(tiempo);
+			Thread.sleep(tiempo*1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

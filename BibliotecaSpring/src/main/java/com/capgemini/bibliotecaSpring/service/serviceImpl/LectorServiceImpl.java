@@ -55,7 +55,7 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 			prestamos.remove(prestamoADevolver);
 			lectorrepo.save(lector);
 			prestamorepo.delete(prestamoADevolver);
-		
+		}
 	}
 
 	private Prestamo encontrarPrestamoPorNSocio(List<Prestamo> prestamos, Long nSocio) {
