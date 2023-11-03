@@ -1,7 +1,5 @@
 package com.capgemini.bibliotecaSpring.selenium.impl;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 import java.time.Duration;
 import java.util.List;
@@ -16,8 +14,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.capgemini.bibliotecaSpring.selenium.SeleniumTesting;
@@ -27,15 +23,23 @@ import com.capgemini.bibliotecaSpring.selenium.SeleniumUtils;
 class LibrosTest {
 	private static String URL = "http://localhost:8080/";
 
-	static WebDriver driver;
+	static WebDriver driver = getDriver();
 	static File logLocation;
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+
+	public static WebDriver getDriver() {
 		System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver/chromedriver.exe");
 		ChromeOptions options = new ChromeOptions();
-
-		driver = new ChromeDriver(options);
+		WebDriver driver = new ChromeDriver(options);
+		return driver;
+	}
+	
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {
+//		System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver/chromedriver.exe");
+		
+//		driver.manage().
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
 		driver.manage().window().maximize();
 		driver.get(URL);
 
@@ -49,18 +53,17 @@ class LibrosTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		ChromeOptions options = new ChromeOptions();
-
-		driver = new ChromeDriver(options);
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
-		driver.manage().window().maximize();
+//		ChromeOptions options = new ChromeOptions();
+//		driver = new ChromeDriver(options);
+		
+//		driver.manage().window().maximize();
 		driver.get(URL);
 
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		driver.quit();
+		driver.manage().deleteAllCookies();
 	}
 
 	@Test

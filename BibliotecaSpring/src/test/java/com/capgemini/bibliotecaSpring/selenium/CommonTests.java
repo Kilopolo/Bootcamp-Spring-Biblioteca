@@ -16,15 +16,20 @@ class CommonTests {
 
 	private static String URL = "http://localhost:8080/";
 
-	static WebDriver driver;
+	static WebDriver driver = getDriver();
 	static File logLocation;
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+
+	public static WebDriver getDriver() {
 		System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver/chromedriver.exe");
 		ChromeOptions options = new ChromeOptions();
-
-		driver = new ChromeDriver(options);
+		WebDriver driver = new ChromeDriver(options);
+		return driver;
+	}
+	
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
 		driver.manage().window().maximize();
 		driver.get(URL);
 
@@ -38,18 +43,13 @@ class CommonTests {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		ChromeOptions options = new ChromeOptions();
-
-		driver = new ChromeDriver(options);
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
-		driver.manage().window().maximize();
 		driver.get(URL);
 
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		driver.quit();
+		driver.manage().deleteAllCookies();
 	}
 
 
