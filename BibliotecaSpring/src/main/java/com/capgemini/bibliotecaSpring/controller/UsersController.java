@@ -1,7 +1,5 @@
 package com.capgemini.bibliotecaSpring.controller;
 
-import java.time.LocalDate;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -179,10 +177,7 @@ public class UsersController {
 	@GetMapping("/devolverreserva/{idprestamo}")
 	public String devolverReserva(@PathVariable("idprestamo") long idprestamo, Model modelo) {
 		Lector lector = prestamoservice.getById(idprestamo).getLector();
-		Prestamo prestamo =prestamoservice.getById(idprestamo);
-		prestamo.setFechaFin(LocalDate.now());
-		LocalDate fechaFin= prestamo.getFechaFin();
-		lectorservice.devolver(lector.getIdlector(), fechaFin);
+		lectorservice.devolver(lector, idprestamo);
 		modelo.addAttribute("lector", lector);
 		return "redirect:/reservas";
 	}

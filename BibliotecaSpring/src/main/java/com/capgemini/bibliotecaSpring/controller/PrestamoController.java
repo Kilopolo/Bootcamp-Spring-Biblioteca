@@ -1,7 +1,5 @@
 package com.capgemini.bibliotecaSpring.controller;
 
-import java.time.LocalDate;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +28,8 @@ public class PrestamoController {
 	PrestamoService prestamoservice;
 	@Autowired
 	UserService userservice;
+	
+	
 	@GetMapping("/prestamos/{idlector}")
 	public String mostrarPrestamosLector(Model modelo, @PathVariable("idlector") long idlector) {
 		Lector lector = lectorservice.getById(idlector);
@@ -79,11 +79,7 @@ public class PrestamoController {
 	@GetMapping("/devolver/{idprestamo}")
 	public String devolverPrestamo(@PathVariable("idprestamo") long idprestamo, Model modelo) {
 		Lector lector = prestamoservice.getById(idprestamo).getLector();
-		Prestamo prestamo =prestamoservice.getById(idprestamo);
-		prestamo.setFechaFin(LocalDate.now());
-		LocalDate fechaFin= prestamo.getFechaFin();
-		
-		lectorservice.devolver(lector.getIdlector(), fechaFin);
+		lectorservice.devolver(lector, idprestamo);
 		modelo.addAttribute("lector", lector);
 		return "redirect:/prestamos/" + lector.getIdlector();
 	}
