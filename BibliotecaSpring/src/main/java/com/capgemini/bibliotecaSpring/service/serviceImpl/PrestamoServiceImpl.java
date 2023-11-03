@@ -1,6 +1,7 @@
 package com.capgemini.bibliotecaSpring.service.serviceImpl;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +49,30 @@ public class PrestamoServiceImpl extends ServiceImpl<PrestamoRepositorio, Presta
 	public void borrar(Prestamo prestamo) {
 		Copia copia = prestamo.getCopia();
 		copia.setEstado(EstadoCopia.BIBLIOTECA);
-		deleteById(prestamo.getIdprestamo());;
+		deleteById(prestamo.getIdprestamo());
+		
 	}
+	
+	@Override
+	public boolean restraso(Prestamo prestamo) {
+		LocalDate fechai = prestamo.getFechaInicio();
+		LocalDate fechaf = prestamo.getFechaFin();
+		Period periodo = fechai.until(fechaf);
+		int dias = periodo.getDays();
+		Copia copia = prestamo.getCopia();
+		if(dias > 30) {
+			
+			copia.setEstado(EstadoCopia.RETRASO);
+			prestamo.setCopia(copia);
+			return true;
+			
+		}
+		else {
+			return false;
+		}
+		
+	}
+	
 	
 
 }

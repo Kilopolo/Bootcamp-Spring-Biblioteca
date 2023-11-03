@@ -1,6 +1,7 @@
 package com.capgemini.bibliotecaSpring.service.serviceImpl;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,25 +37,25 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 	public CopiaRepositorio copiarepo;
 
 	@Override
-	public void devolver(long id, LocalDate fechaDevuelto) {
-		Optional<Lector> lectorOptional = lectorrepo.findById(id);
-
-		if (lectorOptional.isPresent()) {
-			Lector lector = lectorOptional.get();
-			List<Prestamo> prestamos = lector.getPrestamosLector();
-			Prestamo prestamoADevolver = encontrarPrestamoPorNSocio(prestamos, id);
-
-			if (prestamoADevolver != null) {
-				prestamoADevolver.setFechaFin(fechaDevuelto);
-				Copia copia = prestamoADevolver.getCopia();
-				copia.setEstado(EstadoCopia.BIBLIOTECA);
-				prestamos.remove(prestamoADevolver);
-				lectorrepo.save(lector);
-				prestamorepo.deleteById(id);
-			}
-		} else {
-			throw new LectorNotFoundException(id);
-		}
+	public void devolver(Lector lector, long idprestamo) {
+		List<Prestamo> prestamos = prestamorepo.findByLector(lector);
+		Prestamo prestamoADevolver = encontrarPrestamoPorNSocio(prestamos, lector.getIdlector());
+		LocalDate fechaDevuelta = LocalDate.now();
+		LocalDate fechaPrevista= prestamoADevolver.getFechaFin();
+		Period periodo = fechaPrevista.until(fechaDevuelta);
+		int diasRetraso = periodo.getDays();
+		if (diasRetraso > 0) {
+			prestamoADevolver.setFechaFin(LocalDate.now());
+//			if(prestamorepo.restraso(prestamoADevolver)) {
+				multar(lector.getIdlector(), prestamoADevolver);
+//			}
+				
+			Copia copia = prestamoADevolver.getCopia();
+			copia.setEstado(EstadoCopia.BIBLIOTECA);
+			prestamos.remove(prestamoADevolver);
+			lectorrepo.save(lector);
+			prestamorepo.delete(prestamoADevolver);
+		
 	}
 
 	private Prestamo encontrarPrestamoPorNSocio(List<Prestamo> prestamos, Long nSocio) {
@@ -108,9 +109,15 @@ public class LectorServiceImpl extends ServiceImpl<LectorRepositorio, Lector> im
 	}
 
 	@Override
-	public void multar(long idLector, int diasRetraso) {
+	public void multar(long idLector, Prestamo prestamo) {
+		LocalDate fechaDevuelta = LocalDate.now();
+		LocalDate fechaPrevista= prestamo.getFechaFin();
+		Period periodo = fechaPrevista.until(fechaDevuelta);
+		int diasRetraso = periodo.getDays();
 		if (diasRetraso > 0) {
 			Optional<Lector> lector = lectorrepo.findById(idLector);
+			Copia copia= prestamo.getCopia();
+			copia.setEstado(EstadoCopia.RETRASO);
 			if (lector.isPresent()) {
 				Lector l = lector.get();
 				int numLibrosPrestados = l.getPrestamosLector().size();

@@ -1,7 +1,5 @@
 package com.capgemini.bibliotecaSpring.controller;
 
-import java.time.LocalDate;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -150,12 +148,24 @@ public class UsersController {
 
 	@GetMapping("/addreserva")
 	public String formPrestamoUser(Model modelo) {
-		Prestamo prestamo = new Prestamo();
+//		Prestamo prestamo = new Prestamo();
 		User activeUser = getActiveUser();
 		Lector lector = activeUser.getLector();
+//		String returnTo="prestamo/addPrestamo";
+		
+		//si tienes mas de 3 prestamos no debes acceder a añadir prestamo
+		if (lector.getPrestamosLector().size() < 3) {
+			Prestamo prestamo;
+			prestamo = new Prestamo();
+			modelo.addAttribute("prestamo", prestamo);
+		} else {
+			return "redirect:/reservas";
+		}
+
 		modelo.addAttribute("lector", lector);
-		modelo.addAttribute("prestamo", prestamo);
-		modelo.addAttribute("copias",copiaservice.copiaBiblioteca());
+
+		modelo.addAttribute("copias", copiaservice.copiaBiblioteca());
+//		return returnTo ;
 		return "prestamo/addPrestamoUser";
 	}
 	@GetMapping("/deletereserva/{idprestamo}")
@@ -179,10 +189,7 @@ public class UsersController {
 	@GetMapping("/devolverreserva/{idprestamo}")
 	public String devolverReserva(@PathVariable("idprestamo") long idprestamo, Model modelo) {
 		Lector lector = prestamoservice.getById(idprestamo).getLector();
-		Prestamo prestamo =prestamoservice.getById(idprestamo);
-		prestamo.setFechaFin(LocalDate.now());
-		LocalDate fechaFin= prestamo.getFechaFin();
-		lectorservice.devolver(lector.getIdlector(), fechaFin);
+		lectorservice.devolver(lector, idprestamo);
 		modelo.addAttribute("lector", lector);
 		return "redirect:/reservas";
 	}

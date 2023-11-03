@@ -17,5 +17,5 @@ public interface PrestamoService extends ServiceS<Prestamo> {
 	 Prestamo guardar(Prestamo prestamo);
 	void borrar(Prestamo prestamo);
 	
-
+	boolean restraso(Prestamo prestamo);
 }
