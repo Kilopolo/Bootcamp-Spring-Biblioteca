@@ -36,11 +36,10 @@ class TestLogicaLector {
 
 	@Autowired
 	private MockMvc mockMvc;
-	
+
 	@MockBean
 	private MultaRepositorio multaRepositorio;
 
-	
 	@MockBean
 	private LectorRepositorio lectorRepositorio;
 
@@ -55,26 +54,18 @@ class TestLogicaLector {
 	@MockBean
 	private UserService userService;
 
-	
 	@MockBean
 	private LectorService lectorService;
+
 	/**
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
-	}
-
-	@BeforeEach
-	void setUp() throws Exception {
-	}
-
-	@AfterEach
-	void tearDown() throws Exception {
-	}
-	*/
+	 * @BeforeAll static void setUpBeforeClass() throws Exception { }
+	 * 
+	 * @AfterAll static void tearDownAfterClass() throws Exception { }
+	 * 
+	 * @BeforeEach void setUp() throws Exception { }
+	 * 
+	 * @AfterEach void tearDown() throws Exception { }
+	 */
 //	@Test
 //	public void testPrestar() {
 //		Lector lector = new Lector();
@@ -96,8 +87,7 @@ class TestLogicaLector {
 //	    assertEquals(EstadoCopia.PRESTADO, copia.getEstado()); 
 //	    System.out.println(copia);
 //	}
-	 
-	 
+
 //	 @Test
 //	    public void testPrestar() {
 //	        Lector lector = new Lector();
@@ -112,7 +102,7 @@ class TestLogicaLector {
 //	        assertEquals(EstadoCopia.PRESTADO, copia.getEstado()); 
 //	        System.out.println(copia);
 //	    }
-	 
+
 //	 @Test
 //	 void testMultar() {
 //		 Multa multa = new Multa(40l,LocalDate.now(),LocalDate.now().plusDays(10),null);
@@ -172,11 +162,9 @@ class TestLogicaLector {
 //				
 //			}
 //	    }
-	 
-	
-	
+
 	@Test
-	@WithMockUser(username="admin",roles={"ADMIN"})
+	@WithMockUser(username = "admin@gmail.com", password = "1234", roles = { "ADMIN" })
 	public void testGetAllUsers() throws Exception {
 		User user = new User();
 		user.setId(11l);
@@ -185,13 +173,5 @@ class TestLogicaLector {
 		when(userService.getById(11l)).thenReturn(user);
 		System.out.println(userService.getById(11l).toString());
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
